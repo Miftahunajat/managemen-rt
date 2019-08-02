@@ -1,0 +1,58 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="main_margin">20dp</dimen>
+    <dimen name="main_padding">12dp</dimen>
+
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_extra_large">48dp</dimen>
+    <dimen name="margin_extra_extra_large">96dp</dimen>
+
+    <dimen name="padding_small">6dp</dimen>
+    <dimen name="padding_large">8dp</dimen>
+    <dimen name="padding_extra_small">3dp</dimen>
+
+    <dimen name="circle_icon_button">36dp</dimen>
+    <dimen name="icon_button">16dp</dimen>
+
+    <dimen name="circle_image_profile">112dp</dimen>
+    <dimen name="standart_item_size">96dp</dimen>
+
+    <dimen name="font_extra_large">22sp</dimen>
+    <dimen name="font_title">16sp</dimen>
+    <dimen name="font_subtitle">12sp</dimen>
+    <dimen name="font_extra_small">10sp</dimen>
+    <dimen name="font_edit_text">12sp</dimen>
+    <dimen name="font_button">12sp</dimen>
+
+    <dimen name="notif_indicator">12dp</dimen>
+    <dimen name="font_notif_indicator">6sp</dimen>
+    <dimen name="font_new">8sp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="icon_menu">64dp</dimen>
+    <dimen name="small_icon_menu">32dp</dimen>
+
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="double_card_corner_radius">24dp</dimen>
+    <dimen name="card_elevation">0dp</dimen>
+    <dimen name="edittext_padding_default">12dp</dimen>
+
+    <dimen name="width_product">180dp</dimen>
+    <dimen name="image_product">160dp</dimen>
+
+    <dimen name="line_separator">2dp</dimen>
+
+    <dimen name="height_line_chart">140dp</dimen>
+
+    <dimen name="image_mission">140dp</dimen>
+
+    <dimen name="shadow_product">60dp</dimen>
+    <dimen name="appbar_padding">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="icon_fav_trx">42dp</dimen>
+</resources>

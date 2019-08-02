@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="@color/colorWhite"
+            android:fillViewport="true"
+            tools:context=".screens.BayarArisanFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp">
+        <ImageView
+                android:id="@+id/iv_bg_pattern3"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_pattern_blue"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="32dp"
+                android:layout_marginBottom="-100dp"
+                app:cardElevation="8dp"
+                android:id="@+id/cardView">
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                               android:layout_height="match_parent">
+
+                <TextView
+                        android:text="Data Pembayaran Arisan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView31"
+                        android:textSize="@dimen/font_subtitle"
+                        android:layout_marginTop="24dp" app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
+                        android:layout_marginStart="24dp"/>
+                <TextView
+                        android:text="Bulan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView35"
+                        android:textSize="@dimen/font_subtitle"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="@+id/divider2"
+                        app:layout_constraintEnd_toEndOf="@+id/divider2"
+                        app:layout_constraintTop_toBottomOf="@+id/divider2"/>
+                <TextView
+                        android:text="Arisan Ibu ibu 1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView32"
+                        android:textSize="@dimen/font_title"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
+                        android:layout_marginStart="24dp"
+                        app:layout_constraintTop_toBottomOf="@+id/textView31"/>
+                <TextView
+                        android:text="Agustus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView36"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/font_title"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintStart_toStartOf="@+id/textView35"
+                        app:layout_constraintTop_toBottomOf="@+id/textView35"
+                        app:layout_constraintEnd_toEndOf="@+id/textView35"/>
+                <TextView
+                        android:text="@string/tanggal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView33"
+                        android:textSize="@dimen/font_title"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintTop_toTopOf="@+id/textView31"
+                        android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginRight="16dp"/>
+                <View
+                        android:id="@+id/divider2"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/textView32"
+                        app:layout_constraintStart_toStartOf="@+id/textView32"
+                        app:layout_constraintEnd_toEndOf="@+id/textView33"
+                />
+                <FrameLayout
+                        android:id="@+id/framelayout_1"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                             app:layout_constraintEnd_toEndOf="parent"
+                             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                             android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                             app:layout_constraintTop_toBottomOf="@+id/textView36">
+                    <include
+                            layout="@layout/inc_arisan_verifikasi"/>
+                </FrameLayout>
+
+                <FrameLayout
+                        android:id="@+id/framelayout_2"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/framelayout_1">
+                    <include
+                            layout="@layout/inc_arisan_belum_membayar"/>
+                </FrameLayout>
+
+                <FrameLayout
+                        android:id="@+id/framelayout_3"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/framelayout_2">
+                    <include
+                            layout="@layout/inc_arisan_sudah_membayar"/>
+                </FrameLayout>
+
+                <FrameLayout
+                        android:id="@+id/framelayout_4"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/framelayout_3">
+                    <include
+                            layout="@layout/inc_arisan_sudah_ditarik"/>
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

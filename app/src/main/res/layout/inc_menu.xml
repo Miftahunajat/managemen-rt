@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/main_margin"
+            android:paddingRight="@dimen/main_margin"
+            android:paddingTop="@dimen/margin_extra_extra_large"
+            android:paddingBottom="@dimen/margin_medium">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/menu_2"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+                android:id="@+id/circle_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/background_line_soft"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_arisan_ibuk2"
+                android:tint="@color/pink_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_1"
+                app:layout_constraintLeft_toLeftOf="@id/circle_1"
+                app:layout_constraintRight_toRightOf="@id/circle_1"
+                app:layout_constraintTop_toTopOf="@id/circle_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/text_menu_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Arisan"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_button"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/padding_small"
+            app:layout_constraintLeft_toLeftOf="@id/menu_1"
+            app:layout_constraintRight_toRightOf="@id/menu_1"
+            app:layout_constraintTop_toBottomOf="@id/menu_1"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/menu_1"
+            app:layout_constraintRight_toLeftOf="@id/menu_3">
+
+        <ImageView
+                android:id="@+id/circle_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/background_line_soft"
+                android:adjustViewBounds="true"
+                tools:ignore="MissingConstraints" />
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+
+                app:srcCompat="@drawable/ic_data_diri"
+                android:tint="@color/teal_600"
+                app:layout_constraintTop_toTopOf="@id/circle_2"
+                app:layout_constraintBottom_toBottomOf="@id/circle_2"
+                app:layout_constraintLeft_toLeftOf="@id/circle_2"
+                app:layout_constraintRight_toRightOf="@id/circle_2"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/text_menu_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Data diri"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_button"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/padding_small"
+            app:layout_constraintLeft_toLeftOf="@id/menu_2"
+            app:layout_constraintRight_toRightOf="@id/menu_2"
+            app:layout_constraintTop_toBottomOf="@id/menu_2"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/menu_2"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+                android:id="@+id/circle_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/background_line_soft"
+                android:adjustViewBounds="true"
+                tools:ignore="MissingConstraints" />
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_daftar_iuran"
+                android:tint="@color/orange_700"
+                app:layout_constraintTop_toTopOf="@id/circle_3"
+                app:layout_constraintBottom_toBottomOf="@id/circle_3"
+                app:layout_constraintLeft_toLeftOf="@id/circle_3"
+                app:layout_constraintRight_toRightOf="@id/circle_3"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/text_menu_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Daftar Iuran"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_button"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/padding_small"
+            app:layout_constraintLeft_toLeftOf="@id/menu_3"
+            app:layout_constraintRight_toRightOf="@id/menu_3"
+            app:layout_constraintTop_toBottomOf="@id/menu_3"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin"
+            app:layout_constraintTop_toBottomOf="@id/text_menu_1"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/menu_5">
+
+        <ImageView
+                android:id="@+id/circle_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/background_line_soft"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp"/>
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_admin_arisan"
+                android:tint="@color/red_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_4"
+                app:layout_constraintLeft_toLeftOf="@id/circle_4"
+                app:layout_constraintRight_toRightOf="@id/circle_4"
+                app:layout_constraintTop_toTopOf="@id/circle_4"/>
+
+        <TextView
+                android:id="@+id/text_menu_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Admin Arisan"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_button"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingTop="@dimen/padding_small"
+                app:layout_constraintLeft_toLeftOf="@id/circle_4"
+                app:layout_constraintRight_toRightOf="@id/circle_4"
+                app:layout_constraintTop_toBottomOf="@id/circle_4"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_margin"
+            app:layout_constraintStart_toEndOf="@+id/menu_4" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/menu_6" app:layout_constraintTop_toTopOf="@+id/menu_4">
+
+        <ImageView
+                android:id="@+id/circle_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/background_line_soft"
+                tools:ignore="MissingConstraints"/>
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_admin_iuran"
+                android:tint="@color/indigo_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_5"
+                app:layout_constraintLeft_toLeftOf="@id/circle_5"
+                app:layout_constraintRight_toRightOf="@id/circle_5"
+                app:layout_constraintTop_toTopOf="@id/circle_5"/>
+
+        <TextView
+                android:id="@+id/text_menu_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Admin Iuran"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_button"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingTop="@dimen/padding_small"
+                app:layout_constraintLeft_toLeftOf="@id/circle_5"
+                app:layout_constraintRight_toRightOf="@id/circle_5"
+                app:layout_constraintTop_toBottomOf="@id/circle_5"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/menu_5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="@dimen/main_margin"
+    app:layout_constraintTop_toTopOf="@id/menu_5"
+    app:layout_constraintBottom_toBottomOf="@id/menu_5">
+
+        <ImageView
+                android:id="@+id/circle_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/background_line_soft"
+                tools:ignore="MissingConstraints"/>
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_pengurus_rt"
+                android:tint="@color/purple_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_6"
+                app:layout_constraintLeft_toLeftOf="@id/circle_6"
+                app:layout_constraintRight_toRightOf="@id/circle_6"
+                app:layout_constraintTop_toTopOf="@id/circle_6"/>
+
+        <TextView
+                android:id="@+id/text_menu_6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pengurus RT"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_button"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingTop="@dimen/padding_small"
+                app:layout_constraintLeft_toLeftOf="@id/circle_6"
+                app:layout_constraintRight_toRightOf="@id/circle_6"
+                app:layout_constraintTop_toBottomOf="@id/circle_6"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

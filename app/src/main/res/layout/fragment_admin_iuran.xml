@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".screens.AdminIuranFragment">
+
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cv_1"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+    >
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:text="Daftar pembayaran Iuran Sosial untuk seluruh warga RT 02"
+                    android:maxEms="14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_subtitle"
+                    android:id="@+id/textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                    app:layout_constraintStart_toStartOf="@+id/textView2"/>
+            <TextView
+                    android:text="Iuran Sosial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_title"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:id="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView7"
+                    app:layout_constraintStart_toEndOf="@+id/imageView7" android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"/>
+            <ImageView
+                    app:srcCompat="@drawable/ic_social"
+                    android:layout_width="@dimen/icon_menu"
+                    android:layout_height="@dimen/icon_menu"
+                    android:tint="@color/blue_500"
+                    android:id="@+id/imageView7" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <View
+                    android:layout_width="4dp"
+                    app:layout_constraintTop_toTopOf="@id/imageView7"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView7"
+                    android:layout_height="0dp"
+                    android:background="@color/blue_500"
+                    app:layout_constraintRight_toLeftOf="@id/textView"
+                    android:id="@+id/view2" android:layout_marginRight="4dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintTop_toBottomOf="@id/cv_1" app:layout_constraintStart_toStartOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:text="Daftar pembayaran Iuran Sampah untuk seluruh warga RT 02"
+                    android:maxEms="14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_subtitle"
+                    android:id="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"/>
+            <TextView
+                    android:text="Iuran Sampah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_title"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:id="@+id/textView4"
+                    app:layout_constraintTop_toTopOf="@+id/imageView9"
+                    app:layout_constraintStart_toEndOf="@+id/imageView9" android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"/>
+            <ImageView
+                    app:srcCompat="@drawable/ic_trash"
+                    android:layout_width="@dimen/icon_menu"
+                    android:layout_height="@dimen/icon_menu"
+                    android:tint="@color/teal_500"
+                    android:id="@+id/imageView9" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="32dp" android:layout_marginStart="32dp" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <View
+                    android:layout_width="4dp"
+                    app:layout_constraintTop_toTopOf="@id/imageView9"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView9"
+                    android:layout_height="0dp"
+                    android:background="@color/teal_500"
+                    app:layout_constraintRight_toLeftOf="@id/textView3"
+                    android:id="@+id/view3" android:layout_marginRight="4dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

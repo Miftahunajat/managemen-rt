@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ManagementMasyrakat</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="notification">Notification</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="iuran">Iuran</string>
+    <string name="profile">Profile</string>
+    <string name="tanggal">
+        16 <b>Agustus</b> 2019
+    </string>
+</resources>

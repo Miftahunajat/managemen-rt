@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="horizontal"
+              android:background="?android:attr/selectableItemBackground"
+              android:layout_width="match_parent"
+              android:layout_height="90dp"
+              android:paddingLeft="@dimen/padding_large" android:paddingStart="@dimen/padding_large"
+android:paddingTop="@dimen/padding_large"
+android:paddingBottom="@dimen/padding_large">
+
+    <ImageView
+            android:layout_width="@dimen/icon_menu"
+            android:layout_height="@dimen/icon_menu"
+            app:srcCompat="@drawable/ic_social"
+            android:tint="@color/green_A100"
+            android:id="@+id/imageView"
+    android:layout_gravity="center"/>
+    <TextView
+            android:text="Iuran 1"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_gravity="center"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_nama" android:layout_weight="1"/>
+    <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:tint="@color/grey_800"
+            android:layout_gravity="center"
+            android:id="@+id/imageView2" android:layout_weight="1"/>
+</LinearLayout>
