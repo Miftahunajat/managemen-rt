@@ -35,7 +35,7 @@
                     android:text="John Smith"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView21"
+                    android:id="@+id/tv_tambah_arisan_baru"
                     style="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorBlack"
                     app:layout_constraintTop_toBottomOf="@+id/imageView11"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_subtitle"
                     android:id="@+id/textView22" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" app:layout_constraintStart_toStartOf="@+id/textView21"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tambah_arisan_baru" app:layout_constraintStart_toStartOf="@+id/tv_tambah_arisan_baru"
             />
             <View
                     android:layout_width="0dp"

@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.pens.managementmasyrakat.R
+import kotlinx.android.synthetic.main.fragment_tambah_arisan.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,8 +26,12 @@ class TambahArisanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_tambah_arisan, container, false)
+        view.tv_tambahkan.setOnClickListener {
+            it.findNavController().navigate(TambahArisanFragmentDirections.actionTambahArisanFragmentToAdminArisanFragment())
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tambah_arisan, container, false)
+        return view
     }
 
 

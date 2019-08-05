@@ -2,29 +2,82 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
-            app:startDestination="@+id/tambahArisanFragment">
+            app:startDestination="@+id/loginFragment">
 
     <fragment android:id="@+id/homeFragment" android:name="com.pens.managementmasyrakat.screens.HomeFragment"
-              android:label="fragment_home" tools:layout="@layout/fragment_home"/>
+              android:label="fragment_home" tools:layout="@layout/fragment_home">
+        <action android:id="@+id/action_homeFragment_to_adminIuranFragment" app:destination="@id/adminIuranFragment"
+                app:enterAnim="@anim/slide_in_right" app:popEnterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_dataDiriFragment" app:destination="@id/dataDiriFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_adminArisanFragment" app:destination="@id/adminArisanFragment"
+                app:enterAnim="@anim/slide_in_right" app:popEnterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_iuranFragment" app:destination="@id/iuranFragment"
+                app:enterAnim="@anim/slide_in_right" app:popEnterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_left"/>
+
+    </fragment>
     <fragment android:id="@+id/dataDiriFragment" android:name="com.pens.managementmasyrakat.screens.DataDiriFragment"
               android:label="fragment_data_diri" tools:layout="@layout/fragment_data_diri"/>
     <fragment android:id="@+id/iuranFragment" android:name="com.pens.managementmasyrakat.screens.IuranFragment"
-              android:label="fragment_iuran" tools:layout="@layout/fragment_iuran"/>
-    <fragment android:id="@+id/adminIuranFragment" android:name="com.pens.managementmasyrakat.screens.AdminIuranFragment"
-              android:label="fragment_admin_iuran" tools:layout="@layout/fragment_admin_iuran"/>
-    <fragment android:id="@+id/adminArisanFragment" android:name="com.pens.managementmasyrakat.screens.AdminArisanFragment"
-              android:label="fragment_admin_arisan" tools:layout="@layout/fragment_admin_arisan"/>
+              android:label="fragment_iuran" tools:layout="@layout/fragment_iuran">
+        <action android:id="@+id/action_iuranFragment_to_dataIuranDetailFragment"
+                app:destination="@id/dataIuranDetailFragment"/>
+    </fragment>
+    <fragment android:id="@+id/adminIuranFragment"
+              android:name="com.pens.managementmasyrakat.screens.AdminIuranFragment"
+              android:label="fragment_admin_iuran" tools:layout="@layout/fragment_admin_iuran">
+        <action android:id="@+id/action_adminIuranFragment_to_searchWargaFragment2"
+                app:destination="@id/searchWargaFragment2" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment android:id="@+id/adminArisanFragment"
+              android:name="com.pens.managementmasyrakat.screens.AdminArisanFragment"
+              android:label="fragment_admin_arisan" tools:layout="@layout/fragment_admin_arisan">
+        <action android:id="@+id/action_adminArisanFragment_to_tambahArisanFragment"
+                app:destination="@id/tambahArisanFragment" app:enterAnim="@anim/slide_in_down"
+                app:exitAnim="@anim/slide_out_up" app:popEnterAnim="@anim/slide_in_down"
+                app:popExitAnim="@anim/slide_out_up"/>
+        <action android:id="@+id/action_adminArisanFragment_to_bayarArisanFragment"
+                app:destination="@id/bayarArisanFragment"/>
+    </fragment>
     <fragment android:id="@+id/detailIuranWarga" android:name="com.pens.managementmasyrakat.screens.DetailIuranWarga"
-              android:label="fragment_detail_iuran_warga" tools:layout="@layout/fragment_detail_iuran_warga"/>
+              android:label="fragment_detail_iuran_warga" tools:layout="@layout/fragment_detail_iuran_warga">
+        <argument android:name="TYPE" app:argType="integer"/>
+        <argument android:name="USER_ID" app:argType="integer"/>
+    </fragment>
     <fragment android:id="@+id/dataIuranDetailFragment"
               android:name="com.pens.managementmasyrakat.screens.DataIuranDetailFragment"
               android:label="fragment_data_iuran_detail" tools:layout="@layout/fragment_data_iuran_detail"/>
-    <fragment android:id="@+id/tambahArisanFragment" android:name="com.pens.managementmasyrakat.screens.TambahArisanFragment"
-              android:label="fragment_tambah_arisan" tools:layout="@layout/fragment_tambah_arisan"/>
-    <fragment android:id="@+id/bayarArisanFragment" android:name="com.pens.managementmasyrakat.screens.BayarArisanFragment"
+    <fragment android:id="@+id/tambahArisanFragment"
+              android:name="com.pens.managementmasyrakat.screens.TambahArisanFragment"
+              android:label="fragment_tambah_arisan" tools:layout="@layout/fragment_tambah_arisan">
+        <action android:id="@+id/action_tambahArisanFragment_to_adminArisanFragment"
+                app:destination="@id/adminArisanFragment" app:enterAnim="@anim/slide_in_down"
+                app:exitAnim="@anim/slide_out_up" app:popEnterAnim="@anim/slide_in_down"
+                app:popExitAnim="@anim/slide_out_up" app:popUpTo="@+id/homeFragment"/>
+    </fragment>
+    <fragment android:id="@+id/bayarArisanFragment"
+              android:name="com.pens.managementmasyrakat.screens.BayarArisanFragment"
               android:label="fragment_bayar_arisan" tools:layout="@layout/fragment_bayar_arisan"/>
-    <fragment android:id="@+id/searchWargaFragment2" android:name="com.pens.managementmasyrakat.screens.SearchWargaFragment"
-              android:label="fragment_search_warga" tools:layout="@layout/fragment_search_warga"/>
-    <fragment android:id="@+id/loginFragment" android:name="com.pens.managementmasyrakat.LoginFragment"
-              android:label="fragment_login" tools:layout="@layout/fragment_login"/>
+    <fragment android:id="@+id/searchWargaFragment2"
+              android:name="com.pens.managementmasyrakat.screens.SearchWargaFragment"
+              android:label="fragment_search_warga" tools:layout="@layout/fragment_search_warga">
+        <action android:id="@+id/action_searchWargaFragment2_to_detailIuranWarga"
+                app:destination="@id/detailIuranWarga" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+        <argument android:name="TYPE" app:argType="integer"/>
+    </fragment>
+    <fragment android:id="@+id/loginFragment" android:name="com.pens.managementmasyrakat.screens.LoginFragment"
+              android:label="fragment_login" tools:layout="@layout/fragment_login">
+        <action android:id="@+id/action_loginFragment_to_homeFragment" app:destination="@id/homeFragment"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"
+                app:exitAnim="@anim/slide_out_right" app:enterAnim="@anim/slide_in_left" app:popUpToInclusive="true"
+                app:popUpTo="@+id/loginFragment"/>
+    </fragment>
 </navigation>

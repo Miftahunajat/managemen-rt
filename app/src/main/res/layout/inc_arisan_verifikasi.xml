@@ -27,8 +27,7 @@
             android:id="@+id/textView26"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginTop="16
-            dp"/>
+            android:layout_marginTop="16dp"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             tools:listitem="@layout/item_belum_terverifikasi"

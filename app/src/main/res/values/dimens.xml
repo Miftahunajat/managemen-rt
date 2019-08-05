@@ -33,7 +33,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="icon_menu">64dp</dimen>
+    <dimen name="icon_logo">128dp</dimen>
     <dimen name="small_icon_menu">32dp</dimen>
+    <dimen name="menu_width">100dp</dimen>
 
     <dimen name="card_corner_radius">12dp</dimen>
     <dimen name="double_card_corner_radius">24dp</dimen>

@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.pens.managementmasyrakat.R
+import kotlinx.android.synthetic.main.fragment_admin_iuran.view.*
+import kotlinx.android.synthetic.main.fragment_data_iuran_detail.view.group_choices
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,12 +23,26 @@ private const val ARG_PARAM2 = "param2"
  */
 class AdminIuranFragment : Fragment() {
 
+    companion object  {
+        const val TYPE_SOSIAL = 1
+        const val TYPE_SAMPAH= 2
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_iuran, container, false)
+        val view = inflater.inflate(R.layout.fragment_admin_iuran, container, false)
+        view.cv_sosial.setOnClickListener {
+            it.findNavController().navigate(AdminIuranFragmentDirections.actionAdminIuranFragmentToSearchWargaFragment2(
+                TYPE_SOSIAL))
+        }
+
+        view.cv_sampah.setOnClickListener {
+            it.findNavController().navigate(AdminIuranFragmentDirections.actionAdminIuranFragmentToSearchWargaFragment2(
+                TYPE_SAMPAH))
+        }
+        return view
     }
 
 
