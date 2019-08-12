@@ -11,7 +11,7 @@
             android:layout_height="@dimen/icon_menu" tools:srcCompat="@tools:sample/avatars"
             android:id="@+id/iv_profile" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/view5"/>
     <TextView
             android:text="John Smith"
@@ -24,7 +24,7 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:id="@+id/tv_nama"
             app:layout_constraintTop_toTopOf="@+id/iv_profile" app:layout_constraintStart_toEndOf="@+id/iv_profile"
-            android:layout_marginLeft="24dp" android:layout_marginStart="24dp"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_nomor"/>
     <TextView
             android:text="081xxxx"
@@ -50,10 +50,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView20"
             android:textColor="@color/red_500"
-            android:padding="@dimen/edittext_padding_default"
+            android:padding="@dimen/textview_padding_default"
+            android:textSize="@dimen/font_subtitle"
             android:background="@drawable/background_red_line_soft"
             app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_profile" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="16dp" android:layout_marginEnd="16dp"/>
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

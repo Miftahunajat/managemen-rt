@@ -29,6 +29,7 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"/>
     <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_belum_verifikasi"
             android:layout_width="0dp"
             tools:listitem="@layout/item_belum_terverifikasi"
             android:layout_height="wrap_content"

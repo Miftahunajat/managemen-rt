@@ -105,7 +105,7 @@
             android:layout_marginLeft="@dimen/main_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/menu_2"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="@id/menu_7">
 
         <ImageView
                 android:id="@+id/circle_kas_rt"
@@ -119,7 +119,7 @@
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
                 app:srcCompat="@drawable/ic_kas_rt"
-                android:tint="@color/green_500"
+                android:tint="@color/light_blue_900"
                 app:layout_constraintTop_toTopOf="@id/circle_kas_rt"
                 app:layout_constraintBottom_toBottomOf="@id/circle_kas_rt"
                 app:layout_constraintLeft_toLeftOf="@id/circle_kas_rt"
@@ -141,6 +141,50 @@
             app:layout_constraintLeft_toLeftOf="@id/menu_3"
             app:layout_constraintRight_toRightOf="@id/menu_3"
             app:layout_constraintTop_toBottomOf="@id/menu_3"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/menu_3"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+                android:id="@+id/daftar_pengunguman"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/background_line_soft"
+                android:adjustViewBounds="true"
+                tools:ignore="MissingConstraints" />
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_announcement"
+                android:tint="@color/yellow_A400"
+                app:layout_constraintTop_toTopOf="@id/daftar_pengunguman"
+                app:layout_constraintBottom_toBottomOf="@id/daftar_pengunguman"
+                app:layout_constraintLeft_toLeftOf="@id/daftar_pengunguman"
+                app:layout_constraintRight_toRightOf="@id/daftar_pengunguman"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/text_menu_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pengunguman"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_button"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/padding_small"
+            app:layout_constraintLeft_toLeftOf="@id/menu_7"
+            app:layout_constraintRight_toRightOf="@id/menu_7"
+            app:layout_constraintTop_toBottomOf="@id/menu_7"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/menu_4"
@@ -239,7 +283,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/menu_5"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/menu_9"
             android:layout_marginLeft="@dimen/main_margin"
             app:layout_constraintTop_toTopOf="@id/menu_5"
             app:layout_constraintBottom_toBottomOf="@id/menu_5">
@@ -279,5 +323,51 @@
                 app:layout_constraintHorizontal_bias="1.0"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_margin"
+            android:maxWidth="@dimen/menu_width"
+            android:layout_marginTop="@dimen/main_margin"
+            app:layout_constraintTop_toBottomOf="@id/text_menu_7"
+            app:layout_constraintLeft_toRightOf="@id/menu_6"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+                android:id="@+id/ic_keluar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/background_line_soft"
+                android:adjustViewBounds="true"
+                tools:ignore="MissingConstraints" />
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_keluar"
+                android:tint="@color/red_500"
+                app:layout_constraintTop_toTopOf="@id/ic_keluar"
+                app:layout_constraintBottom_toBottomOf="@id/ic_keluar"
+                app:layout_constraintLeft_toLeftOf="@id/ic_keluar"
+                app:layout_constraintRight_toRightOf="@id/ic_keluar"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/text_menu_9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Keluar"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_button"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/padding_small"
+            app:layout_constraintLeft_toLeftOf="@id/menu_9"
+            app:layout_constraintRight_toRightOf="@id/menu_9"
+            app:layout_constraintTop_toBottomOf="@id/menu_9"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

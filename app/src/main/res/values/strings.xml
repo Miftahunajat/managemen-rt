@@ -12,4 +12,7 @@
     <string name="tanggal">
         16 <b>Agustus</b> 2019
     </string>
+    <string name="harga_iuran_sosial_rp_15_000_bulan">Harga Iuran : / Bulan</string>
+    <string name="kembali_ke_menu_awal"><![CDATA[<< Kembali ke menu awal]]></string>
+    <string name="pengunguman_agenda_rapat_warga_rt_02">Pengunguman agenda rapat warga RT 02</string>
 </resources>

@@ -17,7 +17,6 @@ object Repository {
         val gson = Gson()
         val json = gson.toJson(user)
         context.getSharedPreferences(PREFNAME, 0).edit().putString("user",json).apply()
-//        context.getSharedPreferences(PREFNAME, 0).edit().putInt("kkid",kkid).apply()
     }
 
     fun getUser(context: Context): UserResponse? {
@@ -25,10 +24,6 @@ object Repository {
         val gson = Gson()
         return if (jsonString != null) gson.fromJson(jsonString, UserResponse::class.java) else null
     }
-
-//    fun getKkId(context: Context): Int? {
-//        return context.getSharedPreferences(PREFNAME, 0).getInt("kkid",0)
-//    }
 
     fun clearUser(context: Context) {
         context.getSharedPreferences(PREFNAME, 0).edit().clear().apply()
@@ -42,7 +37,7 @@ object Repository {
         client = ManagemenApi.apiService.login(nama, password)
     }
 
-    fun getAllIuranBulanIni(id:Int, bulan: String, tahun: String) = networkCall<IuranBulanIniResponse, IuranBulanIniResponse> {
+    fun getAllIuranBulanIni(id:Int, bulan: String, tahun: String) = networkCall<UpdateIuranResponse, UpdateIuranResponse> {
         client = ManagemenApi.apiService.getIuranBulanIni(id,bulan, tahun)
     }
 
@@ -53,11 +48,95 @@ object Repository {
     fun getAllUser() = networkCall<ListResponse<UserResponse>, List<UserResponse>> {
         client = ManagemenApi.apiService.getAllUser()
     }
+
+    fun getAllKKUser() = networkCall<ListResponse<UserResponse>, List<UserResponse>> {
+        client = ManagemenApi.apiService.getAllKkUser()
+    }
+
+    fun updateIuranResponse(
+        id: Int, bulan: String, tahun: String, type: String, bayar: Boolean
+    ) = networkCall<IuranBulanResponse, IuranBulanResponse> {
+        client = ManagemenApi.apiService.updateIuran(id, bulan, tahun, type, bayar)
+    }
+
+    fun postArisan(
+        jenisKelaminId: Int, selesai: String, iuran: String, nama: String
+    ) = networkCall<Arisan, Arisan> {
+        client = ManagemenApi.apiService.postArisan(jenisKelaminId, selesai, iuran, nama)
+    }
+
+    fun getAllArisan(jenis_kelamin_id: Int) = networkCall<ListResponse<Arisan>, List<Arisan>> {
+        client = ManagemenApi.apiService.getAllArisans(jenis_kelamin_id.toString())
+    }
+
+    fun getAllArisansWithStatusIKutUser(user_id: String, jenis_kelamin_id: Int) = networkCall<ListResponse<Arisan>, List<Arisan>> {
+        client = ManagemenApi.apiService.getAllArisansWithStatusIKutUser(user_id,jenis_kelamin_id.toString())
+    }
+
+    fun getArisansUser(arisan_id: Int, user_id: String) = networkCall<IkutArisanResponse, IkutArisanResponse> {
+        client = ManagemenApi.apiService.getArisansUser(arisan_id, user_id)
+    }
+
+    fun getAllStatusArisan(arisan_id: Int) = networkCall<AllStatusArisanUser, AllStatusArisanUser> {
+        client = ManagemenApi.apiService.getAllStatusArisanUser(arisan_id)
+    }
+
+    fun updateArisan(arisans_user_id: Int, bulan: String, tahun: String, bayar: Boolean) = networkCall<UserBayarArisan, UserBayarArisan> {
+        client = ManagemenApi.apiService.updateArisan(arisans_user_id.toString(), bulan, tahun, bayar)
+    }
+
+    fun getDetailUserStatus(id: Int, tahun: String, user_id: String) = networkCall<ListResponse<UserBayarArisan>,List<UserBayarArisan>> {
+        client = ManagemenApi.apiService.getDetailUserStatus(id, tahun, user_id)
+    }
+
+    fun postDaftarArisan(id: Int, user_id: String) = networkCall<DaftarArisanResponse,DaftarArisanResponse> {
+        client = ManagemenApi.apiService.postDaftarArisan(id, user_id)
+    }
+
+    fun postIkutArisan(id: Int, user_id: String) = networkCall<IkutArisanResponse,IkutArisanResponse> {
+        client = ManagemenApi.apiService.postIkutArisan(id, user_id)
+    }
+
+    fun postTarikArisan(id: Int, user_id: String) = networkCall<IkutArisanResponse,IkutArisanResponse> {
+        client = ManagemenApi.apiService.postTarikArisan(id, user_id)
+    }
+
+    fun updateUser(
+        id: Int,
+        nama: String? = null,
+        password: String? = null,
+        alamat: String? = null,
+        no_hp: String? = null
+    ) = networkCall<UserResponse,UserResponse> {
+        client = ManagemenApi.apiService.updateUser(
+            id,
+            nama,
+            password,
+            alamat,
+            no_hp
+        )
+    }
+
+    fun getUserDetail(id: Int) = networkCall<UserResponse,UserResponse> {
+        client = ManagemenApi.apiService.getUserDetail(id)
+    }
+
+    fun getHargaIuranByCode(code: Int) = networkCall<HargaIuranResponse,HargaIuranResponse> {
+        client = ManagemenApi.apiService.getHargaIuranByCode(code)
+    }
+
+    fun updateHargaIuran(id: Int, harga: String) = networkCall<HargaIuranResponse,HargaIuranResponse> {
+        client = ManagemenApi.apiService.updateHargaIuran(id, harga)
+    }
+
+    fun getAllPengunguman() = networkCall<ListResponse<PengungumanResponse>,List<PengungumanResponse>> {
+        client = ManagemenApi.apiService.getAllPengunguman()
+    }
 }
 
 object ManagemenApi {
     var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var API_BASE_URL: String = "http://1b69ec21.ngrok.io/"
+    var API_BASE_URL: String = "http://38505ea6.ngrok.io/"
     var httpClient = OkHttpClient.Builder().addInterceptor(interceptor)
     var builder: Retrofit.Builder = Retrofit.Builder()
         .baseUrl(API_BASE_URL)

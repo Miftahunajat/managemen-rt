@@ -30,6 +30,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             tools:listitem="@layout/item_sudah_ditarik"
+            android:id="@+id/rv_sudah_ditarik"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             tools:itemCount="3"

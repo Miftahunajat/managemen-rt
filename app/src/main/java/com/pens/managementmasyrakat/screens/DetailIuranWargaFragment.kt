@@ -7,60 +7,71 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nex3z.togglebuttongroup.button.CircularToggle
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.adapter.AdminIuranSampahPertahunAdapter
 import com.pens.managementmasyrakat.adapter.AdminIuranSosialPertahunAdapter
-import com.pens.managementmasyrakat.getNamaTahun
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.IuranPerTahunResponse
 import com.pens.managementmasyrakat.screens.AdminIuranFragment.Companion.TYPE_SOSIAL
 import com.pens.managementmasyrakat.showmessage
+import com.pens.managementmasyrakat.toRupiahs
 import kotlinx.android.synthetic.main.fragment_detail_iuran_warga.view.*
-import kotlinx.android.synthetic.main.fragment_iuran.view.*
-import java.util.*
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class DetailIuranWarga : Fragment(), AdminIuranSosialPertahunAdapter.OnSosialClickListener,
-    AdminIuranSampahPertahunAdapter.OnSampahClickListener {
-    override fun onSampahClick(position: Int) {
+class DetailIuranWargaFragment : Fragment(){
 
-    }
-
-    override fun onSosialClick(position: Int) {
-
-    }
+    var userKKid: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_detail_iuran_warga, container, false)
+        val detailIuranWargaFragmentArgs by navArgs<DetailIuranWargaFragmentArgs>()
+        view.group_choices.setOnCheckedChangeListener { group, checkedId ->
+            val circularToggle: CircularToggle = group.findViewById(checkedId)
+            refreshList(circularToggle.text.toString(), detailIuranWargaFragmentArgs)
+        }
+        userKKid = detailIuranWargaFragmentArgs.userid
+        getKKUser(detailIuranWargaFragmentArgs.userid)
         view.rv_detail_iuran_warga.layoutManager = LinearLayoutManager(context)
         view.rv_detail_iuran_warga.setHasFixedSize(true)
         view.rv_detail_iuran_warga.isNestedScrollingEnabled = false
-        view.group_choices.setOnCheckedChangeListener { group, checkedId ->
-            val circularToggle: CircularToggle = group.findViewById(checkedId)
-            context?.showmessage(circularToggle.text.toString())
-            refreshList(circularToggle.text.toString())
-        }
+        getHargaIuran(view)
+
 
 
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    private fun getHargaIuran(view: View?) {
+        val detailIuranWargaFragmentArgs by navArgs<DetailIuranWargaFragmentArgs>()
+        Repository.getHargaIuranByCode(detailIuranWargaFragmentArgs.codeiuran).observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    Log.d("Loading", it.status.toString())
+                }
+                Resource.SUCCESS ->{
+                    view!!.tv_harga.text = it.data!!.harga.toRupiahs()
+                    Log.d("Success", it.data.toString())
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
     }
 
     private fun setupSampahAdapter(data: IuranPerTahunResponse?) {
@@ -76,17 +87,19 @@ class DetailIuranWarga : Fragment(), AdminIuranSosialPertahunAdapter.OnSosialCli
     }
 
 
-    private fun refreshList(tahun: String) {
-        val detailIuranWargaArgs by navArgs<DetailIuranWargaArgs>()
-        Repository.getAllIuranTahunIni(detailIuranWargaArgs.userid, tahun)
-            .observe(this, androidx.lifecycle.Observer {
+    private fun refreshList(
+        tahun: String,
+        detailIuranWargaFragmentArgs: DetailIuranWargaFragmentArgs
+    ) {
+        Repository.getAllIuranTahunIni(userKKid!!, tahun)
+            .observe(this, Observer {
                 when(it?.status){
                     Resource.LOADING ->{
                         Log.i("Loggin", it.status.toString())
                     }
                     Resource.SUCCESS ->{
                         view?.tv_nama?.text = it.data?.nama
-                        if (detailIuranWargaArgs.type == TYPE_SOSIAL){
+                        if (detailIuranWargaFragmentArgs.type == TYPE_SOSIAL){
                             setupSosialAdapter(it.data)
                         }else{
                             setupSampahAdapter(it.data)
@@ -99,5 +112,23 @@ class DetailIuranWarga : Fragment(), AdminIuranSosialPertahunAdapter.OnSosialCli
                     }
                 }
             })
+    }
+
+    private fun getKKUser(id: Int) {
+        Repository.getUserDetail(id).observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    Log.d("Loading", it.status.toString())
+                }
+                Resource.SUCCESS ->{
+                    view?.tv_nama?.text = it.data?.nama
+                    userKKid = it.data?.user_kk_id
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
     }
 }

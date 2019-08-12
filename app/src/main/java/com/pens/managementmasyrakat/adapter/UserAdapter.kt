@@ -1,5 +1,7 @@
 package com.pens.managementmasyrakat.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +13,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_data_warga.view.*
 import java.util.*
 
-class UserAdapter(val onClickListener: OnClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
-    private var data: List<UserResponse> = ArrayList()
+class UserAdapter(val onClickListener: OnClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>(),
+TextWatcher{
+    private var baseData: List<UserResponse> = ArrayList()
+    private var currData: List<UserResponse> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
@@ -22,17 +25,18 @@ class UserAdapter(val onClickListener: OnClickListener) : RecyclerView.Adapter<U
         )
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = currData.size
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(currData[position])
         holder.itemView.setOnClickListener {
             onClickListener.onClick(position)
         }
     }
 
-    fun swapData(data: List<UserResponse>) {
-        this.data = data
+    fun swapData(baseData: List<UserResponse>) {
+        this.baseData = baseData
+        this.currData = baseData
         notifyDataSetChanged()
     }
 
@@ -48,5 +52,10 @@ class UserAdapter(val onClickListener: OnClickListener) : RecyclerView.Adapter<U
         fun onClick(position: Int)
     }
 
-
+    override fun afterTextChanged(p0: Editable?) {}
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        currData = baseData.filter { it.nama.contains(p0!!, ignoreCase = true) || p0.isBlank() }
+        notifyDataSetChanged()
+    }
 }

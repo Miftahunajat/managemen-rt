@@ -1,12 +1,34 @@
 package com.pens.managementmasyrakat
 
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.provider.SyncStateContract.Helpers.update
+import android.text.InputType
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.pens.managementmasyrakat.adapter.BayarArisanAdapter
 import com.pens.managementmasyrakat.network.Repository
+import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.UserResponse
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.*
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Context.showmessage(msg: String){
@@ -52,27 +74,112 @@ fun Calendar.getNamaBulan(): String{
 
 }
 
-fun CheckBox.addEventDialogListener(onYes: () -> Unit){
+fun CheckBox.addEventDialogListener(update: (CheckBox) -> Unit){
     this.setOnClickListener {
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle("Perubahan data")
         builder.setMessage("Apakah anda yakin ingin merubah data")
-        builder.setPositiveButton("YES"){dialog, which ->
-            // Do something when user press the positive button
-            Toast.makeText(this.context,"Ok, we change the app background.",Toast.LENGTH_SHORT).show()
-            // Change the app background color
-
+        builder.setPositiveButton("YES"){ _, _ ->
+            update(this)
         }
 
-
-        // Display a negative button on alert dialog
-        builder.setNegativeButton("No"){dialog,which ->
-            this.context.showmessage("You are not agree.")
+        builder.setNegativeButton("No"){ _, _ ->
+            this.context.showmessage("Anda membatalkan")
             this.isChecked = !this.isChecked
         }
         val dialog: AlertDialog = builder.create()
-
-        // Display the alert dialog on app interface
         dialog.show()
     }
+}
+
+fun String.toRupiahs(): String{
+    val money = String.format("%,d",this.toInt())
+    return "Rp, $money"
+}
+
+fun String.formatToDate(patternBefore: String, patternAfter: String): String {
+    var spf = SimpleDateFormat(patternBefore, Locale.getDefault())
+    val newDate = spf.parse(this)
+    spf = SimpleDateFormat(patternAfter, Locale.getDefault())
+    return spf.format(newDate!!)
+}
+
+fun RecyclerView.setupWithBayarArisanAdapter(
+        adapter: BayarArisanAdapter,
+        layoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
+    ){
+    if(this.layoutManager == null) this.layoutManager = layoutManager
+    this.adapter = adapter
+}
+
+fun Calendar.getFormattedTanggal(): String{
+    val tanggal = this[Calendar.DATE]
+    val bulan = this.getNamaBulan()
+    val tahun = this[Calendar.YEAR]
+    return "$tanggal $bulan $tahun"
+}
+
+fun View.addDialogDaftarArisanOnClick(judulArisan: String, update: () -> Unit){
+    this.setOnClickListener {
+        val builder = AlertDialog.Builder(this.context)
+        builder.setTitle("Mendaftar Arisan")
+        builder.setMessage("Apakah anda yakin ingin mendaftar $judulArisan")
+        builder.setPositiveButton("YES"){ _, _ ->
+            this.context.showmessage("Permintaan Dikirim")
+            update()
+        }
+
+        builder.setNegativeButton("No"){ _, _ ->
+            this.context.showmessage("Permintaan Dibatalkan")
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+}
+
+fun Context.showEditableBottomSheetDialog(title: String = "Masukkan data baru",
+                                          text: String,
+                                          inputType: Int = InputType.TYPE_CLASS_TEXT,
+                                          update: (String) -> Unit){
+    val bottomSheetDialog = BottomSheetDialog(this)
+    val dialogView = LayoutInflater.from(this).inflate(R.layout.fragment_bottom_sheet_dialog, null)
+    dialogView.tv_batal.setOnClickListener {
+        bottomSheetDialog.dismiss()
+    }
+    bottomSheetDialog.setContentView(dialogView)
+    dialogView.tv_title.text = title
+    dialogView.et_data.setText(text)
+    dialogView.et_data.inputType= inputType
+    dialogView.tv_simpan.setOnClickListener {
+        update(dialogView.et_data.text.toString())
+        bottomSheetDialog.dismiss()
+    }
+    bottomSheetDialog.show()
+}
+
+fun Context.showAlertDialog(
+    title: String = "Perubahan Data",
+    message: String = "Apakah anda yakin ingin melalukannya",
+    onYes: String = "Perubahan Data Berhasil",
+    onNo: String = "Perubahan Data Gagal",
+    update: () -> Unit
+){
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle(title)
+    builder.setMessage(message)
+    builder.setPositiveButton("YES"){ _, _ ->
+        this.showmessage(onYes)
+        update()
+    }
+
+    builder.setNegativeButton("No"){ _, _ ->
+        this.showmessage(onNo)
+    }
+    val dialog: AlertDialog = builder.create()
+    dialog.show()
+}
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, url: String?) {
+    Picasso.get().load(url).into(view)
 }

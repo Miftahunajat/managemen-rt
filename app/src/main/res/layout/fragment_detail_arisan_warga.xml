@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fillViewport="true"
+        tools:context=".screens.DetailIuranWargaFragment"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             >
+    <ImageView
+            android:id="@+id/iv_bg_pattern3"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_pattern_blue"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/margin_extra_extra_large"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:cardCornerRadius="32dp"
+            app:cardElevation="8dp"
+            android:id="@+id/cardView">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="match_parent">
+            <ImageView
+                    android:layout_width="@dimen/icon_menu"
+                    android:layout_height="@dimen/icon_menu" tools:src="@tools:sample/avatars"
+                    android:id="@+id/imageView11" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
+            <TextView
+                    android:text="John Smith"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_nama"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                    app:layout_constraintStart_toStartOf="@+id/imageView11"
+            />
+            <TextView
+                    android:text="Status Pembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_subtitle"
+                    android:id="@+id/textView22" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_nama"
+                    app:layout_constraintStart_toStartOf="@+id/tv_nama"
+            />
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorSoftAccent1"
+                    android:id="@+id/view6" app:layout_constraintStart_toStartOf="@+id/textView22"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22"
+                    android:layout_marginRight="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="8dp"/>
+
+            <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                    android:id="@+id/group_choices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:tbgCheckedButton="@+id/choice_a"
+                    app:layout_constraintTop_toBottomOf="@+id/view6" app:layout_constraintEnd_toEndOf="@+id/view6"
+
+                    app:layout_constraintStart_toStartOf="@+id/view6" android:layout_marginTop="8dp">
+
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_a"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2019"/>
+
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_b"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2020"/>
+
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_c"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2021"/>
+
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_d"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2022"/>
+
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_e"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2023"/>
+
+            </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_detail_arisan_warga"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/view6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:listitem="@layout/item_data_bayar"
+                    app:layout_constraintEnd_toEndOf="@+id/view6"
+                    app:layout_constraintTop_toBottomOf="@+id/group_choices"
+                    android:layout_marginTop="8dp"/>
+            <TextView
+                    android:text="15,000"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_harga"
+                    app:layout_constraintEnd_toStartOf="@+id/textView25" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/view6"/>
+            <TextView
+                    android:text=" / bulan"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/font_subtitle"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView25" app:layout_constraintEnd_toEndOf="@+id/view6"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_harga"/>
+            <CheckBox
+                    android:text="Ditarik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cb_ditarik"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_harga"
+                    app:layout_constraintStart_toStartOf="@+id/tv_harga"
+            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

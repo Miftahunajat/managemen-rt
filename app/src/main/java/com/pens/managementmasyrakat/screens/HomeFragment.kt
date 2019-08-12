@@ -2,16 +2,18 @@ package com.pens.managementmasyrakat.screens
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.pens.managementmasyrakat.R
-import com.pens.managementmasyrakat.isAdminArisan
-import com.pens.managementmasyrakat.isAdminIuran
-import com.pens.managementmasyrakat.isPengurusRT
+import androidx.navigation.fragment.findNavController
+import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.network.Repository
+import com.pens.managementmasyrakat.network.lib.Resource
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.inc_menu.view.*
 
@@ -44,24 +46,55 @@ class HomeFragment : Fragment() {
         view.circle_admin_iuran.setOnClickListener {
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminIuranFragment())
         }
+        view.ic_keluar.setOnClickListener {
+            Repository.clearUser(context!!)
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+        }
         setupUser(view)
+        view.tv_to_pengunguman.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanFragment())
+        }
         view.circle_pengurus_rt
+        setupPengunguman(view)
         return view
+    }
+
+    private fun setupPengunguman(view: View?) {
+        Repository.getAllPengunguman().observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    Log.d("Loading", it.status.toString())
+                }
+                Resource.SUCCESS ->{
+                    view!!.tv_title.text = it.data!!.last().title
+                    view.tv_body.text = it.data!!.last().body
+                    Log.d("Success", it.data.toString())
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
     }
 
     private fun setupUser(view: View) {
         val user = Repository.getUser(context!!)
-        view.tv_nama.text = user!!.nama
+        val nama = user!!.nama
+        view.textView7.text = "Selamat datang\n $nama"
         if (user.isAdminArisan() == false) {
-            view.menu_4.visibility = View.GONE
+            view.menu_4.visibility = View.INVISIBLE
+            view.menu_4.setOnClickListener(null)
         }
 
         if (user.isAdminIuran() == false) {
-            view.menu_5.visibility = View.GONE
+            view.menu_5.visibility = View.INVISIBLE
+            view.menu_5.setOnClickListener(null)
         }
 
         if (user.isPengurusRT() == false) {
-            view.menu_6.visibility = View.GONE
+            view.menu_6.visibility = View.INVISIBLE
+            view.menu_6.setOnClickListener(null)
         }
     }
 

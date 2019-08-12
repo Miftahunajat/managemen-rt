@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
-            app:startDestination="@+id/loginFragment">
+            app:startDestination="@+id/pengungumanBaruFragment">
 
     <fragment android:id="@+id/homeFragment" android:name="com.pens.managementmasyrakat.screens.HomeFragment"
               android:label="fragment_home" tools:layout="@layout/fragment_home">
@@ -18,6 +18,12 @@
         <action android:id="@+id/action_homeFragment_to_iuranFragment" app:destination="@id/iuranFragment"
                 app:enterAnim="@anim/slide_in_right" app:popEnterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_loginFragment" app:destination="@id/loginFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_pengungumanFragment" app:destination="@id/pengungumanFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
 
     </fragment>
     <fragment android:id="@+id/dataDiriFragment" android:name="com.pens.managementmasyrakat.screens.DataDiriFragment"
@@ -25,7 +31,12 @@
     <fragment android:id="@+id/iuranFragment" android:name="com.pens.managementmasyrakat.screens.IuranFragment"
               android:label="fragment_iuran" tools:layout="@layout/fragment_iuran">
         <action android:id="@+id/action_iuranFragment_to_dataIuranDetailFragment"
-                app:destination="@id/dataIuranDetailFragment"/>
+                app:destination="@id/dataIuranDetailFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_iuranFragment_to_listArisan" app:destination="@id/listArisan"
+                app:enterAnim="@anim/slide_in_down" app:exitAnim="@anim/slide_out_up"
+                app:popEnterAnim="@anim/slide_in_down" app:popExitAnim="@anim/slide_out_up"/>
     </fragment>
     <fragment android:id="@+id/adminIuranFragment"
               android:name="com.pens.managementmasyrakat.screens.AdminIuranFragment"
@@ -43,16 +54,24 @@
                 app:exitAnim="@anim/slide_out_up" app:popEnterAnim="@anim/slide_in_down"
                 app:popExitAnim="@anim/slide_out_up"/>
         <action android:id="@+id/action_adminArisanFragment_to_bayarArisanFragment"
-                app:destination="@id/bayarArisanFragment"/>
+                app:destination="@id/bayarArisanFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
-    <fragment android:id="@+id/detailIuranWarga" android:name="com.pens.managementmasyrakat.screens.DetailIuranWarga"
+    <fragment android:id="@+id/detailIuranWarga"
+              android:name="com.pens.managementmasyrakat.screens.DetailIuranWargaFragment"
               android:label="fragment_detail_iuran_warga" tools:layout="@layout/fragment_detail_iuran_warga">
         <argument android:name="TYPE" app:argType="integer"/>
         <argument android:name="USER_ID" app:argType="integer"/>
+        <argument android:name="CODE_IURAN" app:argType="integer"/>
     </fragment>
     <fragment android:id="@+id/dataIuranDetailFragment"
               android:name="com.pens.managementmasyrakat.screens.DataIuranDetailFragment"
-              android:label="fragment_data_iuran_detail" tools:layout="@layout/fragment_data_iuran_detail"/>
+              android:label="fragment_data_iuran_detail" tools:layout="@layout/fragment_data_iuran_detail">
+        <argument android:name="TYPE" app:argType="integer"/>
+        <argument android:name="USER_KK_ID" app:argType="integer"/>
+        <argument android:name="CODE_IURAN" app:argType="integer"/>
+    </fragment>
     <fragment android:id="@+id/tambahArisanFragment"
               android:name="com.pens.managementmasyrakat.screens.TambahArisanFragment"
               android:label="fragment_tambah_arisan" tools:layout="@layout/fragment_tambah_arisan">
@@ -63,7 +82,13 @@
     </fragment>
     <fragment android:id="@+id/bayarArisanFragment"
               android:name="com.pens.managementmasyrakat.screens.BayarArisanFragment"
-              android:label="fragment_bayar_arisan" tools:layout="@layout/fragment_bayar_arisan"/>
+              android:label="fragment_bayar_arisan" tools:layout="@layout/fragment_bayar_arisan">
+        <argument android:name="ID_ARISAN" app:argType="integer"/>
+        <action android:id="@+id/action_bayarArisanFragment_to_detailArisanWargaFragment"
+                app:destination="@id/detailArisanWargaFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_in_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment android:id="@+id/searchWargaFragment2"
               android:name="com.pens.managementmasyrakat.screens.SearchWargaFragment"
               android:label="fragment_search_warga" tools:layout="@layout/fragment_search_warga">
@@ -80,4 +105,38 @@
                 app:exitAnim="@anim/slide_out_right" app:enterAnim="@anim/slide_in_left" app:popUpToInclusive="true"
                 app:popUpTo="@+id/loginFragment"/>
     </fragment>
+    <fragment android:id="@+id/detailArisanWargaFragment"
+              android:name="com.pens.managementmasyrakat.screens.DetailArisanWargaFragment"
+              android:label="DetailArisanWargaFragment"
+              tools:layout="@layout/fragment_detail_arisan_warga">
+        <argument android:name="ID_ARISAN" app:argType="integer"/>
+        <argument android:name="ID_USER" app:argType="integer"/>
+    </fragment>
+    <fragment android:id="@+id/listArisan" android:name="com.pens.managementmasyrakat.screens.ListArisan"
+              android:label="fragment_list_arisan" tools:layout="@layout/fragment_list_arisan">
+        <action android:id="@+id/action_listArisan_to_iuranFragment" app:destination="@id/iuranFragment"
+                app:enterAnim="@anim/slide_in_down" app:exitAnim="@anim/slide_out_up"
+                app:popEnterAnim="@anim/slide_in_down" app:popExitAnim="@anim/slide_out_up"/>
+        <argument android:name="JENIS_KELAMIN_ID" app:argType="integer"/>
+        <action android:id="@+id/action_listArisan_to_dataArisanWargaDetail"
+                app:destination="@id/dataArisanWargaDetail"/>
+    </fragment>
+    <fragment android:id="@+id/dataArisanWargaDetail"
+              android:name="com.pens.managementmasyrakat.screens.DataArisanWargaDetail"
+              android:label="fragment_data_arisan_warga_detail"
+              tools:layout="@layout/fragment_data_arisan_warga_detail">
+        <argument android:name="ID_ARISAN" app:argType="integer"/>
+        <argument android:name="ID_USER"/>
+    </fragment>
+    <fragment android:id="@+id/pengungumanFragment"
+              android:name="com.pens.managementmasyrakat.screens.PengungumanFragment"
+              android:label="pengunguman_fragment" tools:layout="@layout/pengunguman_fragment">
+        <action android:id="@+id/action_pengungumanFragment_to_homeFragment" app:destination="@id/homeFragment"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/homeFragment" app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment android:id="@+id/pengungumanBaruFragment"
+              android:name="com.pens.managementmasyrakat.screens.PengungumanBaruFragment"
+              android:label="fragment_pengunguman_baru" tools:layout="@layout/fragment_pengunguman_baru"/>
 </navigation>

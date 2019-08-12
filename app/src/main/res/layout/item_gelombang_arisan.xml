@@ -3,14 +3,15 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                                                    android:orientation="vertical"
                                                    android:layout_width="match_parent"
-                                                   android:background="?android:attr/selectableItemBackground"
+                                                   android:foreground="?android:attr/selectableItemBackground"
+                                                   android:background="@color/colorWhite"
                                                    android:layout_height="wrap_content">
     <TextView
             android:text="Arisan Ibu ibu 1"
             android:layout_width="wrap_content"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_height="wrap_content"
-            android:id="@+id/textView6" android:layout_marginTop="8dp"
+            android:id="@+id/tv_nama" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"/>
     <TextView
@@ -19,7 +20,7 @@
             android:textSize="@dimen/font_subtitle"
             android:layout_height="wrap_content"
             android:id="@+id/textView13"
-            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintStart_toStartOf="@+id/tv_tanggal"
             app:layout_constraintTop_toTopOf="@+id/textView14"/>
     <TextView
             android:text="Biaya Iuran"
@@ -27,14 +28,14 @@
             android:textSize="@dimen/font_subtitle"
             android:layout_height="wrap_content"
             android:id="@+id/textView18"
-            app:layout_constraintTop_toTopOf="@+id/textView14" app:layout_constraintEnd_toEndOf="@+id/textView17"/>
+            app:layout_constraintTop_toTopOf="@+id/textView14" app:layout_constraintEnd_toEndOf="@+id/tv_minimum_iuran"/>
     <TextView
             android:text="17 Agustus 2019"
             android:layout_width="wrap_content"
             android:textSize="@dimen/font_title"
             android:textColor="@color/colorBlack"
             android:layout_height="wrap_content"
-            android:id="@+id/textView15"
+            android:id="@+id/tv_tanggal"
             app:layout_constraintTop_toBottomOf="@+id/textView13" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="8dp" android:layout_marginEnd="8dp"/>
     <TextView
@@ -44,7 +45,7 @@
             android:padding="4dp"
             android:textColor="@color/colorBlack"
             android:layout_height="wrap_content"
-            android:id="@+id/textView17"
+            android:id="@+id/tv_minimum_iuran"
             app:layout_constraintTop_toBottomOf="@+id/textView13"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"/>
@@ -54,9 +55,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView14"
             android:textSize="@dimen/font_subtitle"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintEnd_toEndOf="@+id/textView12"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_jumlah"
+            app:layout_constraintStart_toStartOf="@+id/tv_jumlah"
+            app:layout_constraintEnd_toEndOf="@+id/tv_jumlah"/>
     <TextView
             android:text="17"
             android:layout_width="76dp"
@@ -66,9 +67,9 @@
             android:gravity="center"
             android:textAlignment="center"
             android:background="@drawable/background_line_soft"
-            android:id="@+id/textView12"
+            android:id="@+id/tv_jumlah"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama"
             app:layout_constraintEnd_toEndOf="parent"/>
     <View
             android:layout_width="match_parent"
@@ -76,6 +77,6 @@
             android:id="@+id/view4"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@color/colorSoftAccent1" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/tv_tanggal"
             android:layout_marginTop="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
