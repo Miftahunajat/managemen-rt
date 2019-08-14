@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
@@ -28,6 +29,8 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class HomeFragment : Fragment() {
+
+    var idPengunguman = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +53,20 @@ class HomeFragment : Fragment() {
             Repository.clearUser(context!!)
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
-        setupUser(view)
         view.tv_to_pengunguman.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanFragment(idPengunguman))
         }
-        view.circle_pengurus_rt
+        view.circle_pengurus_rt.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengurusRTFragment())
+        }
+        view.circle_kas_rt.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToKasRTManagementFragment(false))
+        }
+        view.daftar_pengunguman.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanListFragment())
+        }
+        FirebaseMessaging.getInstance().subscribeToTopic("pengunguman")
+        setupUser(view)
         setupPengunguman(view)
         return view
     }
@@ -69,6 +81,7 @@ class HomeFragment : Fragment() {
                     view!!.tv_title.text = it.data!!.last().title
                     view.tv_body.text = it.data!!.last().body
                     Log.d("Success", it.data.toString())
+                    idPengunguman = it.data!!.last().id
                 }
                 Resource.ERROR ->{
                     Log.d("Error", it.message!!)

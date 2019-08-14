@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "366157120102",
+    "firebase_url": "https://platypus-b0055.firebaseio.com",
+    "project_id": "platypus-b0055",
+    "storage_bucket": "platypus-b0055.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366157120102:android:2859e4162d731535",
+        "android_client_info": {
+          "package_name": "com.pens.managementmasyrakat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366157120102-d0672gm21kl0geltid9i64o19kogj3hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJz0zVU8q6EXSOohdMfmQS_d-633x8uE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366157120102-d0672gm21kl0geltid9i64o19kogj3hj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -36,6 +36,11 @@ class BayarArisanAdapter(val onClickListener: OnClickListener, val type: Int) : 
 
     override fun onBindViewHolder(holder: BayarArisanViewHolder, position: Int) {
         holder.bind(data[position])
+        if (type == TYPE_BELUM_MEMBAYAR) holder.itemView.setOnLongClickListener {
+            onClickListener.onBelumBayarLongClick(data[position].nama, data[position].id.toString()
+            )
+            true
+        }
         holder.itemView.setOnClickListener {
             if (type == TYPE_VERIFIKASI) onClickListener.onVerifikasiClick(data[position].id)
             else onClickListener.onClick(data[position].id)
@@ -49,7 +54,7 @@ class BayarArisanAdapter(val onClickListener: OnClickListener, val type: Int) : 
 
     class BayarArisanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: UserResponse) = with(itemView) {
-            itemView.findViewById<TextView>(R.id.tv_nama).text = item.nama
+            itemView.findViewById<TextView>(R.id.tv_title).text = item.nama
             itemView.findViewById<TextView>(R.id.tv_nomor).text = item.no_hp
         }
     }
@@ -58,5 +63,7 @@ class BayarArisanAdapter(val onClickListener: OnClickListener, val type: Int) : 
         fun onClick(user_id: Int)
 
         fun onVerifikasiClick(user_id: Int)
+
+        fun onBelumBayarLongClick(nama: String, user_id: String)
     }
 }

@@ -59,7 +59,7 @@ class UserBayarArisanAdapter(val fragment: Fragment) :
 
     class UserBayarArisanViewbHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: UserBayarArisan) = with(itemView) {
-            itemView.tv_nama_bulan.text = item.bulan.nama_bulan
+            itemView.tv_bulan.text = item.bulan.nama_bulan
             itemView.tv_status.isChecked = item.bayar
         }
     }

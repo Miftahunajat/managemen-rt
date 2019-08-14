@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.databinding.PengungumanFragmentBinding
 import com.pens.managementmasyrakat.network.Repository
@@ -36,13 +37,15 @@ class PengungumanFragment : Fragment() {
     }
 
     private fun getFirstPengunguman(view: View?) {
+        val pengungumanFragmentArgs by navArgs<PengungumanFragmentArgs>()
         Repository.getAllPengunguman().observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    pengungumanFragmentBinding.data = it.data!!.last()
+                    val pengungumanResponse = it.data!!.filter { it.id == pengungumanFragmentArgs.idpengunguman }.first()
+                    pengungumanFragmentBinding.data = pengungumanResponse
                     Log.d("Success", it.data!!.last().toString())
                 }
                 Resource.ERROR ->{

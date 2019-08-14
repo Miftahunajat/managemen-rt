@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -98,7 +97,7 @@ class DetailIuranWargaFragment : Fragment(){
                         Log.i("Loggin", it.status.toString())
                     }
                     Resource.SUCCESS ->{
-                        view?.tv_nama?.text = it.data?.nama
+                        view?.tv_title?.text = it.data?.nama
                         if (detailIuranWargaFragmentArgs.type == TYPE_SOSIAL){
                             setupSosialAdapter(it.data)
                         }else{
@@ -121,7 +120,7 @@ class DetailIuranWargaFragment : Fragment(){
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    view?.tv_nama?.text = it.data?.nama
+                    view?.tv_title?.text = it.data?.nama
                     userKKid = it.data?.user_kk_id
                 }
                 Resource.ERROR ->{

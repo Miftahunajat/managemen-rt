@@ -63,7 +63,7 @@ class AdminIuranSampahPertahunAdapter(val fragment: Fragment) : RecyclerView.Ada
 
     class IuranPetahunViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: IuranPerTahun) = with(itemView) {
-            itemView.tv_nama_bulan.text = item.bulan
+            itemView.tv_bulan.text = item.bulan
             itemView.tv_status.isChecked = item.iuran_sampah
         }
     }

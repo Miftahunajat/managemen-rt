@@ -32,7 +32,7 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:text="Selamat siang diberitahukan pada seluruh warga RT 02 bahwa pada siang ini pukul 14.00 akan ada agenda rapat untuk seluruh warga rt 02"
+                    android:text=""
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_body"
@@ -45,7 +45,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginEnd="8dp"/>
             <TextView
-                    android:text="Agenda Rapat 02"
+                    android:text=""
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:textSize="@dimen/font_title"

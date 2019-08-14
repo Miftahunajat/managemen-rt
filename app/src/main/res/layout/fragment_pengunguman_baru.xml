@@ -11,13 +11,13 @@
                                                        tools:context=".screens.PengungumanBaruFragment">
 
         <TextView
-                android:text="Tambahkan "
+                android:text="Umumkan Warga"
                 android:layout_width="0dp"
                 android:textAlignment="center"
                 android:layout_height="56dp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:id="@+id/tv_tambahkan2"
+                android:id="@+id/tv_umumkan_warga"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:textSize="@dimen/font_title"
                 android:elevation="19dp"
@@ -30,7 +30,7 @@
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/tv_tambahkan2"
+                app:layout_constraintBottom_toTopOf="@id/tv_umumkan_warga"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,6 @@
                         android:ems="10"
                         android:hint="*Keterangan gambar"
                         android:padding="@dimen/edittext_padding_default"
-                        android:focusable="false"
                         android:id="@+id/et_content_desc"
                         android:background="@drawable/background_box_gray"
                         app:layout_constraintTop_toBottomOf="@+id/iv_content"

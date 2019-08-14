@@ -46,24 +46,33 @@ class IuranFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_iuran, container, false)
-        view.tv_nama_bulan.text = Calendar.getInstance().getNamaBulan()
+        view.tv_bulan.text = Calendar.getInstance().getNamaBulan()
         val kkId = context!!.getUser()!!.user_kk_id
         view.tv_tanggal.text = Calendar.getInstance().getFormattedTanggal()
         val cal = Calendar.getInstance()
-        val month_date = SimpleDateFormat("MMMM", Locale.getDefault())
+        val monthDate = SimpleDateFormat("MMMM", Locale.getDefault())
         val yearDate = SimpleDateFormat("yyyy", Locale.getDefault())
-        val month_name = month_date.format(cal.getTime())
+        val monthName = monthDate.format(cal.getTime())
         Log.d(IuranFragment::class.java.simpleName, "onCreateView: $");
-        val year_name = yearDate.format(cal.getTime())
-        Repository.getAllIuranBulanIni(kkId, month_name, year_name).observe(this, androidx.lifecycle.Observer {
+        val yearName = yearDate.format(cal.time)
+        Repository.getAllIuranBulanIni(kkId, monthName, yearName).observe(this, androidx.lifecycle.Observer {
             when(it?.status){
                 Resource.LOADING ->{
+                    view.cl_1.toLoading()
+                    view.cl_2.toLoading()
+                    view.cl_3.toLoading()
                     Log.i("Loggin", it.status.toString())
                 }
                 Resource.SUCCESS ->{
+                    view.cl_1.finishLoading()
+                    view.cl_2.finishLoading()
+                    view.cl_3.finishLoading()
                     setupViewWithData(view, it.data)
                 }
                 Resource.ERROR ->{
+                    view.cl_1.finishLoading()
+                    view.cl_2.finishLoading()
+                    view.cl_3.finishLoading()
                     context?.showmessage("Tidak Terhubung Internet")
                     Log.i("Error", it.message!!)
                 }

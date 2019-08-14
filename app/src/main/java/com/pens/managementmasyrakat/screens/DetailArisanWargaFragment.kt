@@ -77,7 +77,7 @@ class DetailArisanWargaFragment : Fragment(){
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    view!!.tv_nama.text = it.data!!.user.nama
+                    view!!.tv_title.text = it.data!!.user.nama
                     view.tv_harga.text = it.data!!.arisan.iuran.toRupiahs()
                     view.cb_ditarik.isChecked = it.data!!.tarik
                     Log.d("Success", it.data.toString())

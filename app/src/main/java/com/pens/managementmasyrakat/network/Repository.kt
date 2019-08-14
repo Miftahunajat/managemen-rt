@@ -10,6 +10,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import com.google.gson.Gson
 import com.pens.managementmasyrakat.network.model.*
+import retrofit2.http.Field
+import java.util.concurrent.TimeUnit
 
 
 object Repository {
@@ -132,12 +134,39 @@ object Repository {
     fun getAllPengunguman() = networkCall<ListResponse<PengungumanResponse>,List<PengungumanResponse>> {
         client = ManagemenApi.apiService.getAllPengunguman()
     }
+
+    fun getPengunguman(id: Int) = networkCall<PengungumanResponse,PengungumanResponse> {
+        client = ManagemenApi.apiService.getPengunguman(id)
+    }
+
+    fun postPengunguman(title: String, body: String, content: String, contentDesc: String) = networkCall<PengungumanResponse,PengungumanResponse> {
+        client = ManagemenApi.apiService.postPengunguman(title, body, content, contentDesc)
+    }
+
+    fun getPengeluaranPertahun(tahun: String) = networkCall<ListResponse<DataKasRTResponse>,List<DataKasRTResponse>> {
+        client = ManagemenApi.apiService.pengeluaranPerTahun(tahun)
+    }
+
+    fun postPengeluaran(tahun: String, keterangan: String, nama_bulan: String, jumlah: String) = networkCall<ListResponse<DataKasRTResponse>,List<DataKasRTResponse>> {
+        client = ManagemenApi.apiService.postListPengeluaran(tahun, keterangan, nama_bulan, jumlah)
+    }
+
+    fun deletePengeluaran(id: Int) = networkCall<Pengeluaran,Pengeluaran> {
+        client = ManagemenApi.apiService.deleteListPengeluaran(id.toString())
+    }
+
+    fun getKeluargas(id: Int) = networkCall<ListResponse<UserResponse>,List<UserResponse>> {
+        client = ManagemenApi.apiService.getKeluargas(id.toString())
+    }
 }
 
 object ManagemenApi {
     var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var API_BASE_URL: String = "http://38505ea6.ngrok.io/"
-    var httpClient = OkHttpClient.Builder().addInterceptor(interceptor)
+    var API_BASE_URL: String = "http://8f86990d.ngrok.io/"
+    var httpClient = OkHttpClient.Builder()
+        .addInterceptor(interceptor)
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(20, TimeUnit.SECONDS)
     var builder: Retrofit.Builder = Retrofit.Builder()
         .baseUrl(API_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

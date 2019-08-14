@@ -12,10 +12,9 @@ import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.Arisan
 import com.pens.managementmasyrakat.screens.ListArisanDirections
-import kotlinx.android.synthetic.main.item_gelombang_arisan.view.*
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.*
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_minimum_iuran
-import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_nama
+import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_title
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_tanggal
 
 class ArisanWargaAdapter(val fragment: Fragment, val user_id: Int) : RecyclerView.Adapter<ArisanWargaAdapter.ArisanViewHolder>() {
@@ -69,7 +68,7 @@ class ArisanWargaAdapter(val fragment: Fragment, val user_id: Int) : RecyclerVie
 
     class ArisanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Arisan) = with(itemView) {
-            itemView.tv_nama.text = item.nama
+            itemView.tv_title.text = item.nama
             itemView.tv_minimum_iuran.text = item.iuran.toRupiahs()
             itemView.tv_tanggal.text = item.selesai.formatToDate("yyyy-MM-dd","dd MMMM yyyy")
         }

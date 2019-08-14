@@ -11,12 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nex3z.togglebuttongroup.button.CircularToggle
-import com.pens.managementmasyrakat.R
+import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.DataIuranAdapter
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
-import com.pens.managementmasyrakat.showmessage
-import com.pens.managementmasyrakat.toRupiahs
 import kotlinx.android.synthetic.main.fragment_data_iuran_detail.view.*
 import kotlinx.android.synthetic.main.fragment_detail_iuran_warga.view.group_choices
 
@@ -57,17 +55,20 @@ class DataIuranDetailFragment : Fragment() {
     private fun refreshList(tahun: String) {
         val dataIuranDetailFragmentArgs by navArgs<DataIuranDetailFragmentArgs>()
         Repository.getAllIuranTahunIni(dataIuranDetailFragmentArgs.userkkid, tahun)
-            .observe(this, androidx.lifecycle.Observer {
+            .observe(this, Observer {
                 when(it?.status){
                     Resource.LOADING ->{
+                        view!!.rv_data_iuran.toLoading()
                         Log.i("Loggin", it.status.toString())
                     }
                     Resource.SUCCESS ->{
-                        view?.tv_nama?.text = it.data?.nama
+                        view!!.rv_data_iuran.finishLoading()
+                        view?.tv_title?.text = it.data?.nama
                         dataIuranAdapter.swapData(it.data!!.iuran_per_tahun)
                         Log.d("@@@", it.data!!.toString())
                     }
                     Resource.ERROR ->{
+                        view!!.rv_data_iuran.finishLoading()
                         context?.showmessage("Tidak Terhubung Di Internet")
                         Log.i("Error", it.message!!)
                     }
@@ -80,6 +81,7 @@ class DataIuranDetailFragment : Fragment() {
         Repository.getHargaIuranByCode(dataIuranDetailFragmentArgs.codeiuran).observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{
+
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
@@ -87,6 +89,7 @@ class DataIuranDetailFragment : Fragment() {
                     Log.d("Success", it.data.toString())
                 }
                 Resource.ERROR ->{
+
                     Log.d("Error", it.message!!)
                     context?.showmessage("Something is wrong")
                 }

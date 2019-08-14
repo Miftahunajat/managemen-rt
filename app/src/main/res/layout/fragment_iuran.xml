@@ -29,7 +29,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="wrap_content"
                                                                android:id="@+id/cl_1"
-                                                               app:layout_constraintTop_toBottomOf="@+id/tv_nama_bulan"
+                                                               app:layout_constraintTop_toBottomOf="@+id/tv_bulan"
                                                                android:background="?android:attr/selectableItemBackground"
                                                                android:layout_marginTop="8dp"
                                                                android:clickable="true"
@@ -47,7 +47,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
-                            android:src="@drawable/background_green_line_soft"
+                            android:src="@drawable/background_red_line_soft"
                             tools:ignore="MissingConstraints"
                             tools:layout_editor_absoluteX="0dp"
                             tools:layout_editor_absoluteY="0dp"/>
@@ -65,9 +65,9 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
-                        android:text="Sudah membayar"
+                        android:text="Belum Membayar Iuran"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/green_500"
+                        android:textColor="@color/red_500"
                         android:layout_height="wrap_content" android:id="@+id/tv_1"
                         app:layout_constraintBottom_toBottomOf="@+id/menu_1"
                         app:layout_constraintVertical_chainStyle="packed"
@@ -261,7 +261,7 @@
                     android:textSize="@dimen/font_title"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
-                    android:id="@+id/tv_nama_bulan" app:layout_constraintStart_toStartOf="@+id/view"
+                    android:id="@+id/tv_bulan" app:layout_constraintStart_toStartOf="@+id/view"
                     app:layout_constraintEnd_toEndOf="@+id/view"
                     app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintTop_toBottomOf="@+id/textView3"/>

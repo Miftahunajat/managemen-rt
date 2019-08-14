@@ -38,7 +38,7 @@ class ArisanAdapter(val onClickListener: OnClickListener) : RecyclerView.Adapter
 
     class ArisanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Arisan) = with(itemView) {
-            itemView.tv_nama.text = item.nama
+            itemView.tv_title.text = item.nama
             itemView.tv_jumlah.text = item.peserta.toString()
             itemView.tv_minimum_iuran.text = item.iuran.toRupiahs()
             itemView.tv_tanggal.text = item.selesai.formatToDate("yyyy-MM-dd","dd MMMM yyyy")

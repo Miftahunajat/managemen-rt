@@ -9,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.pens.managementmasyrakat.R
+import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
-import com.pens.managementmasyrakat.saveUser
-import com.pens.managementmasyrakat.showmessage
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
@@ -52,13 +50,16 @@ class LoginFragment : Fragment() {
             when(it?.status){
                 Resource.LOADING ->{
                     Log.i("Loggin", it.status.toString())
+                    view!!.tv_masuk.toLoading()
                 }
                 Resource.SUCCESS ->{
                     Log.d("@@@", it.data!!.toString())
+                    view!!.tv_masuk.finishLoading()
                     context!!.saveUser(it.data!!)
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
                 Resource.ERROR ->{
+                    view!!.tv_masuk.finishLoading()
                     context?.showmessage("Nama / Password salah")
                     Log.i("Error", it.message!!)
                 }

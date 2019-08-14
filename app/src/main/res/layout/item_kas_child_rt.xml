@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_marginBottom="8dp"
+                                                   android:clickable="true"
+                                                   android:focusable="true"
+                                                   android:background="?android:attr/selectableItemBackground">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       app:layout_constraintTop_toTopOf="parent"
+                                                       app:layout_constraintBottom_toBottomOf="parent"
+                                                       android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+                                                       >
+        <TextView
+                android:text="January"
+                android:layout_width="0dp"
+                android:ellipsize="end"
+                android:layout_height="wrap_content" android:id="@+id/tv_bulan" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                android:textSize="@dimen/font_title"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_harga" android:layout_marginRight="8dp"/>
+        <TextView
+                android:text="Rp. -5.000.000"
+                android:textColor="@color/red_900"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content" android:id="@+id/tv_harga" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:textSize="@dimen/font_title"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingRight="@dimen/padding_large"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

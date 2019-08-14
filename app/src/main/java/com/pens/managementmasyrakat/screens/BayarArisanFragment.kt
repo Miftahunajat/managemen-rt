@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.BayarArisanAdapter
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
+import com.pens.managementmasyrakat.network.model.UserBayarArisan
 import kotlinx.android.synthetic.main.fragment_bayar_arisan.view.*
 import kotlinx.android.synthetic.main.inc_arisan_belum_membayar.view.*
 import kotlinx.android.synthetic.main.inc_arisan_sudah_ditarik.view.*
@@ -32,6 +35,35 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
+    override fun onBelumBayarLongClick(nama: String,user_id: String) {
+        context?.showAlertDialog("Sudah membayar ?", "Apakah anda ingin merubah $nama menjadi sudah membayar pada $bulan $tahun") {
+            context?.showmessage("Belum terimplementasi")
+//            Transformations.switchMap(Repository.getDetailUserStatus(arisan_id!!, tahun, user_id)){
+//                if (it?.status == Resource.SUCCESS){
+//                    Repository.updateArisan(3,"asd","123123",true)
+//                }else{
+//                    it as LiveData<Resource<List<UserBayarArisan>>>
+//                }
+//            }
+//            Repository.updateArisan(item.arisans_user_id, item.bulan.nama_bulan, item.tahun, it.isChecked)
+//                .observe(fragment, Observer {
+//                    when(it?.status){
+//                        Resource.LOADING ->{
+//                            Log.i("Loggin", it.status.toString())
+//                        }
+//                        Resource.SUCCESS ->{
+//                            fragment.context?.showmessage("Update Berhasil")
+//                            Log.d("@@@", it.data!!.toString())
+//                        }
+//                        Resource.ERROR ->{
+//                            fragment.context?.showmessage("Update gagal")
+//                            Log.i("Error", it.message!!)
+//                        }
+//                    }
+//                })
+        }
+    }
+
     override fun onVerifikasiClick(user_id: Int) {
         context?.showAlertDialog {
             Repository.postIkutArisan(arisan_id!!, user_id.toString()).observe(this, Observer {
@@ -66,6 +98,8 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
         const val TYPE_SUDAH_MEMBAYAR = 3
         const val TYPE_SUDAH_TARIK = 4
     }
+    val bulan by lazy { Calendar.getInstance().getNamaBulan() }
+    val tahun by lazy { Calendar.getInstance().getNamaTahun() }
 
     val verifikasiAdapter = BayarArisanAdapter(this, TYPE_VERIFIKASI)
     val belumMembayarAdapter = BayarArisanAdapter(this, TYPE_BELUM_MEMBAYAR)
@@ -82,7 +116,7 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
         view.inc_arisan_belum_membayar.rv_belum_membayar.setupWithBayarArisanAdapter(belumMembayarAdapter)
         view.inc_sudah_membayar.rv_sudah_membayar.setupWithBayarArisanAdapter(sudahMembayarAdapter)
         view.inc_sudah_ditarik.rv_sudah_ditarik.setupWithBayarArisanAdapter(sudahTarikAdapter)
-        view.tv_nama_bulan.text = Calendar.getInstance().getNamaBulan()
+        view.tv_bulan.text = Calendar.getInstance().getNamaBulan()
         view.tv_tanggal.text = Calendar.getInstance().getFormattedTanggal()
 
         refreshViewRecycler(view)
@@ -112,6 +146,22 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
             }
         })
     }
-
-
 }
+
+
+//Repository.updateArisan(item.arisans_user_id, item.bulan.nama_bulan, item.tahun, it.isChecked)
+//.observe(fragment, Observer {
+//    when(it?.status){
+//        Resource.LOADING ->{
+//            Log.i("Loggin", it.status.toString())
+//        }
+//        Resource.SUCCESS ->{
+//            fragment.context?.showmessage("Update Berhasil")
+//            Log.d("@@@", it.data!!.toString())
+//        }
+//        Resource.ERROR ->{
+//            fragment.context?.showmessage("Update gagal")
+//            Log.i("Error", it.message!!)
+//        }
+//    }
+//})

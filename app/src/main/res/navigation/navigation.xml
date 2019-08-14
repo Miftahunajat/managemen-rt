@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
-            app:startDestination="@+id/pengungumanBaruFragment">
+            app:startDestination="@+id/loginFragment">
 
     <fragment android:id="@+id/homeFragment" android:name="com.pens.managementmasyrakat.screens.HomeFragment"
               android:label="fragment_home" tools:layout="@layout/fragment_home">
@@ -24,6 +24,15 @@
         <action android:id="@+id/action_homeFragment_to_pengungumanFragment" app:destination="@id/pengungumanFragment"
                 app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_pengurusRTFragment" app:destination="@id/pengurusRTFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_kasRTManagementFragment"
+                app:destination="@id/kasRTManagementFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_homeFragment_to_pengungumanListFragment"
+                app:destination="@id/pengungumanListFragment"/>
 
     </fragment>
     <fragment android:id="@+id/dataDiriFragment" android:name="com.pens.managementmasyrakat.screens.DataDiriFragment"
@@ -135,8 +144,36 @@
                 app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
                 app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@+id/homeFragment" app:popUpToInclusive="true"/>
+        <argument android:name="ID_PENGUNGUMAN" app:argType="integer"/>
     </fragment>
     <fragment android:id="@+id/pengungumanBaruFragment"
               android:name="com.pens.managementmasyrakat.screens.PengungumanBaruFragment"
-              android:label="fragment_pengunguman_baru" tools:layout="@layout/fragment_pengunguman_baru"/>
+              android:label="fragment_pengunguman_baru" tools:layout="@layout/fragment_pengunguman_baru">
+        <action android:id="@+id/action_pengungumanBaruFragment_to_pengurusRTFragment"
+                app:destination="@id/pengurusRTFragment" app:enterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_right" app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_left" app:popUpTo="@+id/homeFragment"/>
+    </fragment>
+    <fragment android:id="@+id/kasRTManagementFragment"
+              android:name="com.pens.managementmasyrakat.KasRTManagementFragment"
+              android:label="fragment_kas_rtmanagement" tools:layout="@layout/fragment_kas_rtmanagement">
+        <argument android:name="IS_ADMIN" app:argType="boolean"/>
+    </fragment>
+    <fragment android:id="@+id/pengurusRTFragment" android:name="com.pens.managementmasyrakat.PengurusRTFragment"
+              android:label="fragment_pengurus_rt" tools:layout="@layout/fragment_pengurus_rt">
+        <action android:id="@+id/action_pengurusRTFragment_to_kasRTManagementFragment"
+                app:destination="@id/kasRTManagementFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_pengurusRTFragment_to_pengungumanBaruFragment"
+                app:destination="@id/pengungumanBaruFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment android:id="@+id/pengungumanListFragment"
+              android:name="com.pens.managementmasyrakat.PengungumanListFragment"
+              android:label="fragment_pengunguman_list" tools:layout="@layout/fragment_pengunguman_list">
+        <action android:id="@+id/action_pengungumanListFragment_to_pengungumanFragment"
+                app:destination="@id/pengungumanFragment"/>
+    </fragment>
 </navigation>

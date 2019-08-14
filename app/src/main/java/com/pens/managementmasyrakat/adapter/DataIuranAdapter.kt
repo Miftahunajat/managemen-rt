@@ -46,7 +46,7 @@ class DataIuranAdapter(val type: Int) : RecyclerView.Adapter<DataIuranAdapter.Da
 
     class DataIuranViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: IuranPerTahun, type: Int) = with(itemView) {
-            itemView.tv_nama_bulan.text = item.bulan
+            itemView.tv_bulan.text = item.bulan
             var index: Int
             if (type == TYPE_SOSIAL)
                 index = item.iuran_sosial.toInt()

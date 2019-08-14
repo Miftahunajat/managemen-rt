@@ -32,7 +32,7 @@ class IuranAdapter : RecyclerView.Adapter<IuranAdapter.IuranViewHolder>() {
 
     class IuranViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Iuran) = with(itemView) {
-            itemView.tv_nama.text = item.name
+            itemView.tv_title.text = item.name
             itemView.imageView.setImageDrawable(ContextCompat.getDrawable(context, item.imageId))
             ImageViewCompat.setImageTintList(imageView, ColorStateList.valueOf(ContextCompat.getColor(context, item.colorId)))
             // TODO: Bind the data with View

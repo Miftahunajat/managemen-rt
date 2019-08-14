@@ -41,7 +41,7 @@ class DataUserBayarArisanAdapter(val fragment: Fragment) :
 
     class UserBayarArisanViewbHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: UserBayarArisan) = with(itemView) {
-            itemView.tv_nama_bulan.text = item.bulan.nama_bulan
+            itemView.tv_bulan.text = item.bulan.nama_bulan
             var index: Int = item.bayar.toInt()
             itemView.tv_status.text = stringsTitle[index]
             itemView.tv_status.setTextColor(ContextCompat.getColor(context, DataIuranAdapter.textColor[index]))

@@ -21,7 +21,7 @@ import com.pens.managementmasyrakat.showmessage
 import com.pens.managementmasyrakat.toRupiahs
 import kotlinx.android.synthetic.main.fragment_data_arisan_warga_detail.view.*
 import kotlinx.android.synthetic.main.fragment_data_arisan_warga_detail.view.group_choices
-import kotlinx.android.synthetic.main.fragment_data_arisan_warga_detail.view.tv_nama
+import kotlinx.android.synthetic.main.fragment_data_arisan_warga_detail.view.tv_title
 
 
 /**
@@ -60,7 +60,7 @@ class DataArisanWargaDetail : Fragment() {
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    view!!.tv_nama.text = it.data!!.user.nama
+                    view!!.tv_title.text = it.data!!.user.nama
                     view.tv_harga.text = it.data!!.arisan.iuran.toRupiahs()
                     view.tv_ditarik.text = if (it.data!!.tarik) "Sudah Ditarik" else "Belum Ditarik"
                     Log.d("Success", it.data.toString())

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.R
-import com.pens.managementmasyrakat.databinding.ItemDataWargaBinding
 import com.pens.managementmasyrakat.network.model.UserResponse
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_data_warga.view.*
@@ -42,7 +41,7 @@ TextWatcher{
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: UserResponse) = with(itemView) {
-            itemView.tv_nama.text = item.nama
+            itemView.tv_title.text = item.nama
             itemView.tv_nomor.text = item.no_hp
             Picasso.get().load(item.image_url.thumbnail.url).into(itemView.iv_profile)
         }

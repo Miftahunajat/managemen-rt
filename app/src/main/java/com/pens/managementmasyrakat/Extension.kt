@@ -1,34 +1,39 @@
 package com.pens.managementmasyrakat
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.provider.SyncStateContract.Helpers.update
+import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.MediaStore.Images.Media.getBitmap
 import android.text.InputType
-import android.util.Log
+import android.util.Base64
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pens.managementmasyrakat.adapter.BayarArisanAdapter
 import com.pens.managementmasyrakat.network.Repository
-import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.UserResponse
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.et_data
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_batal
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_simpan
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_title
+import kotlinx.android.synthetic.main.fragment_iuran.view.*
+import kotlinx.android.synthetic.main.fragment_kas_rtmanagement.view.*
+import kotlinx.android.synthetic.main.fragment_tambah_list_pengeluaran.view.*
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Context.showmessage(msg: String){
@@ -93,7 +98,7 @@ fun CheckBox.addEventDialogListener(update: (CheckBox) -> Unit){
 }
 
 fun String.toRupiahs(): String{
-    val money = String.format("%,d",this.toInt())
+    val money = String.format("%,d",this.toFloat().toInt())
     return "Rp, $money"
 }
 
@@ -162,6 +167,7 @@ fun Context.showAlertDialog(
     message: String = "Apakah anda yakin ingin melalukannya",
     onYes: String = "Perubahan Data Berhasil",
     onNo: String = "Perubahan Data Gagal",
+    onNegatifPressed: () -> Unit = {},
     update: () -> Unit
 ){
     val builder = AlertDialog.Builder(this)
@@ -173,6 +179,7 @@ fun Context.showAlertDialog(
     }
 
     builder.setNegativeButton("No"){ _, _ ->
+        onNegatifPressed()
         this.showmessage(onNo)
     }
     val dialog: AlertDialog = builder.create()
@@ -182,4 +189,59 @@ fun Context.showAlertDialog(
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
     Picasso.get().load(url).into(view)
+}
+
+fun Bitmap.tobase64(): String{
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.JPEG, 90, baos)
+    val b = baos.toByteArray()
+    return Base64.encodeToString(b, Base64.DEFAULT)
+}
+
+fun Uri.toBitmap(context: Context): Bitmap?{
+    return try {getBitmap(context.contentResolver, this)} catch (e: IOException) { null }
+}
+
+fun Context.showAddPengeluaranBottomSheetDialog(title: String = "Masukkan data baru", inputType: Int = InputType.TYPE_CLASS_TEXT, update: (String, String) -> Unit){
+    val bottomSheetDialog = BottomSheetDialog(this)
+    val dialogView = LayoutInflater.from(this).inflate(R.layout.fragment_tambah_list_pengeluaran, null)
+    dialogView.tv_batal.setOnClickListener {
+        bottomSheetDialog.dismiss()
+    }
+    bottomSheetDialog.setContentView(dialogView)
+    dialogView.tv_title.text = title
+    dialogView.et_data.inputType= inputType
+    dialogView.tv_simpan.setOnClickListener {
+        update(dialogView.et_data.text.toString(),dialogView.et_data2.text.toString())
+        bottomSheetDialog.dismiss()
+    }
+    bottomSheetDialog.window!!.attributes.gravity = Gravity.BOTTOM
+    bottomSheetDialog.show()
+}
+
+fun RecyclerView.addDecoration() {
+    val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+    this.addItemDecoration(dividerItemDecoration)
+}
+
+
+fun View.toLoading() {
+    if (this.tag == null){
+        val progressBar = ProgressBar(this.context)
+        this.tag = progressBar
+        progressBar.isIndeterminate = true
+        progressBar.visibility = View.VISIBLE
+        val currentLayoutParams = this.layoutParams as ConstraintLayout.LayoutParams
+        this.visibility = View.INVISIBLE
+        (this.parent as ConstraintLayout).addView(progressBar, currentLayoutParams)
+    }
+}
+
+fun View.finishLoading(){
+    if (this.tag != null && this.tag is ProgressBar){
+        val progressBar = this.tag as ProgressBar
+        progressBar.visibility = View.GONE
+        this.tag = null
+        this.visibility = View.VISIBLE
+    }
 }

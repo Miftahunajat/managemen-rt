@@ -137,4 +137,42 @@ interface ApiService {
 
     @GET("pengunguman")
     fun getAllPengunguman(): Deferred<Response<ListResponse<PengungumanResponse>>>
+
+    @GET("pengunguman/{id}")
+    fun getPengunguman(
+        @Path("id") id: Int
+    ): Deferred<Response<PengungumanResponse>>
+
+    @FormUrlEncoded
+    @POST("pengunguman")
+    fun postPengunguman(
+        @Field("title")title: String,
+        @Field("body")body: String,
+        @Field("content")content: String,
+        @Field("content_desc")descContent: String
+    ): Deferred<Response<PengungumanResponse>>
+
+    @GET("pengeluaran_per_tahun")
+    fun pengeluaranPerTahun(
+        @Query("tahun")tahun: String
+    ): Deferred<Response<ListResponse<DataKasRTResponse>>>
+
+    @FormUrlEncoded
+    @POST("list_pengeluaran")
+    fun postListPengeluaran(
+        @Field("tahun")tahun: String,
+        @Field("keterangan")keterangan: String,
+        @Field("nama_bulan")nama_bulan: String,
+        @Field("jumlah")jumlah: String
+    ): Deferred<Response<ListResponse<DataKasRTResponse>>>
+
+    @DELETE("list_pengeluaran/{pengeluaranId}")
+    fun deleteListPengeluaran(
+        @Path("pengeluaranId")pengeluaranId: String
+    ): Deferred<Response<Pengeluaran>>
+
+    @GET("user/{user_id}/keluarga")
+    fun getKeluargas(
+        @Path("user_id")user_id: String
+    ): Deferred<Response<ListResponse<UserResponse>>>
 }

@@ -17,7 +17,7 @@
                 style="@style/TextAppearance.AppCompat.Title"
 
                 android:padding="8dp"
-                android:layout_height="wrap_content" android:id="@+id/tv_nama_bulan" android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content" android:id="@+id/tv_bulan" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="8dp"
 
