@@ -51,7 +51,7 @@ class TambahArisanFragment : Fragment() {
                 context?.showmessage("Tidak boleh ada yang kosong")
                 return@setOnClickListener
             }
-            Repository.postArisan(user!!.jenis_kelamin_id, tanggalSelesai, view.et_body.text.toString(), view.et_body.text.toString())
+            Repository.postArisan(user!!.jenis_kelamin_id, tanggalSelesai, view.et_body.text.toString(), view.et_title.text.toString())
                 .observe(this, androidx.lifecycle.Observer {
                     when(it?.status){
                         Resource.LOADING ->{

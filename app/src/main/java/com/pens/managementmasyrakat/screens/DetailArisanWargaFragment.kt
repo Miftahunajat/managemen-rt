@@ -11,13 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nex3z.togglebuttongroup.button.CircularToggle
-import com.pens.managementmasyrakat.R
+import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.UserBayarArisanAdapter
-import com.pens.managementmasyrakat.addEventDialogListener
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
-import com.pens.managementmasyrakat.showmessage
-import com.pens.managementmasyrakat.toRupiahs
 import kotlinx.android.synthetic.main.fragment_detail_arisan_warga.view.*
 
 
@@ -74,15 +71,18 @@ class DetailArisanWargaFragment : Fragment(){
         Repository.getArisansUser(detailArisanFragmentArgs.idarisan,detailArisanFragmentArgs.iduser.toString()).observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{
+                    view?.rv_detail_arisan_warga?.toLoading()
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
+                    view?.rv_detail_arisan_warga?.finishLoading()
                     view!!.tv_title.text = it.data!!.user.nama
                     view.tv_harga.text = it.data!!.arisan.iuran.toRupiahs()
                     view.cb_ditarik.isChecked = it.data!!.tarik
                     Log.d("Success", it.data.toString())
                 }
                 Resource.ERROR ->{
+                    view?.rv_detail_arisan_warga?.finishLoading()
                     Log.d("Error", it.message!!)
                     context?.showmessage("Something is wrong")
                 }

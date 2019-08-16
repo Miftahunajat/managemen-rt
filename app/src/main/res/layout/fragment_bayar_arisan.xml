@@ -141,7 +141,22 @@
                     <include
                             android:id="@+id/inc_sudah_ditarik"
                             layout="@layout/inc_arisan_sudah_ditarik"/>
+
                 </FrameLayout>
+                <TextView
+                        android:text="Tutup Arisan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_tutup_arisan"
+                        android:textColor="@color/red_500"
+                        style="@style/TextAppearance.AppCompat.Title"
+                        android:layout_marginTop="32dp"
+                        android:padding="@dimen/textview_padding_default"
+                        android:background="@drawable/background_red_line_soft"
+                        app:layout_constraintTop_toBottomOf="@id/framelayout_4"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -23,16 +23,6 @@
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"/>
-        <TextView
-                android:text="Total Saldo : Rp. 5000,000"
-                android:layout_width="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/font_title"
-                android:layout_height="wrap_content" android:id="@+id/tv_total" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

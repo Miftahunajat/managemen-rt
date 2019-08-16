@@ -1,8 +1,10 @@
 package com.pens.managementmasyrakat
 
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import android.provider.MediaStore
 import android.provider.MediaStore.Images.Media.getBitmap
 import android.text.InputType
 import android.util.Base64
@@ -28,8 +30,6 @@ import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.et_data
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_batal
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_simpan
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_title
-import kotlinx.android.synthetic.main.fragment_iuran.view.*
-import kotlinx.android.synthetic.main.fragment_kas_rtmanagement.view.*
 import kotlinx.android.synthetic.main.fragment_tambah_list_pengeluaran.view.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -200,6 +200,21 @@ fun Bitmap.tobase64(): String{
 
 fun Uri.toBitmap(context: Context): Bitmap?{
     return try {getBitmap(context.contentResolver, this)} catch (e: IOException) { null }
+}
+
+fun Uri.getRealPath(context: Context): String? {
+    var cursor: Cursor? = null
+    try{
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        cursor = context.contentResolver.query(this, proj, null, null, null);
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        return cursor?.getString(columnIndex!!)
+    } finally {
+        cursor?.close()
+    }
+
+
 }
 
 fun Context.showAddPengeluaranBottomSheetDialog(title: String = "Masukkan data baru", inputType: Int = InputType.TYPE_CLASS_TEXT, update: (String, String) -> Unit){

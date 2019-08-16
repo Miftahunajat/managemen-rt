@@ -6,11 +6,13 @@ import com.pens.managementmasyrakat.network.ManagemenApi.PREFNAME
 import com.pens.managementmasyrakat.network.lib.networkCall
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+
 import com.google.gson.Gson
 import com.pens.managementmasyrakat.network.model.*
-import retrofit2.http.Field
+import com.pens.managementmasyrakat.screens.TotalPengeluaranResponse
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 
@@ -158,11 +160,23 @@ object Repository {
     fun getKeluargas(id: Int) = networkCall<ListResponse<UserResponse>,List<UserResponse>> {
         client = ManagemenApi.apiService.getKeluargas(id.toString())
     }
+
+    fun updateArisan(id: Int, tutup: Boolean) = networkCall<Arisan,Arisan> {
+        client = ManagemenApi.apiService.updateArisan(id.toString(),tutup.toString())
+    }
+
+    fun postPengungumanPhoto(title: MultipartBody.Part, body: MultipartBody.Part, content: MultipartBody.Part?, contentDesc: MultipartBody.Part) = networkCall<PengungumanResponse,PengungumanResponse> {
+        client = ManagemenApi.apiService.postPengungumanPhoto(title, body, content, contentDesc)
+    }
+
+    fun getTotalPengeluaran() = networkCall<TotalPengeluaranResponse,TotalPengeluaranResponse> {
+        client = ManagemenApi.apiService.getTotalPengeluaran()
+    }
 }
 
 object ManagemenApi {
     var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var API_BASE_URL: String = "http://8f86990d.ngrok.io/"
+    var API_BASE_URL: String = "https://managemenrtapi.herokuapp.com/"
     var httpClient = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .connectTimeout(10, TimeUnit.SECONDS)
@@ -175,6 +189,6 @@ object ManagemenApi {
         .client(httpClient.build())
         .build()
 
-    var apiService = retrofit.create<ApiService>(ApiService::class.java)
+    var apiService: ApiService = retrofit.create<ApiService>(ApiService::class.java)
     val PREFNAME = "MANAGEMEN_RT"
 }

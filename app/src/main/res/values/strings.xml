@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ManagementMasyrakat</string>
+    <string name="app_name">Kampungku</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -16,4 +16,5 @@
     <string name="kembali_ke_menu_awal"><![CDATA[<< Kembali ke menu awal]]></string>
     <string name="pengunguman_agenda_rapat_warga_rt_02">Pengunguman agenda rapat warga RT 02</string>
     <string name="notification_channel_id">default</string>
+    <string name="filter_title_kampungku">Kampungku</string>
 </resources>

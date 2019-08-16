@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,13 +65,13 @@ public class RTFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(notification.getBody())
                 .setAutoCancel(true)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.win))
+//                .setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.win))
                 .setContentIntent(pendingIntent)
                 .setColor(ContextCompat.getColor(this,R.color.colorAccent))
                 .setLights(Color.RED, 1000, 300)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setNumber(++numMessages)
-                .setSmallIcon(R.drawable.ic_pengurus_rt)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(largeIcon(this));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
@@ -115,7 +116,7 @@ public class RTFirebaseMessagingService extends FirebaseMessagingService {
 
     private Bitmap largeIcon(RTFirebaseMessagingService namiFirebaseMessagingService) {
         Resources res = namiFirebaseMessagingService.getResources();
-        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.ic_pengurus_rt);
+        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
         return largeIcon;
     }
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.crashlytics.android.Crashlytics
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
@@ -60,7 +61,8 @@ class LoginFragment : Fragment() {
                 }
                 Resource.ERROR ->{
                     view!!.tv_masuk.finishLoading()
-                    context?.showmessage("Nama / Password salah")
+                    context?.showmessage("$nama $password")
+                    context?.showmessage(it.message!!)
                     Log.i("Error", it.message!!)
                 }
             }

@@ -30,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : Fragment() {
 
-    var idPengunguman = 0
+    var idPengunguman: Int? = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
         view.tv_to_pengunguman.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanFragment(idPengunguman))
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanFragment(idPengunguman!!))
         }
         view.circle_pengurus_rt.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengurusRTFragment())
@@ -78,10 +78,10 @@ class HomeFragment : Fragment() {
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    view!!.tv_title.text = it.data!!.last().title
-                    view.tv_body.text = it.data!!.last().body
+                    view!!.tv_title.text = it.data?.last()?.title
+                    view.tv_body.text = it.data?.last()?.body
                     Log.d("Success", it.data.toString())
-                    idPengunguman = it.data!!.last().id
+                    idPengunguman = it.data?.last()?.id
                 }
                 Resource.ERROR ->{
                     Log.d("Error", it.message!!)

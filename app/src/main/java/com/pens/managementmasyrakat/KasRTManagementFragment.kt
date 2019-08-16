@@ -51,10 +51,31 @@ class KasRTManagementFragment : Fragment(), KasRTRAdapter.OnBulanClickListener {
         }
         view.tv_title.text = if (isAdmin) "Atur Kas RT" else "Kas RT"
 
+
         return view
     }
 
+    private fun totalPengeluaran() {
+        Repository.getTotalPengeluaran().observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    Log.d("Loading", it.status.toString())
+                }
+                Resource.SUCCESS ->{
+                    val saldo = it.data!!.total.toString()
+                    view?.tv_total_saldo?.text = "Total saldo RT : ${saldo.toRupiahs()}"
+                    Log.d("Success", it.data.toString())
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
+    }
+
     private fun refreshList(tahun: String) {
+        totalPengeluaran()
         Repository.getPengeluaranPertahun(tahun)
             .observe(this, Observer {
                 when(it?.status){

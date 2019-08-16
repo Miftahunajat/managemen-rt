@@ -44,18 +44,15 @@ public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends 
     class GroupViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvBulan;
-        private TextView tvTotalSaldo;
 
         GroupViewHolder(@NonNull View itemView) {
             super(itemView);
             tvBulan = itemView.findViewById(R.id.tv_bulan);
-            tvTotalSaldo = itemView.findViewById(R.id.tv_total);
         }
 
         public void setGroupDetails(Object item) {
             DataKasRTResponse dataKasRTResponse = (DataKasRTResponse) item;
             tvBulan.setText(dataKasRTResponse.getBulan().getNama_bulan());
-            tvTotalSaldo.setText("Total : " + ExtensionKt.toRupiahs(dataKasRTResponse.getTotal()));
         }
     }
 

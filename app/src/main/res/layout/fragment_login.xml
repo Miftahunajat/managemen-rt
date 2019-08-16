@@ -5,6 +5,12 @@
              android:layout_height="match_parent"
              tools:context=".screens.LoginFragment"
 >
+    <ImageView
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/pattern_hexagon"/>
 
     <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -80,7 +86,9 @@
                     android:layout_marginStart="32dp" android:layout_marginRight="32dp"
                     android:layout_marginEnd="32dp" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
     <ImageView
@@ -91,12 +99,7 @@
             android:id="@+id/imageView12"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="64dp"
             app:layout_constraintStart_toStartOf="@+id/cardView2" app:layout_constraintEnd_toEndOf="@+id/cardView2"/>
-    <ImageView
-            android:layout_width="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_height="match_parent"
 
-    android:src="@drawable/pattern_hexagon"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,14 @@ package com.pens.managementmasyrakat.screens
 
 
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.update
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ import androidx.navigation.fragment.navArgs
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.BayarArisanAdapter
 import com.pens.managementmasyrakat.network.Repository
+import com.pens.managementmasyrakat.network.Repository.updateArisan
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.UserBayarArisan
 import kotlinx.android.synthetic.main.fragment_bayar_arisan.view.*
@@ -37,14 +40,21 @@ private const val ARG_PARAM2 = "param2"
 class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
     override fun onBelumBayarLongClick(nama: String,user_id: String) {
         context?.showAlertDialog("Sudah membayar ?", "Apakah anda ingin merubah $nama menjadi sudah membayar pada $bulan $tahun") {
-            context?.showmessage("Belum terimplementasi")
-//            Transformations.switchMap(Repository.getDetailUserStatus(arisan_id!!, tahun, user_id)){
-//                if (it?.status == Resource.SUCCESS){
-//                    Repository.updateArisan(3,"asd","123123",true)
-//                }else{
-//                    it as LiveData<Resource<List<UserBayarArisan>>>
-//                }
-//            }
+            Repository.getDetailUserStatus(arisan_id!!, tahun, user_id).observe(this, Observer {
+                when(it?.status){
+                    Resource.LOADING ->{
+                        Log.d("Loading", it.status.toString())
+                    }
+                    Resource.SUCCESS ->{
+                        updateArisan(it.data?.first()?.arisans_user_id)
+                        Log.d("Success", it.data.toString())
+                    }
+                    Resource.ERROR ->{
+                        Log.d("Error", it.message!!)
+                        context?.showmessage("Something is wrong")
+                    }
+                }
+            })
 //            Repository.updateArisan(item.arisans_user_id, item.bulan.nama_bulan, item.tahun, it.isChecked)
 //                .observe(fragment, Observer {
 //                    when(it?.status){
@@ -62,6 +72,24 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
 //                    }
 //                })
         }
+    }
+
+    private fun updateArisan(arisans_user_id: Int?) {
+        Repository.updateArisan(arisans_user_id!!, bulan, tahun, bayar = true).observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    Log.d("Loading", it.status.toString())
+                }
+                Resource.SUCCESS ->{
+                    refreshViewRecycler(view)
+                    Log.d("Success", it.data.toString())
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
     }
 
     override fun onVerifikasiClick(user_id: Int) {
@@ -118,9 +146,30 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
         view.inc_sudah_ditarik.rv_sudah_ditarik.setupWithBayarArisanAdapter(sudahTarikAdapter)
         view.tv_bulan.text = Calendar.getInstance().getNamaBulan()
         view.tv_tanggal.text = Calendar.getInstance().getFormattedTanggal()
+        view.tv_tutup_arisan.setOnClickListener { onTutupArisanClick() }
 
         refreshViewRecycler(view)
         return view
+    }
+
+    private fun onTutupArisanClick() {
+        context?.showAlertDialog("Menutup arisan","Apakah anda yakin ingin menutup arisan","Arisan berhasil di tutup",""){
+            Repository.updateArisan(arisan_id!!, true).observe(this, Observer {
+                when(it?.status){
+                    Resource.LOADING ->{
+                        Log.d("Loading", it.status.toString())
+                    }
+                    Resource.SUCCESS ->{
+                        findNavController().navigate(BayarArisanFragmentDirections.actionBayarArisanFragmentToAdminArisanFragment())
+                        Log.d("Success", it.data.toString())
+                    }
+                    Resource.ERROR ->{
+                        Log.d("Error", it.message!!)
+                        context?.showmessage("Something is wrong")
+                    }
+                }
+            })
+        }
     }
 
     private fun refreshViewRecycler(view: View?) {

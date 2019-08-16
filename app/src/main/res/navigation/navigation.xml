@@ -97,6 +97,8 @@
                 app:destination="@id/detailArisanWargaFragment" app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_in_left" app:popEnterAnim="@anim/slide_in_right"
                 app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_bayarArisanFragment_to_adminArisanFragment"
+                app:destination="@id/adminArisanFragment" app:popUpTo="@+id/homeFragment"/>
     </fragment>
     <fragment android:id="@+id/searchWargaFragment2"
               android:name="com.pens.managementmasyrakat.screens.SearchWargaFragment"

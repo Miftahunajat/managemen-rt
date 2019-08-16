@@ -13,7 +13,9 @@ data class UserResponse(
     val password: String,
     val roles: List<Role>,
     val updated_at: String,
-    val user_kk_id: Int
+    val user_kk_id: Int,
+    val sampah: Int?,
+    val sosial: Int?
 ) : DataResponse<UserResponse> {
     override fun retrieveData(): UserResponse = this
 }

@@ -1,7 +1,10 @@
 package com.pens.managementmasyrakat.network
 
 import com.pens.managementmasyrakat.network.model.*
+import com.pens.managementmasyrakat.screens.TotalPengeluaranResponse
 import kotlinx.coroutines.Deferred
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -24,7 +27,7 @@ interface ApiService {
     fun getAllUser(
     ): Deferred<Response<ListResponse<UserResponse>>>
 
-    @GET("all_kk_user")
+    @GET("all_kk_user_with_iuran")
     fun getAllKkUser(
     ): Deferred<Response<ListResponse<UserResponse>>>
 
@@ -175,4 +178,23 @@ interface ApiService {
     fun getKeluargas(
         @Path("user_id")user_id: String
     ): Deferred<Response<ListResponse<UserResponse>>>
+
+    @FormUrlEncoded
+    @PUT("arisan/{arisan_id}")
+    fun updateArisan(
+        @Path("arisan_id")arisan_id: String,
+        @Field("tutup")tutup: String
+    ): Deferred<Response<Arisan>>
+
+    @Multipart
+    @POST("pengunguman")
+    fun postPengungumanPhoto(
+        @Part title: MultipartBody.Part,
+        @Part body: MultipartBody.Part,
+        @Part content: MultipartBody.Part?,
+        @Part descContent: MultipartBody.Part
+    ): Deferred<Response<PengungumanResponse>>
+
+    @GET("total_pengeluaran")
+    fun getTotalPengeluaran(): Deferred<Response<TotalPengeluaranResponse>>
 }

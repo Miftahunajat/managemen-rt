@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -85,10 +86,10 @@ public class NotificationService {
         try {
             jNotification.put("title", "Pengunguman untuk Warga RT 02");
             jNotification.put("body",  title);
-            jNotification.put("sound", "default");
+            jNotification.put("sound", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             jNotification.put("badge", "1");
             jNotification.put("click_action", "OPEN_ACTIVITY_1");
-            jNotification.put("icon", "ic_notification");
+//            jNotification.put("icon", "ic_notification");
 
             jPayload.put("to", "/topics/pengunguman" );
             jPayload.put("collapse_key", "type_a");

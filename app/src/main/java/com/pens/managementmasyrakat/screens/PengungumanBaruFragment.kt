@@ -22,6 +22,12 @@ import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.fragment_tambah_arisan.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import java.io.File
+import okhttp3.RequestBody
+
+
 
 
 /**
@@ -36,7 +42,7 @@ class PengungumanBaruFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(com.pens.managementmasyrakat.R.layout.fragment_pengunguman_baru, container, false)
+        val view = inflater.inflate(R.layout.fragment_pengunguman_baru, container, false)
         view.iv_content.setOnClickListener { onSelectImageClick(view.iv_content) }
         view.tv_umumkan_warga.setOnClickListener { postPengunguman(view) }
         // Inflate the layout for this fragment
@@ -44,13 +50,24 @@ class PengungumanBaruFragment : Fragment() {
     }
 
     private fun postPengunguman(view: View) {
-        val base64String = mCropImageUri?.toBitmap(context!!)?.tobase64()
-        val uploadingImage = if (base64String==null) "" else "data:image/jpeg;base64,$base64String"
-        Repository.postPengunguman(
-            et_title.text.toString(),
-            et_body.text.toString(),
-            uploadingImage,
-            et_content_desc.text.toString()
+        val file: File?
+        var image: MultipartBody.Part? = null
+        if (mCropImageUri == null ) file = null
+        else {
+            file = File(mCropImageUri?.getRealPath(context!!)!!)
+            val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file)
+            image = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        }
+        val requestTitle = MultipartBody.Part.createFormData("title",et_title.text.toString())
+        val requestBody= MultipartBody.Part.createFormData("body",et_body.text.toString())
+        val requestContentDesc = MultipartBody.Part.createFormData("content_desc",et_content_desc.text.toString())
+
+
+        Repository.postPengungumanPhoto(
+            requestTitle,
+            requestBody,
+            image,
+            requestContentDesc
         ).observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{

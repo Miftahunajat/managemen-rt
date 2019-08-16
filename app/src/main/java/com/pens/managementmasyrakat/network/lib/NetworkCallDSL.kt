@@ -24,7 +24,7 @@ class CallHandler<RESPONSE : Any, DATA: Any> {
                 withContext(Dispatchers.Main) {
                     if (e is HttpException)
                         result.value = Resource.error(
-                            "${e.message} | code ${e.response().code()}",
+                            "${e.message} | code ${e.response()?.code()}",
                             0
                         )
                     else

@@ -16,6 +16,17 @@
                 android:name=".MainActivity"
                 android:label="@string/app_name"
                 android:windowSoftInputMode="stateHidden">
+            <intent-filter android:label="@string/filter_title_kampungku">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <!-- note that the leading "/" is required for pathPrefix-->
+                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <data android:scheme="example"
+                      android:host="kampungku" />
+
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
