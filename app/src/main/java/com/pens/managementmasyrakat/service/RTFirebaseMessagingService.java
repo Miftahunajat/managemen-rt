@@ -35,7 +35,6 @@ public class RTFirebaseMessagingService extends FirebaseMessagingService {
     public static final String FCM_PARAM = "picture";
     private static final String CHANNEL_NAME = "FCM";
     private static final String CHANNEL_DESC = "Firebase Cloud Messaging";
-//    private static final String AUTH_KEY = "key=AAAAG-plUn8:APA91bGtKWzuSijMBD3kAJ7B5w6DyjLH2EXTPydEoJ9S7MH4dhU6in0e3YqBdzNtxDBbC3GtIsseHHabR1l8j-m7jJVk9Q8lv3lkAuJsHvl9l2rqAz0kxBwF4W3psLvKnEjkrA638ncUvhDL1LJ0UIm7FMqB5hQMnw";
     private int numMessages = 0;
 
     @Override
@@ -116,8 +115,7 @@ public class RTFirebaseMessagingService extends FirebaseMessagingService {
 
     private Bitmap largeIcon(RTFirebaseMessagingService namiFirebaseMessagingService) {
         Resources res = namiFirebaseMessagingService.getResources();
-        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
-        return largeIcon;
+        return BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
     }
 
 

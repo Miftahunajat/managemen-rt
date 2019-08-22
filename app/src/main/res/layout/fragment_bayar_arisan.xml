@@ -1,165 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:background="@color/colorWhite"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".screens.BayarArisanFragment">
+    <androidx.appcompat.widget.AppCompatTextView
+            android:text="@string/bulan_agustus_harga_iuran_sosial_rp_15_000_bulan"
+            android:textColor="@color/colorBlack"
+            android:layout_width="0dp"
+            android:paddingLeft="32dp"
+            android:textSize="@dimen/font_title"
+            android:gravity="left"
+            android:paddingRight="16dp"
+            android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorWhite"
-            android:fillViewport="true"
-            tools:context=".screens.BayarArisanFragment">
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp">
-        <ImageView
-                android:id="@+id/iv_bg_pattern3"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_pattern_blue"
-                app:layout_constraintTop_toTopOf="parent"/>
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/margin_medium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="32dp"
-                android:layout_marginBottom="-100dp"
-                app:cardElevation="8dp"
-                android:id="@+id/cardView">
-            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-                                                               android:layout_height="match_parent">
-
-                <TextView
-                        android:text="Data Pembayaran Arisan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView31"
-                        android:textSize="@dimen/font_subtitle"
-                        android:layout_marginTop="24dp" app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
-                        android:layout_marginStart="24dp"/>
-                <TextView
-                        android:text="Bulan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView35"
-                        android:textSize="@dimen/font_subtitle"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintStart_toStartOf="@+id/divider2"
-                        app:layout_constraintEnd_toEndOf="@+id/divider2"
-                        app:layout_constraintTop_toBottomOf="@+id/divider2"/>
-                <TextView
-                        android:text="Arisan Ibu ibu 1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_nama_arisan"
-                        android:textSize="@dimen/font_title"
-                        android:textColor="@color/colorBlack"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
-                        android:layout_marginStart="24dp"
-                        app:layout_constraintTop_toBottomOf="@+id/textView31"/>
-                <TextView
-                        android:text="Agustus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_bulan"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/font_title"
-                        android:textColor="@color/colorBlack"
-                        app:layout_constraintStart_toStartOf="@+id/textView35"
-                        app:layout_constraintTop_toBottomOf="@+id/textView35"
-                        app:layout_constraintEnd_toEndOf="@+id/textView35"/>
-                <TextView
-                        android:text="@string/tanggal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_tanggal"
-                        android:textSize="@dimen/font_title"
-                        android:textColor="@color/colorBlack"
-                        app:layout_constraintTop_toTopOf="@+id/textView31"
-                        android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginRight="16dp"/>
-                <View
-                        android:id="@+id/divider2"
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_nama_arisan"
-                        app:layout_constraintStart_toStartOf="@+id/tv_nama_arisan"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_tanggal"
-                />
-                <FrameLayout
-                        android:id="@+id/framelayout_1"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                             app:layout_constraintEnd_toEndOf="parent"
-                             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                             android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                             app:layout_constraintTop_toBottomOf="@+id/tv_bulan">
-                    <include
-                            android:id="@+id/inc_arisan_verifikasi"
-                            layout="@layout/inc_arisan_verifikasi"/>
-                </FrameLayout>
-
-                <FrameLayout
-                        android:id="@+id/framelayout_2"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/framelayout_1">
-                    <include
-                            android:id="@+id/inc_arisan_belum_membayar"
-                            layout="@layout/inc_arisan_belum_membayar"/>
-                </FrameLayout>
-
-                <FrameLayout
-                        android:id="@+id/framelayout_3"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/framelayout_2">
-                    <include
-                            android:id="@+id/inc_sudah_membayar"
-                            layout="@layout/inc_arisan_sudah_membayar"/>
-                </FrameLayout>
-
-                <FrameLayout
-                        android:id="@+id/framelayout_4"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/framelayout_3">
-                    <include
-                            android:id="@+id/inc_sudah_ditarik"
-                            layout="@layout/inc_arisan_sudah_ditarik"/>
-
-                </FrameLayout>
-                <TextView
-                        android:text="Tutup Arisan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_tutup_arisan"
-                        android:textColor="@color/red_500"
-                        style="@style/TextAppearance.AppCompat.Title"
-                        android:layout_marginTop="32dp"
-                        android:padding="@dimen/textview_padding_default"
-                        android:background="@drawable/background_red_line_soft"
-                        app:layout_constraintTop_toBottomOf="@id/framelayout_4"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            android:id="@+id/tv_harga_iuran" app:layout_constraintStart_toStartOf="parent"
+            android:paddingEnd="16dp" android:paddingStart="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_judul" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_tutup_arisan" android:layout_marginRight="8dp"/>
+    <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:inputType="textPersonName"
+            android:hint="Cari Nama"
+            android:ems="10"
+            android:paddingLeft="8dp"
+            android:textSize="@dimen/font_title"
+            app:drawableLeftCompat="@drawable/ic_search_black_24dp"
+            android:id="@+id/et_carinama"
+            android:background="@drawable/background_line_soft_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="16dp"
+            app:drawableStartCompat="@drawable/ic_search_black_24dp" app:layout_constraintTop_toBottomOf="@+id/tv_harga_iuran"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_item_warga_bayar_arisan"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_data_warga_arisan"
+            app:layout_constraintTop_toBottomOf="@+id/et_carinama" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:text="Arisan Ibu ibu 1"
+            style="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:padding="@dimen/main_padding"
+            android:gravity="center|left"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:id="@+id/tv_judul"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="@+id/tv_harga_iuran"
+    />
+    <TextView
+            android:text="Tutup Arisan"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:background="@drawable/background_red_line_soft"
+            android:textColor="@color/red_500"
+            android:textSize="@dimen/font_title"
+            android:id="@+id/tv_tutup_arisan" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_judul" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/et_carinama"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

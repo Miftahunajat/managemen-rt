@@ -8,12 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pens.managementmasyrakat.*
+import com.pens.managementmasyrakat.extension.isAdminArisan
+import com.pens.managementmasyrakat.extension.isAdminIuran
+import com.pens.managementmasyrakat.extension.isPengurusRT
+import com.pens.managementmasyrakat.extension.showmessage
 import com.pens.managementmasyrakat.network.Repository
+import com.pens.managementmasyrakat.network.Repository.getUser
 import com.pens.managementmasyrakat.network.lib.Resource
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.inc_menu.view.*
@@ -53,6 +57,9 @@ class HomeFragment : Fragment() {
             Repository.clearUser(context!!)
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
+        view.circle_arisan.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListArisan(getUser(context!!)!!.jenis_kelamin_id))
+        }
         view.tv_to_pengunguman.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanFragment(idPengunguman!!))
         }
@@ -78,10 +85,12 @@ class HomeFragment : Fragment() {
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    view!!.tv_title.text = it.data?.last()?.title
-                    view.tv_body.text = it.data?.last()?.body
+                    it.data?.last()?.let {
+                        view!!.tv_title.text = it.title
+                        view.tv_body.text = it.body
+                        idPengunguman = it.id
+                    }
                     Log.d("Success", it.data.toString())
-                    idPengunguman = it.data?.last()?.id
                 }
                 Resource.ERROR ->{
                     Log.d("Error", it.message!!)
@@ -101,13 +110,13 @@ class HomeFragment : Fragment() {
         }
 
         if (user.isAdminIuran() == false) {
-            view.menu_5.visibility = View.INVISIBLE
-            view.menu_5.setOnClickListener(null)
+            view.menu_11.visibility = View.INVISIBLE
+            view.menu_11.setOnClickListener(null)
         }
 
         if (user.isPengurusRT() == false) {
-            view.menu_6.visibility = View.INVISIBLE
-            view.menu_6.setOnClickListener(null)
+            view.menu_10.visibility = View.INVISIBLE
+            view.menu_10.setOnClickListener(null)
         }
     }
 

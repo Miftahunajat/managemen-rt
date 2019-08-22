@@ -12,19 +12,13 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.pens.managementmasyrakat.*
+import com.pens.managementmasyrakat.extension.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.UpdateIuranResponse
-import kotlinx.android.synthetic.main.fragment_iuran.*
 import kotlinx.android.synthetic.main.fragment_iuran.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -60,19 +54,16 @@ class IuranFragment : Fragment() {
                 Resource.LOADING ->{
                     view.cl_1.toLoading()
                     view.cl_2.toLoading()
-                    view.cl_3.toLoading()
                     Log.i("Loggin", it.status.toString())
                 }
                 Resource.SUCCESS ->{
                     view.cl_1.finishLoading()
                     view.cl_2.finishLoading()
-                    view.cl_3.finishLoading()
                     setupViewWithData(view, it.data)
                 }
                 Resource.ERROR ->{
                     view.cl_1.finishLoading()
                     view.cl_2.finishLoading()
-                    view.cl_3.finishLoading()
                     context?.showmessage("Tidak Terhubung Internet")
                     Log.i("Error", it.message!!)
                 }
@@ -86,10 +77,6 @@ class IuranFragment : Fragment() {
             findNavController().navigate(IuranFragmentDirections.actionIuranFragmentToDataIuranDetailFragment(
                 TYPE_SAMPAH, context?.getUser()!!.user_kk_id, TYPE_SAMPAH))
         }
-        view.cl_3.setOnClickListener {
-            findNavController().navigate(
-                IuranFragmentDirections.actionIuranFragmentToListArisan(context!!.getUser()!!.jenis_kelamin_id))
-        }
 
         return view
     }
@@ -97,8 +84,6 @@ class IuranFragment : Fragment() {
     private fun setupViewWithData(view: View, data: UpdateIuranResponse?) {
         setView(view.circle_1, view.tv_1, data!!.iuran_sosial_bulan_ini.toInt())
         setView(view.circle_2, view.tv_2, data.iuran_sampah_bulan_ini.toInt())
-        setView(view.circle_3, view.tv_3, data.iuran_arisan)
-        if (data.iuran_arisan != 2) tv_daftar_arisan.visibility = View.GONE
         Log.d("!!!", data.toString())
     }
 

@@ -33,12 +33,12 @@ class AdminIuranFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_admin_iuran, container, false)
         view.cv_sosial.setOnClickListener {
             it.findNavController().navigate(AdminIuranFragmentDirections.actionAdminIuranFragmentToSearchWargaFragment2(
-                TYPE_SOSIAL))
+                TYPE_SOSIAL,false))
         }
 
         view.cv_sampah.setOnClickListener {
             it.findNavController().navigate(AdminIuranFragmentDirections.actionAdminIuranFragmentToSearchWargaFragment2(
-                TYPE_SAMPAH))
+                TYPE_SAMPAH,false))
         }
         return view
     }

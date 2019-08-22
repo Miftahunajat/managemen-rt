@@ -16,11 +16,11 @@ import com.pens.managementmasyrakat.adapter.UserAdapter
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.UserResponse
-import com.pens.managementmasyrakat.showmessage
-import com.pens.managementmasyrakat.toRupiahs
+import com.pens.managementmasyrakat.extension.showmessage
+import com.pens.managementmasyrakat.extension.toRupiahs
 import androidx.core.text.HtmlCompat
-import com.pens.managementmasyrakat.showAlertDialog
-import com.pens.managementmasyrakat.showEditableBottomSheetDialog
+import com.pens.managementmasyrakat.extension.showAlertDialog
+import com.pens.managementmasyrakat.extension.showEditableBottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_search_warga.view.*
 
 
@@ -32,13 +32,15 @@ import kotlinx.android.synthetic.main.fragment_search_warga.view.*
  */
 class SearchWargaFragment : Fragment(), UserAdapter.OnClickListener {
 
-    var listWarga = listOf<UserResponse>()
-    var hargaRupiah = ""
-    var type_id = 1
+    private var listWarga = listOf<UserResponse>()
+    private var hargaRupiah = ""
+    private var type_id = 1
     var code = 1
 
     override fun onClick(position: Int) {
         val searchWargaFragmentArgs by navArgs<SearchWargaFragmentArgs>()
+        if (searchWargaFragmentArgs.allwarga)
+            return
         findNavController().navigate(SearchWargaFragmentDirections.actionSearchWargaFragment2ToDetailIuranWarga(
             searchWargaFragmentArgs.type, listWarga[position].user_kk_id, code
         ))
@@ -49,11 +51,34 @@ class SearchWargaFragment : Fragment(), UserAdapter.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(com.pens.managementmasyrakat.R.layout.fragment_search_warga, container, false)
-        getALLKKUser()
+        val searchWargaFragmentArgs by navArgs<SearchWargaFragmentArgs>()
+        if (searchWargaFragmentArgs.allwarga)
+            getALLUser()
+        else
+            getALLKKUser()
         getHargaIuranJumlah()
         view.tv_harga_iuran.setOnClickListener { addDialogToHargaIuran() }
         // Inflate the layout for this fragment
         return view
+    }
+
+    private fun getALLUser() {
+        Repository.getAllUser().observe(this, Observer { it ->
+            when (it?.status) {
+                Resource.LOADING -> {
+                    Log.i("Loggin", it.status.toString())
+                }
+                Resource.SUCCESS -> {
+                    listWarga = it.data!!.sortedBy { it.alamat }
+                    setupAdapter(listWarga)
+                    Log.d("@@@", it.data!!.toString())
+                }
+                Resource.ERROR -> {
+                    context?.showmessage("Nama / Password salah")
+                    Log.i("Error", it.message!!)
+                }
+            }
+        })
     }
 
     private fun addDialogToHargaIuran() {

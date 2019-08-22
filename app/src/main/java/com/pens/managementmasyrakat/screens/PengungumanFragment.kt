@@ -14,8 +14,7 @@ import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.databinding.PengungumanFragmentBinding
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
-import com.pens.managementmasyrakat.showmessage
-import kotlinx.android.synthetic.main.pengunguman_fragment.view.*
+import com.pens.managementmasyrakat.extension.showmessage
 
 
 class PengungumanFragment : Fragment() {

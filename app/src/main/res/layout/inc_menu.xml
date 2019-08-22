@@ -242,7 +242,7 @@
             app:layout_constraintEnd_toStartOf="@+id/menu_6" app:layout_constraintTop_toTopOf="@+id/menu_4">
 
         <ImageView
-                android:id="@+id/circle_admin_iuran"
+                android:id="@+id/circle_arisan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -252,27 +252,27 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_admin_iuran"
-                android:tint="@color/indigo_500"
-                app:layout_constraintBottom_toBottomOf="@id/circle_admin_iuran"
-                app:layout_constraintLeft_toLeftOf="@id/circle_admin_iuran"
-                app:layout_constraintRight_toRightOf="@id/circle_admin_iuran"
-                app:layout_constraintTop_toTopOf="@id/circle_admin_iuran"/>
+                app:srcCompat="@drawable/ic_arisan"
+                android:tint="@color/pink_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_arisan"
+                app:layout_constraintLeft_toLeftOf="@id/circle_arisan"
+                app:layout_constraintRight_toRightOf="@id/circle_arisan"
+                app:layout_constraintTop_toTopOf="@id/circle_arisan"/>
 
         <TextView
                 android:id="@+id/text_menu_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Admin Iuran"
+                android:text="Arisan"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/font_button"
                 android:gravity="center"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingTop="@dimen/padding_small"
-                app:layout_constraintLeft_toLeftOf="@id/circle_admin_iuran"
-                app:layout_constraintRight_toRightOf="@id/circle_admin_iuran"
-                app:layout_constraintTop_toBottomOf="@id/circle_admin_iuran"/>
+                app:layout_constraintLeft_toLeftOf="@id/circle_arisan"
+                app:layout_constraintRight_toRightOf="@id/circle_arisan"
+                app:layout_constraintTop_toBottomOf="@id/circle_arisan"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -289,7 +289,7 @@
             app:layout_constraintBottom_toBottomOf="@id/menu_5">
 
         <ImageView
-                android:id="@+id/circle_pengurus_rt"
+                android:id="@+id/circle_cari_warga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -299,27 +299,27 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_pengurus_rt"
-                android:tint="@color/purple_500"
-                app:layout_constraintBottom_toBottomOf="@id/circle_pengurus_rt"
-                app:layout_constraintLeft_toLeftOf="@id/circle_pengurus_rt"
-                app:layout_constraintRight_toRightOf="@id/circle_pengurus_rt"
-                app:layout_constraintTop_toTopOf="@id/circle_pengurus_rt"/>
+                android:src="@drawable/ic_all_warga"
+                android:tint="@color/green_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_cari_warga"
+                app:layout_constraintLeft_toLeftOf="@id/circle_cari_warga"
+                app:layout_constraintRight_toRightOf="@id/circle_cari_warga"
+                app:layout_constraintTop_toTopOf="@id/circle_cari_warga"/>
 
         <TextView
                 android:id="@+id/text_menu_6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Pengurus RT"
+                android:text="Semua Warga"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/font_button"
                 android:gravity="center"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingTop="@dimen/padding_small"
-                app:layout_constraintLeft_toLeftOf="@id/circle_pengurus_rt"
-                app:layout_constraintRight_toRightOf="@id/circle_pengurus_rt"
-                app:layout_constraintTop_toBottomOf="@id/circle_pengurus_rt"
+                app:layout_constraintLeft_toLeftOf="@id/circle_cari_warga"
+                app:layout_constraintRight_toRightOf="@id/circle_cari_warga"
+                app:layout_constraintTop_toBottomOf="@id/circle_cari_warga"
                 app:layout_constraintHorizontal_bias="1.0"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -369,5 +369,99 @@
             app:layout_constraintLeft_toLeftOf="@id/menu_9"
             app:layout_constraintRight_toRightOf="@id/menu_9"
             app:layout_constraintTop_toBottomOf="@id/menu_9"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_10"
+            android:layout_width="0dp"
+            android:maxWidth="@dimen/menu_width"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/menu_4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@id/menu_4"
+            android:layout_marginTop="@dimen/main_margin"
+            app:layout_constraintTop_toBottomOf="@id/menu_4">
+
+        <ImageView
+                android:id="@+id/circle_pengurus_rt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/background_line_soft"
+                tools:ignore="MissingConstraints"/>
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_pengurus_rt"
+                android:tint="@color/purple_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_pengurus_rt"
+                app:layout_constraintLeft_toLeftOf="@id/circle_pengurus_rt"
+                app:layout_constraintRight_toRightOf="@id/circle_pengurus_rt"
+                app:layout_constraintTop_toTopOf="@id/circle_pengurus_rt"/>
+
+        <TextView
+                android:id="@+id/text_menu_10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pengurus RT"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_button"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingTop="@dimen/padding_small"
+                app:layout_constraintLeft_toLeftOf="@id/circle_pengurus_rt"
+                app:layout_constraintRight_toRightOf="@id/circle_pengurus_rt"
+                app:layout_constraintTop_toBottomOf="@id/circle_pengurus_rt"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_11"
+            android:layout_width="0dp"
+            android:maxWidth="@dimen/menu_width"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/menu_5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@id/menu_5"
+            android:layout_marginTop="@dimen/main_margin"
+            app:layout_constraintTop_toBottomOf="@id/menu_5">
+
+        <ImageView
+                android:id="@+id/circle_admin_iuran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/background_line_soft"
+                tools:ignore="MissingConstraints"/>
+
+        <ImageView
+                android:layout_width="@dimen/icon_menu"
+                android:layout_height="@dimen/icon_menu"
+                app:srcCompat="@drawable/ic_admin_iuran"
+                android:tint="@color/indigo_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_admin_iuran"
+                app:layout_constraintLeft_toLeftOf="@id/circle_admin_iuran"
+                app:layout_constraintRight_toRightOf="@id/circle_admin_iuran"
+                app:layout_constraintTop_toTopOf="@id/circle_admin_iuran"/>
+
+        <TextView
+                android:id="@+id/text_menu_11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Admin Iuran"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_button"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingTop="@dimen/padding_small"
+                app:layout_constraintLeft_toLeftOf="@id/circle_admin_iuran"
+                app:layout_constraintRight_toRightOf="@id/circle_admin_iuran"
+                app:layout_constraintTop_toBottomOf="@id/circle_admin_iuran"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

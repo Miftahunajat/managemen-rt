@@ -77,11 +77,11 @@ object Repository {
         client = ManagemenApi.apiService.getAllArisansWithStatusIKutUser(user_id,jenis_kelamin_id.toString())
     }
 
-    fun getArisansUser(arisan_id: Int, user_id: String) = networkCall<IkutArisanResponse, IkutArisanResponse> {
-        client = ManagemenApi.apiService.getArisansUser(arisan_id, user_id)
+    fun getArisansUser(arisans_user: Int) = networkCall<AllUserArisanResponse, AllUserArisanResponse> {
+        client = ManagemenApi.apiService.getArisansUser(arisans_user)
     }
 
-    fun getAllStatusArisan(arisan_id: Int) = networkCall<AllStatusArisanUser, AllStatusArisanUser> {
+    fun getAllStatusArisan(arisan_id: Int) = networkCall<ListResponse<AllUserArisanResponse>, List<AllUserArisanResponse>> {
         client = ManagemenApi.apiService.getAllStatusArisanUser(arisan_id)
     }
 
@@ -89,20 +89,20 @@ object Repository {
         client = ManagemenApi.apiService.updateArisan(arisans_user_id.toString(), bulan, tahun, bayar)
     }
 
-    fun getDetailUserStatus(id: Int, tahun: String, user_id: String) = networkCall<ListResponse<UserBayarArisan>,List<UserBayarArisan>> {
-        client = ManagemenApi.apiService.getDetailUserStatus(id, tahun, user_id)
+    fun getDetailUserStatus(id: Int, tahun: String) = networkCall<ListResponse<UserBayarArisan>,List<UserBayarArisan>> {
+        client = ManagemenApi.apiService.getDetailUserStatus(id, tahun)
     }
 
     fun postDaftarArisan(id: Int, user_id: String) = networkCall<DaftarArisanResponse,DaftarArisanResponse> {
         client = ManagemenApi.apiService.postDaftarArisan(id, user_id)
     }
 
-    fun postIkutArisan(id: Int, user_id: String) = networkCall<IkutArisanResponse,IkutArisanResponse> {
-        client = ManagemenApi.apiService.postIkutArisan(id, user_id)
+    fun postIkutArisan(id: Int) = networkCall<IkutArisanResponse,IkutArisanResponse> {
+        client = ManagemenApi.apiService.postIkutArisan(id)
     }
 
-    fun postTarikArisan(id: Int, user_id: String) = networkCall<IkutArisanResponse,IkutArisanResponse> {
-        client = ManagemenApi.apiService.postTarikArisan(id, user_id)
+    fun postTarikArisan(id: Int) = networkCall<IkutArisanResponse,IkutArisanResponse> {
+        client = ManagemenApi.apiService.postTarikArisan(id)
     }
 
     fun updateUser(
@@ -176,7 +176,7 @@ object Repository {
 
 object ManagemenApi {
     var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var API_BASE_URL: String = "https://managemenrtapi.herokuapp.com/"
+    var API_BASE_URL: String = "http://29e7042c.ngrok.io"
     var httpClient = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .connectTimeout(10, TimeUnit.SECONDS)

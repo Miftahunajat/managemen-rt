@@ -13,7 +13,8 @@ data class Arisan(
     val selesai: String,
     val updated_at: String,
     val tutup: String,
-    val user_ikut: Boolean?
+    val user_ikut: Boolean?,
+    val arisans_users: List<AllUserArisanResponse>
 ) : DataResponse<Arisan> {
     override fun retrieveData(): Arisan = this
 }

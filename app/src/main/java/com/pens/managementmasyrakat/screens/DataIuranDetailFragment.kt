@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nex3z.togglebuttongroup.button.CircularToggle
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.DataIuranAdapter
+import com.pens.managementmasyrakat.extension.finishLoading
+import com.pens.managementmasyrakat.extension.showmessage
+import com.pens.managementmasyrakat.extension.toLoading
+import com.pens.managementmasyrakat.extension.toRupiahs
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import kotlinx.android.synthetic.main.fragment_data_iuran_detail.view.*

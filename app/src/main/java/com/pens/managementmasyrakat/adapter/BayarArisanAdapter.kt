@@ -1,69 +1,74 @@
 package com.pens.managementmasyrakat.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.R
-import com.pens.managementmasyrakat.network.model.UserResponse
+import com.pens.managementmasyrakat.extension.toBelumMembayar
+import com.pens.managementmasyrakat.extension.toBelumVerifikasi
+import com.pens.managementmasyrakat.extension.toSudahMembayar
+import com.pens.managementmasyrakat.network.model.AllUserArisanResponse
+import kotlinx.android.synthetic.main.item_data_warga_arisan.view.*
 import java.util.*
 
-class BayarArisanAdapter(val onClickListener: OnClickListener, val type: Int) : RecyclerView.Adapter<BayarArisanAdapter.BayarArisanViewHolder>() {
+class BayarArisanAdapter(val onClickListener: OnClickListener) : RecyclerView.Adapter<BayarArisanAdapter.BayarArisanViewHolder>(), TextWatcher {
 
-    private var data: List<UserResponse> = ArrayList()
-    companion object {
-        const val TYPE_VERIFIKASI = 1
-        const val TYPE_BELUM_MEMBAYAR = 2
-        const val TYPE_SUDAH_MEMBAYAR = 3
-        const val TYPE_SUDAH_TARIK = 4
-    }
+    private var currData: List<AllUserArisanResponse> = ArrayList()
+    private var baseData: List<AllUserArisanResponse> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BayarArisanViewHolder {
-        val layout = when(type){
-            TYPE_VERIFIKASI -> R.layout.item_belum_terverifikasi
-            TYPE_BELUM_MEMBAYAR -> R.layout.item_belum_membayar
-            TYPE_SUDAH_MEMBAYAR -> R.layout.item_sudah_membayar
-            else -> R.layout.item_sudah_ditarik
-        }
         return BayarArisanViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(layout, parent, false)
+                .inflate(R.layout.item_data_warga_arisan, parent, false)
         )
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = currData.size
 
     override fun onBindViewHolder(holder: BayarArisanViewHolder, position: Int) {
-        holder.bind(data[position])
-        if (type == TYPE_BELUM_MEMBAYAR) holder.itemView.setOnLongClickListener {
-            onClickListener.onBelumBayarLongClick(data[position].nama, data[position].id.toString()
-            )
-            true
-        }
+        holder.bind(currData[position])
+        val item = currData[position]
+        if (!item.sudah_membayar)
+            holder.itemView.setOnLongClickListener {
+                onClickListener.onLongBelumMembayarClick(item.id, item.nama_peserta)
+                true
+            }
         holder.itemView.setOnClickListener {
-            if (type == TYPE_VERIFIKASI) onClickListener.onVerifikasiClick(data[position].id)
-            else onClickListener.onClick(data[position].id)
+            if (item.ikut) onClickListener.onClick(currData[position].id)
+            else onClickListener.onVerifikasiClick(item.id)
         }
     }
 
-    fun swapData(data: List<UserResponse>) {
-        this.data = data
+    fun swapData(data: List<AllUserArisanResponse>) {
+        this.currData= data
+        this.baseData= data
         notifyDataSetChanged()
     }
 
     class BayarArisanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: UserResponse) = with(itemView) {
-            itemView.findViewById<TextView>(R.id.tv_title).text = item.nama
-            itemView.findViewById<TextView>(R.id.tv_nomor).text = item.no_hp
+        fun bind(item: AllUserArisanResponse) = with(itemView) {
+            itemView.tv_nama.text = item.nama_peserta
+            itemView.tv_alamat.text = item.user.alamat
+            itemView.tv_sudah_ditarik.visibility = if (item.tarik) View.VISIBLE else View.INVISIBLE
+            if (!item.ikut) itemView.tv_status_bayar.toBelumVerifikasi()
+            else if (item.sudah_membayar) itemView.tv_status_bayar.toSudahMembayar()
+            else itemView.tv_status_bayar.toBelumMembayar()
         }
     }
 
     interface OnClickListener {
-        fun onClick(user_id: Int)
+        fun onClick(arisans_users_id: Int)
+        fun onVerifikasiClick(arisans_users_id: Int)
+        fun onLongBelumMembayarClick(arisans_users_id: Int, nama_peserta: String)
+    }
 
-        fun onVerifikasiClick(user_id: Int)
-
-        fun onBelumBayarLongClick(nama: String, user_id: String)
+    override fun afterTextChanged(p0: Editable?) {}
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        currData = baseData.filter { it.nama_peserta.contains(p0!!, ignoreCase = true) || p0.isBlank() }
+        notifyDataSetChanged()
     }
 }

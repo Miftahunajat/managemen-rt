@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.network.model.IuranPerTahun
-import com.pens.managementmasyrakat.toInt
+import com.pens.managementmasyrakat.extension.toInt
 import kotlinx.android.synthetic.main.item_data_terbayar.view.*
 import java.util.*
 

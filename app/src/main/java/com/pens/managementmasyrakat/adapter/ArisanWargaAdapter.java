@@ -9,7 +9,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.pens.managementmasyrakat.R;
 import com.pens.managementmasyrakat.extension.ExtensionKt;
-import com.pens.managementmasyrakat.network.model.DataKasRTResponse;
+import com.pens.managementmasyrakat.extension.ExtensionTextViewKt;
+import com.pens.managementmasyrakat.network.model.AllUserArisanResponse;
+import com.pens.managementmasyrakat.network.model.Arisan;
 import com.pens.managementmasyrakat.network.model.Pengeluaran;
 
 import java.util.Arrays;
@@ -17,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends List<Pengeluaran>>> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ArisanWargaAdapter<V extends Map<? extends Arisan, ? extends List<AllUserArisanResponse>>> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final int VIEW_TYPE_HEADER = 0;
     public static final int VIEW_TYPE_LISTITEM = 1;
@@ -27,12 +29,12 @@ public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends 
     protected Object[] sections;
     protected int count;
 
-    private OnBulanClickListener onBulanClickListener;
+    private OnClickListener onClickListener;
 
-    public KasRTRAdapter(V data, OnBulanClickListener listener) {
+    public ArisanWargaAdapter(V data, OnClickListener listener) {
         this.data = data;
         onSetData();
-        onBulanClickListener = listener;
+        onClickListener = listener;
     }
 
     public void swapData(V data) {
@@ -43,36 +45,49 @@ public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends 
 
     class GroupViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvBulan;
+        private TextView tvTitle;
+        private TextView tvMinimumIuran;
+        private TextView tvTanggal;
 
         GroupViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvBulan = itemView.findViewById(R.id.tv_bulan);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvMinimumIuran = itemView.findViewById(R.id.tv_minimum_iuran);
+            tvTanggal = itemView.findViewById(R.id.tv_tanggal);
         }
 
         public void setGroupDetails(Object item) {
-            DataKasRTResponse dataKasRTResponse = (DataKasRTResponse) item;
-            tvBulan.setText(dataKasRTResponse.getBulan().getNama_bulan());
+            Arisan arisan = (Arisan) item;
+            tvTitle.setText(arisan.getNama());
+            tvMinimumIuran.setText(ExtensionKt.toRupiahs(arisan.getIuran()));
+            tvTanggal.setText(ExtensionKt.formatToDate(arisan.getSelesai(), "yyyy-MM-dd","dd MMMM yyyy"));
         }
     }
 
     class ChildViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvKeterangan;
-        private TextView tvHargaPengeluaran;
+        private TextView tvNama;
+        private TextView tvAlamat;
+        private TextView tvSudahDitarik;
+        private TextView tvStatusBayar;
 
         ChildViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvKeterangan = itemView.findViewById(R.id.tv_bulan);
-            tvHargaPengeluaran = itemView.findViewById(R.id.tv_harga);
+            tvNama = itemView.findViewById(R.id.tv_nama);
+            tvAlamat = itemView.findViewById(R.id.tv_alamat);
+            tvSudahDitarik = itemView.findViewById(R.id.tv_sudah_ditarik);
+            tvStatusBayar = itemView.findViewById(R.id.tv_status_bayar);
         }
 
         public void setChildDetails(Object item) {
-            Pengeluaran pengeluaran = (Pengeluaran) item;
-            tvKeterangan.setText(pengeluaran.getKeterangan());
-            int color = Integer.valueOf(((Pengeluaran) item).getJumlah()) < 0 ? R.color.red_900 : R.color.green_900;
-            tvHargaPengeluaran.setText(ExtensionKt.toRupiahs(((Pengeluaran) item).getJumlah()));
-            tvHargaPengeluaran.setTextColor(ContextCompat.getColor(itemView.getContext(), color));
+            AllUserArisanResponse userArisanResponse = (AllUserArisanResponse) item;
+            tvNama.setText(userArisanResponse.getNama_peserta());
+            tvAlamat.setText(userArisanResponse.getUser().getAlamat());
+            int visibility = userArisanResponse.getTarik() ? View.VISIBLE : View.INVISIBLE;
+            tvSudahDitarik.setVisibility(visibility);
+            if (!userArisanResponse.getIkut()) ExtensionTextViewKt.toBelumVerifikasi(tvStatusBayar);
+            else if (userArisanResponse.getSudah_membayar()) ExtensionTextViewKt.toSudahMembayar(tvStatusBayar);
+            else ExtensionTextViewKt.toBelumMembayar(tvStatusBayar);
         }
     }
 
@@ -81,11 +96,11 @@ public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if (viewType == VIEW_TYPE_HEADER) { // for call layout
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_kas_group_rt, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gelombang_arisan_warga, parent, false);
             return new GroupViewHolder(view);
 
-        } else { // for email layout
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_kas_child_rt, parent, false);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_child_data_warga_arisan, parent, false);
             return new ChildViewHolder(view);
         }
     }
@@ -105,8 +120,8 @@ public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getItemViewType(position) == VIEW_TYPE_HEADER)
-                    onBulanClickListener.onClick(position, ((DataKasRTResponse)getItem(position)).getBulan().getNama_bulan());
+                if (getItemViewType(position) == VIEW_TYPE_HEADER) onClickListener.onHeaderClick(((Arisan)getItem(position)).getId());
+                else if (((AllUserArisanResponse)getItem(position)).getIkut()) onClickListener.onChildClick(((AllUserArisanResponse)getItem(position)).getId());
             }
         });
     }
@@ -161,7 +176,8 @@ public class KasRTRAdapter<V extends Map<? extends DataKasRTResponse, ? extends 
         }
     }
 
-    public interface OnBulanClickListener{
-        void onClick(int position, String namaBulan);
+    public interface OnClickListener {
+        void onHeaderClick(int arisanUserId);
+        void onChildClick(int position);
     }
 }

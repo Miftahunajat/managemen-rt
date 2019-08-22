@@ -11,9 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pens.managementmasyrakat.adapter.PengungumanAdapter
+import com.pens.managementmasyrakat.extension.addDecoration
+import com.pens.managementmasyrakat.extension.finishLoading
+import com.pens.managementmasyrakat.extension.showmessage
+import com.pens.managementmasyrakat.extension.toLoading
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
-import com.pens.managementmasyrakat.network.model.Pengeluaran
 import com.pens.managementmasyrakat.network.model.PengungumanResponse
 import kotlinx.android.synthetic.main.fragment_pengunguman_list.view.*
 import java.util.ArrayList

@@ -13,11 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.adapter.ArisanAdapter
-import com.pens.managementmasyrakat.getUser
+import com.pens.managementmasyrakat.extension.getUser
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.Arisan
-import com.pens.managementmasyrakat.showmessage
+import com.pens.managementmasyrakat.extension.showmessage
 import kotlinx.android.synthetic.main.fragment_admin_arisan.view.*
 
 /**
@@ -66,7 +66,9 @@ class AdminArisanFragment : Fragment(), ArisanAdapter.OnClickListener {
     }
 
     override fun onClick(position: Int) {
-        val arisanId = listArisan[position].id
-        findNavController().navigate(AdminArisanFragmentDirections.actionAdminArisanFragmentToBayarArisanFragment(arisanId))
+        val arisan = listArisan[position]
+        findNavController().navigate(AdminArisanFragmentDirections.actionAdminArisanFragmentToBayarArisanFragment(
+            arisan.id, arisan.iuran.toInt(), arisan.nama
+        ))
     }
 }

@@ -17,6 +17,10 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.pens.managementmasyrakat.*
+import com.pens.managementmasyrakat.extension.finishLoading
+import com.pens.managementmasyrakat.extension.getRealPath
+import com.pens.managementmasyrakat.extension.showmessage
+import com.pens.managementmasyrakat.extension.toLoading
 import com.pens.managementmasyrakat.service.NotificationService
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource

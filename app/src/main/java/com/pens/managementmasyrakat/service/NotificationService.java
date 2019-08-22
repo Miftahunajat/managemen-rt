@@ -13,6 +13,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.pens.managementmasyrakat.R;
+import com.pens.managementmasyrakat.extension.ExtensionTextViewKt;
 import org.json.JSONException;
 import org.json.JSONObject;
 

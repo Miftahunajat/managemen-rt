@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.network.model.UserBayarArisan
-import com.pens.managementmasyrakat.toInt
+import com.pens.managementmasyrakat.extension.toInt
 import kotlinx.android.synthetic.main.item_data_terbayar.view.*
 
 class DataUserBayarArisanAdapter(val fragment: Fragment) :

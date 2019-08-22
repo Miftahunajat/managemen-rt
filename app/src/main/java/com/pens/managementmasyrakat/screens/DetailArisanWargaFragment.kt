@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nex3z.togglebuttongroup.button.CircularToggle
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.UserBayarArisanAdapter
+import com.pens.managementmasyrakat.extension.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import kotlinx.android.synthetic.main.fragment_detail_arisan_warga.view.*
@@ -34,7 +35,7 @@ class DetailArisanWargaFragment : Fragment(){
         setupUser(view)
         view.cb_ditarik.addEventDialogListener {
             val detailArisanFragmentArgs by navArgs<DetailArisanWargaFragmentArgs>()
-            Repository.postTarikArisan(detailArisanFragmentArgs.idarisan, detailArisanFragmentArgs.iduser.toString()).observe(
+            Repository.postTarikArisan(detailArisanFragmentArgs.idarisansuser).observe(
                 this, Observer {
                     when(it?.status){
                         Resource.LOADING ->{
@@ -68,7 +69,7 @@ class DetailArisanWargaFragment : Fragment(){
 
     private fun setupUser(view: View?) {
         val detailArisanFragmentArgs by navArgs<DetailArisanWargaFragmentArgs>()
-        Repository.getArisansUser(detailArisanFragmentArgs.idarisan,detailArisanFragmentArgs.iduser.toString()).observe(this, Observer {
+        Repository.getArisansUser(detailArisanFragmentArgs.idarisansuser).observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{
                     view?.rv_detail_arisan_warga?.toLoading()
@@ -76,7 +77,7 @@ class DetailArisanWargaFragment : Fragment(){
                 }
                 Resource.SUCCESS ->{
                     view?.rv_detail_arisan_warga?.finishLoading()
-                    view!!.tv_title.text = it.data!!.user.nama
+                    view!!.tv_title.text = it.data!!.nama_peserta
                     view.tv_harga.text = it.data!!.arisan.iuran.toRupiahs()
                     view.cb_ditarik.isChecked = it.data!!.tarik
                     Log.d("Success", it.data.toString())
@@ -93,7 +94,7 @@ class DetailArisanWargaFragment : Fragment(){
 
     private fun refreshList(tahun: String) {
         val detailArisanFragmentArgs by navArgs<DetailArisanWargaFragmentArgs>()
-        Repository.getDetailUserStatus(detailArisanFragmentArgs.idarisan, tahun,detailArisanFragmentArgs.iduser.toString())
+        Repository.getDetailUserStatus(detailArisanFragmentArgs.idarisansuser, tahun)
             .observe(this, Observer {
                 when(it?.status){
                     Resource.LOADING ->{

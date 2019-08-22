@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.R
-import com.pens.managementmasyrakat.addEventDialogListener
+import com.pens.managementmasyrakat.extension.addEventDialogListener
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.UserBayarArisan
-import com.pens.managementmasyrakat.showmessage
+import com.pens.managementmasyrakat.extension.showmessage
 import kotlinx.android.synthetic.main.item_data_bayar.view.*
 
 class UserBayarArisanAdapter(val fragment: Fragment) :

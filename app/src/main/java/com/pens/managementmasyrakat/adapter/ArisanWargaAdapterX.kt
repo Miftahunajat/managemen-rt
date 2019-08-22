@@ -5,19 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.*
+import com.pens.managementmasyrakat.extension.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.Arisan
-import com.pens.managementmasyrakat.screens.ListArisanDirections
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.*
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_minimum_iuran
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_title
 import kotlinx.android.synthetic.main.item_gelombang_arisan_warga.view.tv_tanggal
 
-class ArisanWargaAdapter(val fragment: Fragment, val user_id: Int) : RecyclerView.Adapter<ArisanWargaAdapter.ArisanViewHolder>() {
+class ArisanWargaAdapterX(val fragment: Fragment, val user_id: Int) : RecyclerView.Adapter<ArisanWargaAdapterX.ArisanViewHolder>() {
 
     private var data: List<Arisan> = ArrayList()
 
@@ -36,11 +35,11 @@ class ArisanWargaAdapter(val fragment: Fragment, val user_id: Int) : RecyclerVie
         holder.bind(data[position])
         if (item.user_ikut != null && item.user_ikut) {
             holder.itemView.tv_daftar.visibility = View.GONE
-            holder.itemView.tv_lihat_detail.setOnClickListener {
-                fragment.findNavController().navigate(ListArisanDirections.actionListArisanToDataArisanWargaDetail(item.id, user_id.toString()))
-            }
+//            holder.itemView.tv_lihat_detail.setOnClickListener {
+//                fragment.findNavController().navigate(ListArisanDirections.actionListArisanToDataArisanWargaDetail(item.id, user_id.toString()))
+//            }
         } else {
-            holder.itemView.tv_lihat_detail.visibility = View.GONE
+//            holder.itemView.tv_lihat_detail.visibility = View.GONE
             holder.itemView.tv_daftar.addDialogDaftarArisanOnClick(item.nama) {
                 val userId = fragment.context?.getUser()!!.id
                 Repository.postDaftarArisan(item.id, userId.toString()).observe(fragment, androidx.lifecycle.Observer {

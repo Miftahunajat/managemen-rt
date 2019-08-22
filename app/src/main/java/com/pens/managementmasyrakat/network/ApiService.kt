@@ -81,13 +81,12 @@ interface ApiService {
     ): Deferred<Response<ListResponse<Arisan>>>
 
     @GET("arisan/{id}/all_user")
-    fun getAllStatusArisanUser(@Path("id") arisan_id: Int): Deferred<Response<AllStatusArisanUser>>
+    fun getAllStatusArisanUser(@Path("id") arisan_id: Int): Deferred<Response<ListResponse<AllUserArisanResponse>>>
 
-    @GET("arisan/{arisan_id}/detail_user_status")
+    @GET("arisans_user/{arisans_user}/detail_user_status")
     fun getDetailUserStatus(
-        @Path("arisan_id") id: Int,
-        @Query("tahun") tahun: String,
-        @Query("user_id") user_id: String
+        @Path("arisans_user") id: Int,
+        @Query("tahun") tahun: String
     ): Deferred<Response<ListResponse<UserBayarArisan>>>
 
     @FormUrlEncoded
@@ -99,11 +98,10 @@ interface ApiService {
         @Field("bayar") bayar: Boolean
     ): Deferred<Response<UserBayarArisan>>
 
-    @GET("arisans_user")
+    @GET("arisans_user/{arisans_user_id}")
     fun getArisansUser(
-        @Query("arisan_id") id: Int,
-        @Query("user_id") user_id: String
-    ): Deferred<Response<IkutArisanResponse>>
+        @Path("arisans_user_id") id: Int
+    ): Deferred<Response<AllUserArisanResponse>>
 
     @FormUrlEncoded
     @POST("arisan/{arisan_id}/daftar_arisan")
@@ -112,18 +110,14 @@ interface ApiService {
         @Field("user_id") user_id: String
     ): Deferred<Response<DaftarArisanResponse>>
 
-    @FormUrlEncoded
-    @POST("arisan/{arisan_id}/ikut_arisan")
+    @POST("arisans_user/{arisans_user_id}/ikut_arisan")
     fun postIkutArisan(
-        @Path("arisan_id") id: Int,
-        @Field("user_id") user_id: String
+        @Path("arisans_user_id") id: Int
     ): Deferred<Response<IkutArisanResponse>>
 
-    @FormUrlEncoded
-    @POST("arisan/{arisan_id}/tarik_arisan")
+    @POST("arisans_user/{arisans_user_id}/tarik_arisan")
     fun postTarikArisan(
-        @Path("arisan_id") id: Int,
-        @Field("user_id") user_id: String
+        @Path("arisans_user_id") id: Int
     ): Deferred<Response<IkutArisanResponse>>
 
     @GET("harga_iuran")

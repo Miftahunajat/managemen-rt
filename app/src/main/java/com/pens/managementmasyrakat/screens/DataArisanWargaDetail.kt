@@ -15,6 +15,10 @@ import com.nex3z.togglebuttongroup.button.CircularToggle
 import com.pens.managementmasyrakat.*
 
 import com.pens.managementmasyrakat.adapter.DataUserBayarArisanAdapter
+import com.pens.managementmasyrakat.extension.finishLoading
+import com.pens.managementmasyrakat.extension.showmessage
+import com.pens.managementmasyrakat.extension.toLoading
+import com.pens.managementmasyrakat.extension.toRupiahs
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import kotlinx.android.synthetic.main.fragment_data_arisan_warga_detail.view.*
@@ -42,7 +46,7 @@ class DataArisanWargaDetail : Fragment() {
         view.rv_data_arisan.setHasFixedSize(true)
         view.rv_data_arisan.isNestedScrollingEnabled = false
         view.group_choices.setOnCheckedChangeListener { group, checkedId ->
-            val circularToggle: CircularToggle = group.findViewById<CircularToggle>(checkedId)
+            val circularToggle: CircularToggle = group.findViewById(checkedId)
             context?.showmessage(circularToggle.text.toString())
             refreshList(circularToggle.text.toString())
         }
@@ -52,7 +56,7 @@ class DataArisanWargaDetail : Fragment() {
 
     private fun setupUser(view: View?) {
         val dataarisanwargaDetailArgs by navArgs<DataArisanWargaDetailArgs>()
-        Repository.getArisansUser(dataarisanwargaDetailArgs.idarisan,dataarisanwargaDetailArgs.iduser).observe(this, Observer {
+        Repository.getArisansUser(dataarisanwargaDetailArgs.idarisansuser).observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{
                     view?.rv_data_arisan?.toLoading()
@@ -60,7 +64,7 @@ class DataArisanWargaDetail : Fragment() {
                 }
                 Resource.SUCCESS ->{
                     view?.rv_data_arisan?.finishLoading()
-                    view!!.tv_title.text = it.data!!.user.nama
+                    view!!.tv_title.text = it.data!!.nama_peserta
                     view.tv_harga.text = it.data!!.arisan.iuran.toRupiahs()
                     view.tv_ditarik.text = if (it.data!!.tarik) "Sudah Ditarik" else "Belum Ditarik"
                     Log.d("Success", it.data.toString())
@@ -76,7 +80,7 @@ class DataArisanWargaDetail : Fragment() {
 
     private fun refreshList(tahun: String) {
         val dataarisanwargaDetailArgs by navArgs<DataArisanWargaDetailArgs>()
-        Repository.getDetailUserStatus(dataarisanwargaDetailArgs.idarisan, tahun,dataarisanwargaDetailArgs.iduser.toString())
+        Repository.getDetailUserStatus(dataarisanwargaDetailArgs.idarisansuser, tahun)
             .observe(this, Observer {
                 when(it?.status){
                     Resource.LOADING ->{

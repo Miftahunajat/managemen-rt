@@ -1,13 +1,10 @@
-package com.pens.managementmasyrakat
+package com.pens.managementmasyrakat.extension
 
 import android.content.Context
 import android.database.Cursor
-import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import android.provider.MediaStore.Images.Media.getBitmap
 import android.text.InputType
-import android.util.Base64
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +19,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.pens.managementmasyrakat.adapter.BayarArisanAdapter
+import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.model.UserResponse
 import com.squareup.picasso.Picasso
@@ -31,8 +28,6 @@ import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_batal
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_simpan
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.view.tv_title
 import kotlinx.android.synthetic.main.fragment_tambah_list_pengeluaran.view.*
-import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -109,14 +104,6 @@ fun String.formatToDate(patternBefore: String, patternAfter: String): String {
     return spf.format(newDate!!)
 }
 
-fun RecyclerView.setupWithBayarArisanAdapter(
-        adapter: BayarArisanAdapter,
-        layoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
-    ){
-    if(this.layoutManager == null) this.layoutManager = layoutManager
-    this.adapter = adapter
-}
-
 fun Calendar.getFormattedTanggal(): String{
     val tanggal = this[Calendar.DATE]
     val bulan = this.getNamaBulan()
@@ -189,17 +176,6 @@ fun Context.showAlertDialog(
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
     Picasso.get().load(url).into(view)
-}
-
-fun Bitmap.tobase64(): String{
-    val baos = ByteArrayOutputStream()
-    this.compress(Bitmap.CompressFormat.JPEG, 90, baos)
-    val b = baos.toByteArray()
-    return Base64.encodeToString(b, Base64.DEFAULT)
-}
-
-fun Uri.toBitmap(context: Context): Bitmap?{
-    return try {getBitmap(context.contentResolver, this)} catch (e: IOException) { null }
 }
 
 fun Uri.getRealPath(context: Context): String? {

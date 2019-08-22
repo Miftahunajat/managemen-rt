@@ -18,8 +18,8 @@ import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.IuranPerTahunResponse
 import com.pens.managementmasyrakat.screens.AdminIuranFragment.Companion.TYPE_SOSIAL
-import com.pens.managementmasyrakat.showmessage
-import com.pens.managementmasyrakat.toRupiahs
+import com.pens.managementmasyrakat.extension.showmessage
+import com.pens.managementmasyrakat.extension.toRupiahs
 import kotlinx.android.synthetic.main.fragment_detail_iuran_warga.view.*
 
 /**

@@ -2,51 +2,38 @@ package com.pens.managementmasyrakat.screens
 
 
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.update
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pens.managementmasyrakat.*
 import com.pens.managementmasyrakat.adapter.BayarArisanAdapter
+import com.pens.managementmasyrakat.extension.*
 import com.pens.managementmasyrakat.network.Repository
-import com.pens.managementmasyrakat.network.Repository.updateArisan
 import com.pens.managementmasyrakat.network.lib.Resource
-import com.pens.managementmasyrakat.network.model.UserBayarArisan
 import kotlinx.android.synthetic.main.fragment_bayar_arisan.view.*
-import kotlinx.android.synthetic.main.inc_arisan_belum_membayar.view.*
-import kotlinx.android.synthetic.main.inc_arisan_sudah_ditarik.view.*
-import kotlinx.android.synthetic.main.inc_arisan_sudah_membayar.view.*
-import kotlinx.android.synthetic.main.inc_arisan_verifikasi.view.*
 import java.util.*
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
-    override fun onBelumBayarLongClick(nama: String,user_id: String) {
-        context?.showAlertDialog("Sudah membayar ?", "Apakah anda ingin merubah $nama menjadi sudah membayar pada $bulan $tahun") {
-            Repository.getDetailUserStatus(arisan_id!!, tahun, user_id).observe(this, Observer {
+    override fun onVerifikasiClick(arisans_users_id: Int) {
+        context?.showAlertDialog {
+            Repository.postIkutArisan(arisans_users_id).observe(this, Observer {
                 when(it?.status){
                     Resource.LOADING ->{
                         Log.d("Loading", it.status.toString())
                     }
                     Resource.SUCCESS ->{
-                        updateArisan(it.data?.first()?.arisans_user_id)
+                        refreshViewRecycler(view!!)
                         Log.d("Success", it.data.toString())
                     }
                     Resource.ERROR ->{
@@ -55,22 +42,12 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
                     }
                 }
             })
-//            Repository.updateArisan(item.arisans_user_id, item.bulan.nama_bulan, item.tahun, it.isChecked)
-//                .observe(fragment, Observer {
-//                    when(it?.status){
-//                        Resource.LOADING ->{
-//                            Log.i("Loggin", it.status.toString())
-//                        }
-//                        Resource.SUCCESS ->{
-//                            fragment.context?.showmessage("Update Berhasil")
-//                            Log.d("@@@", it.data!!.toString())
-//                        }
-//                        Resource.ERROR ->{
-//                            fragment.context?.showmessage("Update gagal")
-//                            Log.i("Error", it.message!!)
-//                        }
-//                    }
-//                })
+        }
+    }
+
+    override fun onLongBelumMembayarClick(arisans_users_id: Int, nama_peserta: String) {
+        context?.showAlertDialog("Sudah membayar ?", "Apakah anda ingin merubah $nama_peserta menjadi sudah membayar pada $bulan $tahun") {
+            updateArisan(arisans_users_id)
         }
     }
 
@@ -81,7 +58,7 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    refreshViewRecycler(view)
+                    refreshViewRecycler(view!!)
                     Log.d("Success", it.data.toString())
                 }
                 Resource.ERROR ->{
@@ -92,67 +69,34 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
         })
     }
 
-    override fun onVerifikasiClick(user_id: Int) {
-        context?.showAlertDialog {
-            Repository.postIkutArisan(arisan_id!!, user_id.toString()).observe(this, Observer {
-                when(it?.status){
-                    Resource.LOADING ->{
-                        Log.d("Loading", it.status.toString())
-                    }
-                    Resource.SUCCESS ->{
-                        refreshViewRecycler(view)
-                        Log.d("Success", it.data.toString())
-                    }
-                    Resource.ERROR ->{
-                        Log.d("Error", it.message!!)
-                        context?.showmessage("Something is wrong")
-                    }
-                }
-            })
-        }
-    }
-
-    override fun onClick(user_id: Int) {
+    override fun onClick(arisans_users_id: Int) {
         findNavController().navigate(BayarArisanFragmentDirections.actionBayarArisanFragmentToDetailArisanWargaFragment(
-            arisan_id!!, user_id
-            ))
+            arisans_users_id))
     }
 
     var arisan_id: Int? = null
 
-    companion object {
-        const val TYPE_VERIFIKASI = 1
-        const val TYPE_BELUM_MEMBAYAR = 2
-        const val TYPE_SUDAH_MEMBAYAR = 3
-        const val TYPE_SUDAH_TARIK = 4
-    }
     val bulan by lazy { Calendar.getInstance().getNamaBulan() }
     val tahun by lazy { Calendar.getInstance().getNamaTahun() }
 
-    val verifikasiAdapter = BayarArisanAdapter(this, TYPE_VERIFIKASI)
-    val belumMembayarAdapter = BayarArisanAdapter(this, TYPE_BELUM_MEMBAYAR)
-    val sudahMembayarAdapter = BayarArisanAdapter(this, TYPE_SUDAH_MEMBAYAR)
-    val sudahTarikAdapter = BayarArisanAdapter(this, TYPE_SUDAH_TARIK)
-
+    val bayarArisanAdapter = BayarArisanAdapter(this)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_bayar_arisan, container, false)
-
-        view.inc_arisan_verifikasi.rv_belum_verifikasi.setupWithBayarArisanAdapter(verifikasiAdapter)
-        view.inc_arisan_belum_membayar.rv_belum_membayar.setupWithBayarArisanAdapter(belumMembayarAdapter)
-        view.inc_sudah_membayar.rv_sudah_membayar.setupWithBayarArisanAdapter(sudahMembayarAdapter)
-        view.inc_sudah_ditarik.rv_sudah_ditarik.setupWithBayarArisanAdapter(sudahTarikAdapter)
-        view.tv_bulan.text = Calendar.getInstance().getNamaBulan()
-        view.tv_tanggal.text = Calendar.getInstance().getFormattedTanggal()
-        view.tv_tutup_arisan.setOnClickListener { onTutupArisanClick() }
-
+        view.rv_item_warga_bayar_arisan.layoutManager = LinearLayoutManager(context)
+        val bayarArisanFragmentArgs by navArgs<BayarArisanFragmentArgs>()
+        val sourceString = "Data Bulan <b>${Calendar.getInstance().getNamaBulan()}</b> \nHarga Iuran : ${bayarArisanFragmentArgs.hargaiuran.toString().toRupiahs()} / Bulan"
+        view.tv_harga_iuran.text = HtmlCompat.fromHtml(sourceString, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        view.tv_judul.text = bayarArisanFragmentArgs.namaarisan
+        arisan_id = bayarArisanFragmentArgs.idarisan
         refreshViewRecycler(view)
+        view.tv_tutup_arisan.setOnClickListener(::onTutupArisanClick)
         return view
     }
 
-    private fun onTutupArisanClick() {
+    private fun onTutupArisanClick(view: View) {
         context?.showAlertDialog("Menutup arisan","Apakah anda yakin ingin menutup arisan","Arisan berhasil di tutup",""){
             Repository.updateArisan(arisan_id!!, true).observe(this, Observer {
                 when(it?.status){
@@ -172,7 +116,7 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
         }
     }
 
-    private fun refreshViewRecycler(view: View?) {
+    private fun refreshViewRecycler(view: View) {
         val bayarArisanFragmentArgs by navArgs<BayarArisanFragmentArgs>()
         Repository.getAllStatusArisan(bayarArisanFragmentArgs.idarisan).observe(this, Observer {
             when(it?.status){
@@ -180,12 +124,9 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
                     Log.d("Loading", it.status.toString())
                 }
                 Resource.SUCCESS ->{
-                    arisan_id = it.data!!.id
-                    verifikasiAdapter.swapData(it.data!!.peserta_verifikasi)
-                    belumMembayarAdapter.swapData(it.data!!.peserta_belum_membayar)
-                    sudahMembayarAdapter.swapData(it.data!!.peserta_sudah_membayar)
-                    sudahTarikAdapter.swapData(it.data!!.peserta_sudah_ditarik)
-                    view!!.tv_nama_arisan.text = it.data!!.nama
+                    view.rv_item_warga_bayar_arisan.adapter = bayarArisanAdapter
+                    bayarArisanAdapter.swapData(it.data!!)
+                    view.et_carinama.addTextChangedListener(bayarArisanAdapter)
                     Log.d("Success", it.data.toString())
                 }
                 Resource.ERROR ->{
@@ -196,21 +137,3 @@ class BayarArisanFragment : Fragment(), BayarArisanAdapter.OnClickListener {
         })
     }
 }
-
-
-//Repository.updateArisan(item.arisans_user_id, item.bulan.nama_bulan, item.tahun, it.isChecked)
-//.observe(fragment, Observer {
-//    when(it?.status){
-//        Resource.LOADING ->{
-//            Log.i("Loggin", it.status.toString())
-//        }
-//        Resource.SUCCESS ->{
-//            fragment.context?.showmessage("Update Berhasil")
-//            Log.d("@@@", it.data!!.toString())
-//        }
-//        Resource.ERROR ->{
-//            fragment.context?.showmessage("Update gagal")
-//            Log.i("Error", it.message!!)
-//        }
-//    }
-//})
