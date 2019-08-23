@@ -15,9 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.network.Repository
@@ -208,11 +205,6 @@ fun Context.showAddPengeluaranBottomSheetDialog(title: String = "Masukkan data b
     }
     bottomSheetDialog.window!!.attributes.gravity = Gravity.BOTTOM
     bottomSheetDialog.show()
-}
-
-fun RecyclerView.addDecoration() {
-    val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-    this.addItemDecoration(dividerItemDecoration)
 }
 
 
