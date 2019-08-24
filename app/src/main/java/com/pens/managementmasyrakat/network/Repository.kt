@@ -176,7 +176,7 @@ object Repository {
 
 object ManagemenApi {
     var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var API_BASE_URL: String = "http://29e7042c.ngrok.io"
+    var API_BASE_URL: String = "https://0f78594e.ngrok.io"
     var httpClient = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .connectTimeout(10, TimeUnit.SECONDS)

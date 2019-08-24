@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.messaging.FirebaseMessaging
@@ -42,20 +43,20 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         view.circle_daftar_iuran.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToIuranFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToIuranFragment())
         }
         view.circle_data_diri.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDataDiriFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDataDiriFragment())
         }
         view.circle_admin_arisan.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminArisanFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminArisanFragment())
         }
         view.circle_admin_iuran.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminIuranFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminIuranFragment())
         }
         view.ic_keluar.setOnClickListener {
             Repository.clearUser(context!!)
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
         view.circle_arisan.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListArisan(getUser(context!!)!!.jenis_kelamin_id))
@@ -71,6 +72,9 @@ class HomeFragment : Fragment() {
         }
         view.daftar_pengunguman.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanListFragment())
+        }
+        view.circle_cari_warga.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchWargaFragment2(0,true))
         }
         FirebaseMessaging.getInstance().subscribeToTopic("pengunguman")
         setupUser(view)
@@ -101,24 +105,35 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupUser(view: View) {
-        val user = Repository.getUser(context!!)
-        val nama = user!!.nama
-        view.textView7.text = "Selamat datang\n $nama"
-        if (user.isAdminArisan() == false) {
-            view.menu_4.visibility = View.INVISIBLE
-            view.menu_4.setOnClickListener(null)
-        }
+        Repository.getUserDetail(getUser(context!!)!!.id).observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    Log.d("Loading", it.status.toString())
+                }
+                Resource.SUCCESS ->{
+                    val user = it.data
+                    val nama = user!!.nama
+                    view.textView7.text = "Selamat datang\n $nama"
+                    if (user.isAdminArisan() == false) {
+                        view.menu_4.visibility = View.INVISIBLE
+                        view.menu_4.setOnClickListener(null)
+                    }
 
-        if (user.isAdminIuran() == false) {
-            view.menu_11.visibility = View.INVISIBLE
-            view.menu_11.setOnClickListener(null)
-        }
+                    if (user.isAdminIuran() == false) {
+                        view.menu_11.visibility = View.INVISIBLE
+                        view.menu_11.setOnClickListener(null)
+                    }
 
-        if (user.isPengurusRT() == false) {
-            view.menu_10.visibility = View.INVISIBLE
-            view.menu_10.setOnClickListener(null)
-        }
+                    if (user.isPengurusRT() == false) {
+                        view.menu_10.visibility = View.INVISIBLE
+                        view.menu_10.setOnClickListener(null)
+                    }
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
     }
-
-
 }

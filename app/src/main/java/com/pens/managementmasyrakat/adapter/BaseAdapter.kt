@@ -8,7 +8,7 @@ import java.util.*
 
 class BaseAdapter<T>(
     val layout: Int,
-    private val clickListeners: List<(View, T) -> Unit>?
+    val bindView: (View, T) -> Unit
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewModel>() {
 
     private var data: List<T> = ArrayList()
@@ -24,10 +24,7 @@ class BaseAdapter<T>(
 
     override fun onBindViewHolder(holder: BaseViewModel, position: Int) {
         val item = data[position]
-        clickListeners?.let {
-            for (clickListener in clickListeners) clickListener(holder.itemView, item)
-        }
-
+        bindView(holder.itemView, item)
     }
 
     fun swapData(data: List<T>) {

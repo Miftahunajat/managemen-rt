@@ -52,14 +52,21 @@ class SearchWargaFragment : Fragment(), UserAdapter.OnClickListener {
     ): View? {
         val view = inflater.inflate(com.pens.managementmasyrakat.R.layout.fragment_search_warga, container, false)
         val searchWargaFragmentArgs by navArgs<SearchWargaFragmentArgs>()
-        if (searchWargaFragmentArgs.allwarga)
+        if (searchWargaFragmentArgs.allwarga){
             getALLUser()
-        else
+            hideMenu(view)
+        }
+        else{
             getALLKKUser()
-        getHargaIuranJumlah()
+            getHargaIuranJumlah()
+        }
         view.tv_harga_iuran.setOnClickListener { addDialogToHargaIuran() }
         // Inflate the layout for this fragment
         return view
+    }
+
+    private fun hideMenu(view: View) {
+        view.tv_harga_iuran!!.visibility = View.GONE
     }
 
     private fun getALLUser() {
@@ -151,7 +158,7 @@ class SearchWargaFragment : Fragment(), UserAdapter.OnClickListener {
 
     private fun setupAdapter(data: List<UserResponse>?) {
         val userAdapter = UserAdapter(this)
-        userAdapter.swapData(data!!)
+        userAdapter.swapData(data!!.sortedBy { it.alamat })
         view?.rootView!!.rv_item_warga.layoutManager = LinearLayoutManager(context)
         view?.rootView!!.rv_item_warga.adapter = userAdapter
         view?.et_carinama!!.addTextChangedListener(userAdapter)

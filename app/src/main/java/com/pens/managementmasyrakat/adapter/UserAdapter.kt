@@ -42,8 +42,8 @@ TextWatcher{
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: UserResponse) = with(itemView) {
             itemView.tv_title.text = item.nama
-            itemView.tv_nomor.text = item.no_hp
-            Picasso.get().load(item.image_url.thumbnail.url).into(itemView.iv_profile)
+            itemView.tv_alamat.text = item.alamat
+            Picasso.get().load(item.image_url.thumbnail.url).error(R.drawable.img_avatar).placeholder(R.drawable.img_avatar).into(itemView.iv_profile)
         }
     }
 

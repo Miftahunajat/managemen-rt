@@ -3,6 +3,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+                                                   android:background="@color/colorWhite"
              tools:context=".screens.SearchWargaFragment">
     <androidx.appcompat.widget.AppCompatTextView
             android:text="@string/harga_iuran_sosial_rp_15_000_bulan"

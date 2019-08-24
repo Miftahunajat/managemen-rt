@@ -7,6 +7,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import android.widget.Toast
+import com.pens.managementmasyrakat.extension.getPrefObj
+import com.pens.managementmasyrakat.extension.savePref
 import com.pens.managementmasyrakat.network.Repository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -33,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, "Action clicked", Toast.LENGTH_LONG).show();
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 }

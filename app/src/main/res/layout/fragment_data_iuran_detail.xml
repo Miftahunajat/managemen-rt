@@ -86,7 +86,18 @@
                         android:padding="8dp"
                         android:layout_height="wrap_content"
                         android:text="2020"/>
-
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_c"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2021"/>
+                <com.nex3z.togglebuttongroup.button.CircularToggle
+                        android:id="@+id/choice_d"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2022"/>
             </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_data_iuran"
