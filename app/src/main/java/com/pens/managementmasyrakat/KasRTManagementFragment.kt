@@ -17,14 +17,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.nex3z.togglebuttongroup.button.CircularToggle
 import com.pens.managementmasyrakat.adapter.KasRTRAdapter.VIEW_TYPE_HEADER
-import com.pens.managementmasyrakat.extension.showAddPengeluaranBottomSheetDialog
-import com.pens.managementmasyrakat.extension.showAlertDialog
-import com.pens.managementmasyrakat.extension.showmessage
-import com.pens.managementmasyrakat.extension.toRupiahs
+import com.pens.managementmasyrakat.extension.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.DataKasRTResponse
 import com.pens.managementmasyrakat.network.model.Pengeluaran
+import kotlinx.android.synthetic.main.fragment_detail_arisan_warga.*
 
 
 /**
@@ -43,6 +41,21 @@ class KasRTManagementFragment : Fragment(), KasRTRAdapter.OnBulanClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Repository.getAllKKUser().observe(this, Observer {
+            when(it?.status){
+                Resource.LOADING ->{
+                    textView22.toLoading()
+                }
+                Resource.SUCCESS ->{
+                    textView22.finishLoading()
+                    Log.d("Success", it.data.toString())
+                }
+                Resource.ERROR ->{
+                    Log.d("Error", it.message!!)
+                    context?.showmessage("Something is wrong")
+                }
+            }
+        })
         val view = inflater.inflate(R.layout.fragment_kas_rtmanagement, container, false)
         val kasRTManagementFragmentArgs by navArgs<KasRTManagementFragmentArgs>()
         isAdmin = kasRTManagementFragmentArgs.isadmin

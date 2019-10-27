@@ -36,10 +36,6 @@ fun Context.getUser(): UserResponse?{
     return Repository.getUser(this)
 }
 
-//fun Context.getKkId(): Int?{
-//    return Repository.getKkId(this)
-//}
-
 fun Context.saveUser(user: UserResponse){
     Repository.saveUser(user, this)
 }

@@ -113,6 +113,13 @@
                 app:popExitAnim="@anim/slide_out_left"/>
         <argument android:name="TYPE" app:argType="integer"/>
         <argument android:name="ALL_WARGA" app:argType="boolean"/>
+        <action
+                android:id="@+id/action_searchWargaFragment2_to_dataWargaFragment"
+                app:destination="@id/dataWargaFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment android:id="@+id/loginFragment" android:name="com.pens.managementmasyrakat.screens.LoginFragment"
               android:label="fragment_login" tools:layout="@layout/fragment_login">
@@ -177,5 +184,14 @@
               android:label="fragment_pengunguman_list" tools:layout="@layout/fragment_pengunguman_list">
         <action android:id="@+id/action_pengungumanListFragment_to_pengungumanFragment"
                 app:destination="@id/pengungumanFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/dataWargaFragment"
+            android:name="com.pens.managementmasyrakat.screens.DataWargaFragment"
+            android:label="fragment_data_warga"
+            tools:layout="@layout/fragment_data_warga" >
+        <argument
+                android:name="USER_ID"
+                app:argType="string" />
     </fragment>
 </navigation>

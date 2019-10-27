@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pens.managementmasyrakat.adapter.BaseAdapter
 
 @Suppress("UNCHECKED_CAST")
-fun <T> RecyclerView.setupWithAdapter(layout: Int,
+fun <T> RecyclerView.setupNoAdapter(layout: Int,
                                       listItem: List<T> = ArrayList(),
                                       bindView: (View, T) -> Unit) {
     this.layoutManager = LinearLayoutManager(context)
@@ -19,7 +19,7 @@ fun <T> RecyclerView.setupWithAdapter(layout: Int,
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <T> RecyclerView.refreshRecyclerView(listItem: List<T> = ArrayList()) {
+fun <T> RecyclerView.refreshNoAdapterRecyclerView(listItem: List<T> = ArrayList()) {
     this.adapter?.let {
         (it as BaseAdapter<T>).swapData(listItem)
         it.notifyDataSetChanged()

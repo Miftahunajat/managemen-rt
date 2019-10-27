@@ -11,26 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pens.managementmasyrakat.adapter.PengungumanAdapter
-import com.pens.managementmasyrakat.extension.addDecoration
-import com.pens.managementmasyrakat.extension.finishLoading
-import com.pens.managementmasyrakat.extension.showmessage
-import com.pens.managementmasyrakat.extension.toLoading
+import com.pens.managementmasyrakat.extension.*
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.PengungumanResponse
 import kotlinx.android.synthetic.main.fragment_pengunguman_list.view.*
+import kotlinx.android.synthetic.main.item_pengunguman.view.*
 import java.util.ArrayList
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class PengungumanListFragment : Fragment(), PengungumanAdapter.OnClickListener {
 
     var listPengunguman: List<PengungumanResponse> = ArrayList()
@@ -67,12 +56,11 @@ class PengungumanListFragment : Fragment(), PengungumanAdapter.OnClickListener {
     }
 
     private fun setupPengunguman(view: View?, data: List<PengungumanResponse>?) {
-        val pengungumanAdapter = PengungumanAdapter(this)
-        view!!.rv_pengunguman.layoutManager = LinearLayoutManager(context)
-        view.rv_pengunguman.addDecoration()
-        view.rv_pengunguman.adapter = pengungumanAdapter
-        pengungumanAdapter.swapData(data!!)
-        listPengunguman = data
+        view?.rv_pengunguman?.setupNoAdapter(R.layout.item_pengunguman, data!!,::bindData)
+    }
+
+    private fun bindData(view: View, pengungumanResponse: PengungumanResponse){
+        view.tv_title.text = pengungumanResponse.title
     }
 
 

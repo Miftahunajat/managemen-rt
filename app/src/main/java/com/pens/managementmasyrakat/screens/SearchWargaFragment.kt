@@ -40,10 +40,13 @@ class SearchWargaFragment : Fragment(), UserAdapter.OnClickListener {
     override fun onClick(position: Int) {
         val searchWargaFragmentArgs by navArgs<SearchWargaFragmentArgs>()
         if (searchWargaFragmentArgs.allwarga)
-            return
-        findNavController().navigate(SearchWargaFragmentDirections.actionSearchWargaFragment2ToDetailIuranWarga(
-            searchWargaFragmentArgs.type, listWarga[position].user_kk_id, code
-        ))
+            findNavController().navigate(SearchWargaFragmentDirections.actionSearchWargaFragment2ToDataWargaFragment(listWarga[position].id.toString()))
+        else{
+            findNavController().navigate(SearchWargaFragmentDirections.actionSearchWargaFragment2ToDetailIuranWarga(
+                searchWargaFragmentArgs.type, listWarga[position].user_kk_id, code
+            ))
+        }
+
     }
 
     override fun onCreateView(
