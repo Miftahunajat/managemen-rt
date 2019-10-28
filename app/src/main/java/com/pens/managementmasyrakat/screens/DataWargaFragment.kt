@@ -14,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 
 import com.pens.managementmasyrakat.R
 import com.pens.managementmasyrakat.databinding.FragmentDataWargaBinding
-import com.pens.managementmasyrakat.extension.saveUser
 import com.pens.managementmasyrakat.extension.showmessage
 import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource

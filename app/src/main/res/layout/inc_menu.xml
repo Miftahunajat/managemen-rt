@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-                android:id="@+id/circle_daftar_iuran"
+                android:id="@+id/circle_data_diri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -29,12 +29,12 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_daftar_iuran"
-                android:tint="@color/orange_700"
-                app:layout_constraintBottom_toBottomOf="@id/circle_daftar_iuran"
-                app:layout_constraintLeft_toLeftOf="@id/circle_daftar_iuran"
-                app:layout_constraintRight_toRightOf="@id/circle_daftar_iuran"
-                app:layout_constraintTop_toTopOf="@id/circle_daftar_iuran" />
+                app:srcCompat="@drawable/ic_data_diri"
+                android:tint="@color/teal_600"
+                app:layout_constraintBottom_toBottomOf="@id/circle_data_diri"
+                app:layout_constraintLeft_toLeftOf="@id/circle_data_diri"
+                app:layout_constraintRight_toRightOf="@id/circle_data_diri"
+                app:layout_constraintTop_toTopOf="@id/circle_data_diri" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,7 +42,7 @@
             android:id="@+id/text_menu_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Daftar Iuran"
+            android:text="Data Diri"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/font_button"
             android:gravity="center"
@@ -63,7 +63,7 @@
             app:layout_constraintRight_toLeftOf="@id/menu_3">
 
         <ImageView
-                android:id="@+id/circle_data_diri"
+                android:id="@+id/circle_cari_warga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/background_line_soft"
@@ -74,12 +74,12 @@
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
 
-                app:srcCompat="@drawable/ic_data_diri"
-                android:tint="@color/teal_600"
-                app:layout_constraintTop_toTopOf="@id/circle_data_diri"
-                app:layout_constraintBottom_toBottomOf="@id/circle_data_diri"
-                app:layout_constraintLeft_toLeftOf="@id/circle_data_diri"
-                app:layout_constraintRight_toRightOf="@id/circle_data_diri"/>
+                android:src="@drawable/ic_all_warga"
+                android:tint="@color/green_500"
+                app:layout_constraintTop_toTopOf="@id/circle_cari_warga"
+                app:layout_constraintBottom_toBottomOf="@id/circle_cari_warga"
+                app:layout_constraintLeft_toLeftOf="@id/circle_cari_warga"
+                app:layout_constraintRight_toRightOf="@id/circle_cari_warga"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -87,7 +87,7 @@
             android:id="@+id/text_menu_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Data diri"
+            android:text="Semua Warga"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/font_button"
             android:gravity="center"
@@ -108,7 +108,7 @@
             app:layout_constraintRight_toRightOf="@id/menu_7">
 
         <ImageView
-                android:id="@+id/circle_kas_rt"
+                android:id="@+id/circle_arisan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/background_line_soft"
@@ -118,12 +118,12 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_kas_rt"
-                android:tint="@color/light_blue_900"
-                app:layout_constraintTop_toTopOf="@id/circle_kas_rt"
-                app:layout_constraintBottom_toBottomOf="@id/circle_kas_rt"
-                app:layout_constraintLeft_toLeftOf="@id/circle_kas_rt"
-                app:layout_constraintRight_toRightOf="@id/circle_kas_rt"/>
+                app:srcCompat="@drawable/ic_arisan"
+                android:tint="@color/pink_500"
+                app:layout_constraintTop_toTopOf="@id/circle_arisan"
+                app:layout_constraintBottom_toBottomOf="@id/circle_arisan"
+                app:layout_constraintLeft_toLeftOf="@id/circle_arisan"
+                app:layout_constraintRight_toRightOf="@id/circle_arisan"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,7 +131,7 @@
             android:id="@+id/text_menu_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Kas RT"
+            android:text="Arisan"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/font_button"
             android:gravity="center"
@@ -152,7 +152,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
         <ImageView
-                android:id="@+id/daftar_pengunguman"
+                android:id="@+id/circle_daftar_iuran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/background_line_soft"
@@ -162,12 +162,12 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_announcement"
-                android:tint="@color/yellow_A400"
-                app:layout_constraintTop_toTopOf="@id/daftar_pengunguman"
-                app:layout_constraintBottom_toBottomOf="@id/daftar_pengunguman"
-                app:layout_constraintLeft_toLeftOf="@id/daftar_pengunguman"
-                app:layout_constraintRight_toRightOf="@id/daftar_pengunguman"/>
+                app:srcCompat="@drawable/ic_daftar_iuran"
+                android:tint="@color/orange_700"
+                app:layout_constraintTop_toTopOf="@id/circle_daftar_iuran"
+                app:layout_constraintBottom_toBottomOf="@id/circle_daftar_iuran"
+                app:layout_constraintLeft_toLeftOf="@id/circle_daftar_iuran"
+                app:layout_constraintRight_toRightOf="@id/circle_daftar_iuran"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -175,7 +175,7 @@
             android:id="@+id/text_menu_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pengunguman"
+            android:text="Daftar Iuran"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/font_button"
             android:gravity="center"
@@ -197,7 +197,7 @@
             app:layout_constraintEnd_toStartOf="@+id/menu_5">
 
         <ImageView
-                android:id="@+id/circle_admin_arisan"
+                android:id="@+id/circle_kas_rt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -209,27 +209,27 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_admin_arisan"
-                android:tint="@color/red_500"
-                app:layout_constraintBottom_toBottomOf="@id/circle_admin_arisan"
-                app:layout_constraintLeft_toLeftOf="@id/circle_admin_arisan"
-                app:layout_constraintRight_toRightOf="@id/circle_admin_arisan"
-                app:layout_constraintTop_toTopOf="@id/circle_admin_arisan"/>
+                app:srcCompat="@drawable/ic_kas_rt"
+                android:tint="@color/light_blue_900"
+                app:layout_constraintBottom_toBottomOf="@id/circle_kas_rt"
+                app:layout_constraintLeft_toLeftOf="@id/circle_kas_rt"
+                app:layout_constraintRight_toRightOf="@id/circle_kas_rt"
+                app:layout_constraintTop_toTopOf="@id/circle_kas_rt"/>
 
         <TextView
                 android:id="@+id/text_menu_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Admin Arisan"
+                android:text="Kas RT"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/font_button"
                 android:gravity="center"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingTop="@dimen/padding_small"
-                app:layout_constraintLeft_toLeftOf="@id/circle_admin_arisan"
-                app:layout_constraintRight_toRightOf="@id/circle_admin_arisan"
-                app:layout_constraintTop_toBottomOf="@id/circle_admin_arisan"/>
+                app:layout_constraintLeft_toLeftOf="@id/circle_kas_rt"
+                app:layout_constraintRight_toRightOf="@id/circle_kas_rt"
+                app:layout_constraintTop_toBottomOf="@id/circle_kas_rt"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -242,7 +242,7 @@
             app:layout_constraintEnd_toStartOf="@+id/menu_6" app:layout_constraintTop_toTopOf="@+id/menu_4">
 
         <ImageView
-                android:id="@+id/circle_arisan"
+                android:id="@+id/circle_pengumuman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -252,75 +252,75 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_arisan"
-                android:tint="@color/pink_500"
-                app:layout_constraintBottom_toBottomOf="@id/circle_arisan"
-                app:layout_constraintLeft_toLeftOf="@id/circle_arisan"
-                app:layout_constraintRight_toRightOf="@id/circle_arisan"
-                app:layout_constraintTop_toTopOf="@id/circle_arisan"/>
+                app:srcCompat="@drawable/ic_announcement"
+                android:tint="@color/yellow_A400"
+                app:layout_constraintBottom_toBottomOf="@id/circle_pengumuman"
+                app:layout_constraintLeft_toLeftOf="@id/circle_pengumuman"
+                app:layout_constraintRight_toRightOf="@id/circle_pengumuman"
+                app:layout_constraintTop_toTopOf="@id/circle_pengumuman"/>
 
         <TextView
                 android:id="@+id/text_menu_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Arisan"
+                android:text="Pengumuman"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/font_button"
                 android:gravity="center"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingTop="@dimen/padding_small"
-                app:layout_constraintLeft_toLeftOf="@id/circle_arisan"
-                app:layout_constraintRight_toRightOf="@id/circle_arisan"
-                app:layout_constraintTop_toBottomOf="@id/circle_arisan"/>
+                app:layout_constraintLeft_toLeftOf="@id/circle_pengumuman"
+                app:layout_constraintRight_toRightOf="@id/circle_pengumuman"
+                app:layout_constraintTop_toBottomOf="@id/circle_pengumuman"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/menu_6"
             android:layout_width="0dp"
-            android:maxWidth="@dimen/menu_width"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/menu_5"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@id/menu_9"
             android:layout_marginLeft="@dimen/main_margin"
-            app:layout_constraintTop_toTopOf="@id/menu_5"
-            app:layout_constraintBottom_toBottomOf="@id/menu_5">
+            android:maxWidth="@dimen/menu_width"
+            app:layout_constraintBottom_toBottomOf="@id/menu_5"
+            app:layout_constraintEnd_toEndOf="@+id/menu_3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/menu_5"
+            app:layout_constraintTop_toTopOf="@id/menu_5">
 
         <ImageView
-                android:id="@+id/circle_cari_warga"
+                android:id="@+id/circle_keluar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:src="@drawable/background_line_soft"
-                tools:ignore="MissingConstraints"/>
+                tools:ignore="MissingConstraints" />
 
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                android:src="@drawable/ic_all_warga"
-                android:tint="@color/green_500"
-                app:layout_constraintBottom_toBottomOf="@id/circle_cari_warga"
-                app:layout_constraintLeft_toLeftOf="@id/circle_cari_warga"
-                app:layout_constraintRight_toRightOf="@id/circle_cari_warga"
-                app:layout_constraintTop_toTopOf="@id/circle_cari_warga"/>
+                app:srcCompat="@drawable/ic_keluar"
+                android:tint="@color/red_500"
+                app:layout_constraintBottom_toBottomOf="@id/circle_keluar"
+                app:layout_constraintLeft_toLeftOf="@id/circle_keluar"
+                app:layout_constraintRight_toRightOf="@id/circle_keluar"
+                app:layout_constraintTop_toTopOf="@id/circle_keluar" />
 
         <TextView
                 android:id="@+id/text_menu_6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Semua Warga"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/font_button"
+                android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:paddingTop="@dimen/padding_small"
-                app:layout_constraintLeft_toLeftOf="@id/circle_cari_warga"
-                app:layout_constraintRight_toRightOf="@id/circle_cari_warga"
-                app:layout_constraintTop_toBottomOf="@id/circle_cari_warga"
-                app:layout_constraintHorizontal_bias="1.0"/>
+                android:text="Keluar"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_button"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="@id/circle_keluar"
+                app:layout_constraintRight_toRightOf="@id/circle_keluar"
+                app:layout_constraintTop_toBottomOf="@id/circle_keluar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -328,15 +328,14 @@
             android:id="@+id/menu_9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/main_margin"
             android:maxWidth="@dimen/menu_width"
             android:layout_marginTop="@dimen/main_margin"
-            app:layout_constraintTop_toBottomOf="@id/text_menu_7"
-            app:layout_constraintLeft_toRightOf="@id/menu_6"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/menu_6"
+            app:layout_constraintStart_toStartOf="@id/menu_6"
+            app:layout_constraintEnd_toEndOf="@id/menu_6">
 
         <ImageView
-                android:id="@+id/ic_keluar"
+                android:id="@+id/circle_admin_arisan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/background_line_soft"
@@ -346,12 +345,12 @@
         <ImageView
                 android:layout_width="@dimen/icon_menu"
                 android:layout_height="@dimen/icon_menu"
-                app:srcCompat="@drawable/ic_keluar"
+                app:srcCompat="@drawable/ic_admin_arisan"
                 android:tint="@color/red_500"
-                app:layout_constraintTop_toTopOf="@id/ic_keluar"
-                app:layout_constraintBottom_toBottomOf="@id/ic_keluar"
-                app:layout_constraintLeft_toLeftOf="@id/ic_keluar"
-                app:layout_constraintRight_toRightOf="@id/ic_keluar"/>
+                app:layout_constraintTop_toTopOf="@id/circle_admin_arisan"
+                app:layout_constraintBottom_toBottomOf="@id/circle_admin_arisan"
+                app:layout_constraintLeft_toLeftOf="@id/circle_admin_arisan"
+                app:layout_constraintRight_toRightOf="@id/circle_admin_arisan"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -359,7 +358,7 @@
             android:id="@+id/text_menu_9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Keluar"
+            android:text="Admin Arisan"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/font_button"
             android:gravity="center"

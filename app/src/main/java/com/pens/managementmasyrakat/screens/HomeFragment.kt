@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         view.circle_admin_iuran.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminIuranFragment())
         }
-        view.ic_keluar.setOnClickListener {
+        view.circle_keluar.setOnClickListener {
             Repository.clearUser(context!!)
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
         view.circle_kas_rt.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToKasRTManagementFragment(false))
         }
-        view.daftar_pengunguman.setOnClickListener {
+        view.circle_pengumuman.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPengungumanListFragment())
         }
         view.circle_cari_warga.setOnClickListener {
@@ -115,8 +115,8 @@ class HomeFragment : Fragment() {
                     val nama = user!!.nama
                     view.textView7.text = "Selamat datang\n $nama"
                     if (user.isAdminArisan() == false) {
-                        view.menu_4.visibility = View.INVISIBLE
-                        view.menu_4.setOnClickListener(null)
+                        view.menu_9.visibility = View.INVISIBLE
+                        view.menu_9.setOnClickListener(null)
                     }
 
                     if (user.isAdminIuran() == false) {

@@ -22,13 +22,7 @@ import com.pens.managementmasyrakat.network.Repository
 import com.pens.managementmasyrakat.network.lib.Resource
 import com.pens.managementmasyrakat.network.model.DataKasRTResponse
 import com.pens.managementmasyrakat.network.model.Pengeluaran
-import kotlinx.android.synthetic.main.fragment_detail_arisan_warga.*
 
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class KasRTManagementFragment : Fragment(), KasRTRAdapter.OnBulanClickListener {
 
     val kasRtAdapter by lazy {
@@ -44,10 +38,10 @@ class KasRTManagementFragment : Fragment(), KasRTRAdapter.OnBulanClickListener {
         Repository.getAllKKUser().observe(this, Observer {
             when(it?.status){
                 Resource.LOADING ->{
-                    textView22.toLoading()
+                    view?.el_detail_iuran_warga?.toLoading()
                 }
                 Resource.SUCCESS ->{
-                    textView22.finishLoading()
+                    view?.el_detail_iuran_warga?.finishLoading()
                     Log.d("Success", it.data.toString())
                 }
                 Resource.ERROR ->{
