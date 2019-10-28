@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.pens.managementmasyrakat.BuildConfig;
 import com.pens.managementmasyrakat.R;
 import com.pens.managementmasyrakat.extension.ExtensionTextViewKt;
 import org.json.JSONException;
@@ -31,7 +32,7 @@ import java.util.Scanner;
 
 public class NotificationService {
 
-    private static final String AUTH_KEY = "key=AAAAVUCqQmY:APA91bH7Pz58g9LjzSstbKUJmHqlILP6T4YzUAeUVH2vCYkoSwUk5lxp7C8mGuHC_TcueL9jnF_w2dKSSGgFWyk2ks3Bu-QjH8SZVdb9ELJ3dR5f-fvVKP0bDV_i0Y4mtPG3XVGqLF5o";
+    private static final String AUTH_KEY = BuildConfig.AUTH_KEY;
     private final Context mContext;
     private final NotificationManager mNotificationManager;
     private static NotificationService instance;

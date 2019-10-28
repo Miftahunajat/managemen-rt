@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 import com.google.gson.Gson
+import com.pens.managementmasyrakat.BuildConfig
 import com.pens.managementmasyrakat.network.model.*
 import com.pens.managementmasyrakat.screens.TotalPengeluaranResponse
 import okhttp3.MultipartBody
@@ -176,7 +177,7 @@ object Repository {
 
 object ManagemenApi {
     var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var API_BASE_URL: String = "https://managemenrtapi.herokuapp.com"
+    var API_BASE_URL: String = BuildConfig.API_BASE_URL
     var httpClient = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .connectTimeout(10, TimeUnit.SECONDS)
@@ -190,5 +191,5 @@ object ManagemenApi {
         .build()
 
     var apiService: ApiService = retrofit.create<ApiService>(ApiService::class.java)
-    val PREFNAME = "MANAGEMEN_RT"
+    val PREFNAME = BuildConfig.PREFNAME
 }
